@@ -1,0 +1,7 @@
+-------IMPORT MANUAL FOR RPG MAKER MV/MZ------
+1- Copy all the png files on the "Rpg Maker MV and MZ" folder and paste it on your game img/tileset folder.
+2- Open the RPG maker MV Engine.
+3- Go to Database(Gear icon) then click on tileset.
+4- Create a new tileset, choose a name
+5- Click on the image files and put it on the respective places (A4 on A4 etc...), The "Fire and Water" archive are a animation one and must be used as a event, put it on the character folder.
+6- Configure the tileset as you see fit, as passable or not, etc... have fun.  
