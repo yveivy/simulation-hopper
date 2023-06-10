@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+
+body {
+    background: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('../images/spaceBackground.png');
+    background-size: cover;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    font-family: 'VT323', monospace;
+    color: white;
+    font-size: 100px;
+    margin: 30px
+}
+
+#handheldNintendoContainer {
+    position: relative;
+    background-image: url('../images/handheldNintendo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width:50vw;
+    height:37.81vw;
+    margin-bottom: 50px;
+
+}
+
+#infoGraphic {
+    /* border: solid 3px blue; */
+    background-image: url(../images/gameInfo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    border-radius: 10px;
+    width: 56.5%;
+    height: 40.5%;
+    top: 13.5%;
+    left: 21%;
+}
+#info {
+    /* border: solid 3px blue; */
+    position: absolute;
+    bottom: 14%;
+    right: 16.5%;
+    width: 11%;
+    height: 5.5%;
+    cursor: pointer;
+}
+
+#startGame {
+    /* border: solid 3px blue; */
+    position: absolute;
+    bottom: 14%;
+    right: 28.5%;
+    width: 11%;
+    height: 5.5%;
+    cursor: pointer;
+    z-index: 2; 
+}
+
+#login {
+    top: 50%; 
+    left: 70%;
+}
