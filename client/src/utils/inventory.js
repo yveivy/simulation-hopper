@@ -49,7 +49,7 @@ export function parseInventoryObjArrayToGetJustItems(inventoryObjArray) {
 }
 
 export async function retrieveInventoryData() {
-    window.globalVars.npcInventoryObjArray = await fetchInventory(interactionObject)
+    window.globalVars.npcInventoryObjArray = await fetchInventory(window.interactionObject)
     window.globalVars.userInventoryObjArray = await fetchInventory('barf')
     window.globalVars.npcInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.npcInventoryObjArray)
     questionData.receiveQuestion.choices = [...window.globalVars.npcInventoryItems]
@@ -103,6 +103,9 @@ export function hideInventoryContainer() {
 }
 
 window.addEventListener('keydown', async function(e) {
+    if (e.key === 'w' || e.key === 'a' || e.key === 's' || e.key === 'd' || e.key === " ") {
+        return
+    }
     if (e.key === 'e') {
         console.log("e key pressed____________")
         if (window.globalVars.inventoryToggledOn) {

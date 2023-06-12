@@ -35,7 +35,7 @@ var npcBioContainer = document.getElementById('npcBioContainer')
 var npcNameEl = document.querySelector("#npcName")
 var npcHeadshotContainer = document.querySelector("#npcHeadshotContainer")
 
-function getRadioInputValue() {
+export function getRadioInputValue() {
     let radios = document.querySelectorAll('[name="choice"]');
     let selectedValue;
 
@@ -48,12 +48,12 @@ function getRadioInputValue() {
     return selectedValue; // this will be the value of the selected radio button
 }
 
-function getTextInputValue() {
+export function getTextInputValue() {
     let textInputValue = document.querySelector("#chatInput").value
     return textInputValue
 }
 
-function askEitherQuestionType(currentQuestion) {
+export function askEitherQuestionType(currentQuestion) {
     if (currentQuestion.type === "input") {
         renderTextQuestion(currentQuestion)
     } else if (currentQuestion.type === "radio") {
@@ -61,7 +61,7 @@ function askEitherQuestionType(currentQuestion) {
     }
 }
 
-function renderTextQuestion(currentQuestion) {
+export function renderTextQuestion(currentQuestion) {
     clearUserInputContainer()
     let questionText = createQuestionText(currentQuestion)
     userInputContainer.appendChild(questionText);
@@ -72,7 +72,7 @@ function renderTextQuestion(currentQuestion) {
     userInputContainer.appendChild(input);   
 }
 
-function renderCheckBoxQuestion(currentQuestion) {
+export function renderCheckBoxQuestion(currentQuestion) {
     clearUserInputContainer()
     let questionText = createQuestionText(currentQuestion)
     userInputContainer.appendChild(questionText);
@@ -93,41 +93,41 @@ function renderCheckBoxQuestion(currentQuestion) {
     });
 }
 
-function clearUserInputContainer() {
+export function clearUserInputContainer() {
     userInputContainer.innerHTML = ''
 }
 export function clearUl(ul) {
     ul.innerHTML = ''
 }
-function clearChatInput() {
+export function clearChatInput() {
     var chatInput = document.querySelector("#chatInput")
     chatInput.value = ""
 }
 
-function createQuestionText(currentQuestion) {
+export function createQuestionText(currentQuestion) {
     let questionText = document.createElement('p');
     questionText.innerText = currentQuestion.text;
     return questionText
 }
 
 export function disableWASD() {
-    WASDenabled = false;
+    window.WASDenabled = false;
 }
 
 export function enableWASD() {
-    WASDenabled = true
+    window.WASDenabled = true
 }
 
-function showInteractionContainer() {
+export function showInteractionContainer() {
     interactionContainer.style.display = 'flex';
 }
 
-function hideInteractionContainer() {
+export function hideInteractionContainer() {
     interactionContainer.style.display = 'none';
 }
 
 
-function finishInteraction() {
+export function finishInteraction() {
     window.globalVars.currentQuestionIndex = 0
     window.globalVars.trade = false
     window.globalVars.chat = false
@@ -139,7 +139,7 @@ function finishInteraction() {
     window.globalVars.userInventoryObjArray = []
     window.globalVars.userInventoryItems = []
     window.globalVars.chatInputValue = ''
-    interactionObject = ''
+    window.interactionObject = ''
     
 
     clearUl(dialogueUl)
@@ -147,7 +147,7 @@ function finishInteraction() {
     hideInteractionContainer()
 }
 
-function setInteractionModeFlag(interactionMode) {
+export function setInteractionModeFlag(interactionMode) {
     if (interactionMode == 'Trade') {
         window.globalVars.trade = true
     } else if (interactionMode == 'Chat') {
@@ -158,7 +158,7 @@ function setInteractionModeFlag(interactionMode) {
 }
 
 
-async function fetchCharacterData(characterSearchableName) {
+export async function fetchCharacterData(characterSearchableName) {
     try {
         const response = await fetch(`/api/gamedata/biography/${characterSearchableName}`);
         
@@ -173,35 +173,37 @@ async function fetchCharacterData(characterSearchableName) {
 }
 
 
-function populateInteractionContainerWithNpcData(npcDataObject) {
-    window.globalVars.npcDataObject.searchable_name = interactionObject
+export function populateInteractionContainerWithNpcData(npcDataObject) {
+    window.globalVars.npcDataObject.searchable_name = window.interactionObject
 
     npcNameEl.innerHTML = npcDataObject.full_name
     npcHeadshotContainer.style.backgroundImage = `url('../images/characterHeadshots/${npcDataObject.searchable_name}.png')`
     npcBioContainer.innerHTML = `Bio:  ${npcDataObject.bio}`
 }
 
-const endGameItems = ['Botanical Elixir ', 'Aetheric Spanner']
-
 
 
 
 // var nextBtn = document.getElementById('nextButton')
 window.addEventListener('keydown', async function(e) {
+    if (e.key === 'w' || e.key === 'a' || e.key === 's' || e.key === 'd') {
+        return
+    }
     retrieveInventoryData()
+    const endGameItems = ['Botanical Elixir ', 'Aetheric Spanner']
     const hasEndGameItems = endGameItems.every(item => window.globalVars.userInventoryItems.includes(item))
-    if (e.key === ' ' && window.globalVars.currentQuestionIndex == 0 && interactionObject!='') {
+    if (e.key === ' ' && window.globalVars.currentQuestionIndex == 0 && window.interactionObject!='') {
         disableWASD()  
-            if (interactionObject === 'Spaceship' && hasEndGameItems) {
-                endGame()
+            if (window.interactionObject === 'Spaceship' && hasEndGameItems) {
+                // endGame()
                 fetchResetInventoryData()
-            } else if (interactionObject === 'Spaceship' && !hasEndGameItems){
+            } else if (window.interactionObject === 'Spaceship' && !hasEndGameItems){
                 console.log("interactionMenu.js eventListener: You can't leave in your spaceship yet. You need to get something to restore the plantlife on your home planet and something to repair your ship.")
                 //ToDo: render message on the screen to the effect of "You can't leave in your spaceship yet. You need to get something to restore plantlife on your planet and something to repair your ship."
                 enableWASD()
                 return
             }   
-        window.globalVars.npcDataObject = await fetchCharacterData(interactionObject)
+        window.globalVars.npcDataObject = await fetchCharacterData(window.interactionObject)
         populateInteractionContainerWithNpcData(window.globalVars.npcDataObject)
         showInteractionContainer()
         askEitherQuestionType(questionData.interactionModeQuestion)
@@ -257,12 +259,12 @@ window.addEventListener('keydown', async function(e) {
 });
 
 
-function removeAnythingOutsideOfQuotes(unformattedStr) {
+export function removeAnythingOutsideOfQuotes(unformattedStr) {
     let str = unformattedStr.match(/"(.*?)"/g).map(item => item.slice(1, -1));
     return str 
 }
 
-async function processChatMessage() {
+export async function processChatMessage() {
     clearUl(dialogueUl)
     clearChatInput()
     var reqObj = createChatPromptFetchReqObj()
@@ -277,13 +279,13 @@ async function processChatMessage() {
     }
 }
 
-function formatDialogueListAsString() {
+export function formatDialogueListAsString() {
     var string = window.globalVars.dialogueList.join("\n")
     return string
 }
 
 
-function createChatPromptFetchReqObj() {
+export function createChatPromptFetchReqObj() {
     var role = window.globalVars.npcDataObject.role
     var bio = window.globalVars.npcDataObject.bio
     var mostRecentMessage = window.globalVars.chatInputValue
@@ -298,7 +300,7 @@ function createChatPromptFetchReqObj() {
     return chatPromptReqObj
 }
 
-function createTradeRequestPromptFetchReqObj() {
+export function createTradeRequestPromptFetchReqObj() {
     var role = window.globalVars.npcDataObject.role
     var bio = window.globalVars.npcDataObject.bio
     var itemOfferedByUser = window.globalVars.tradeRequestData.itemOfferedByUser
@@ -326,7 +328,7 @@ function createTradeRequestPromptFetchReqObj() {
 }
 
 
-async function processTradeOffer() {
+export async function processTradeOffer() {
     window.globalVars.tradeOfferDecision = await fetchTradeOfferResponse()
     console.log("processTradeOffer() offerDecision________", window.globalVars.tradeOfferDecision)
     var reqObj = await createTradeRequestPromptFetchReqObj()
@@ -354,7 +356,7 @@ export function appendLiToUl(ul, text) {
 //     return reqBody
 // }
 
-async function fetchTradeOfferResponse() {
+export async function fetchTradeOfferResponse() {
     var idOfitemOfferedByUser = findIdBasedOnItemNameInJson(window.globalVars.tradeRequestData.itemOfferedByUser, window.globalVars.userInventoryObjArray)
     var idOfItemRequestedByUser = findIdBasedOnItemNameInJson(window.globalVars.tradeRequestData.itemRequestedByUser, window.globalVars.npcInventoryObjArray)
     var responseToTradeOffer = await fetch(`/api/gamedata/trade/${idOfItemRequestedByUser}/${idOfitemOfferedByUser}`, {
