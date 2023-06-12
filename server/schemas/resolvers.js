@@ -1,18 +1,10 @@
-const { Tech, Matchup } = require('../models');
 
-const { Characters, Items, Inventory} = require('../models');
+const { Characters, Items, Inventory, User} = require('../models');
 
 const resolvers = {
   Query: {
     test: () => 'Test get route is working',
 
-    tech: async () => {
-      return Tech.find({});
-    },
-    matchups: async (parent, { _id }) => {
-      const params = _id ? { _id } : {};
-      return Matchup.find(params);
-    },
 
    inventoryByCharacter: async (_, { character }) => {
       try {
@@ -67,19 +59,6 @@ const resolvers = {
   
   Mutation: {
     testPut: () => 'Test put route is working',
-
-    createMatchup: async (parent, args) => {
-      const matchup = await Matchup.create(args);
-      return matchup;
-    },
-    createVote: async (parent, { _id, techNum }) => {
-      const vote = await Matchup.findOneAndUpdate(
-        { _id },
-        { $inc: { [`tech${techNum}_votes`]: 1 } },
-        { new: true }
-      );
-      return vote;
-    },
 
     trade: async (_, { item1, item2}) => {
       //logic to swap items and update the inventory and return updated inventory object
