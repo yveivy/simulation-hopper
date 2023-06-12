@@ -1,4 +1,4 @@
-import { globalVars, questionData } from "./interactionMenu.js";
+import { questionData } from "./interactionMenu.js";
 import { appendLiToUl, disableWASD, enableWASD, clearUl} from "./interactionMenu.js";
 var inventoryContainer = document.querySelector("#inventory-container")
 var inventoryUl = document.querySelector("#inventory-ul")
@@ -49,12 +49,12 @@ export function parseInventoryObjArrayToGetJustItems(inventoryObjArray) {
 }
 
 export async function retrieveInventoryData() {
-    globalVars.npcInventoryObjArray = await fetchInventory(interactionObject)
-    globalVars.userInventoryObjArray = await fetchInventory('barf')
-    globalVars.npcInventoryItems = parseInventoryObjArrayToGetJustItems(globalVars.npcInventoryObjArray)
-    questionData.receiveQuestion.choices = [...globalVars.npcInventoryItems]
-    globalVars.userInventoryItems = parseInventoryObjArrayToGetJustItems(globalVars.userInventoryObjArray)
-    questionData.offerQuestion.choices = [...globalVars.userInventoryItems]
+    window.globalVars.npcInventoryObjArray = await fetchInventory(interactionObject)
+    window.globalVars.userInventoryObjArray = await fetchInventory('barf')
+    window.globalVars.npcInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.npcInventoryObjArray)
+    questionData.receiveQuestion.choices = [...window.globalVars.npcInventoryItems]
+    window.globalVars.userInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.userInventoryObjArray)
+    questionData.offerQuestion.choices = [...window.globalVars.userInventoryItems]
 }
 
 
@@ -86,39 +86,39 @@ export function findIdBasedOnItemNameInJson(itemNameToSearch, objArray) {
     return foundId
 }
 
-async function renderUserInventory() {
+export async function renderUserInventory() {
     showInventoryContainer()
-    globalVars.userInventoryObjArray = await fetchInventory('barf')
-    globalVars.userInventoryItems = parseInventoryObjArrayToGetJustItems(globalVars.userInventoryObjArray)
+    window.globalVars.userInventoryObjArray = await fetchInventory('barf')
+    window.globalVars.userInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.userInventoryObjArray)
     clearUl(inventoryUl)
-    renderInventoryItemDetailsInUl(inventoryUl, globalVars.userInventoryObjArray)
+    renderInventoryItemDetailsInUl(inventoryUl, window.globalVars.userInventoryObjArray)
 }
 
-function showInventoryContainer() {
+export function showInventoryContainer() {
     inventoryContainer.style.display = 'flex';
 }
 
-function hideInventoryContainer() {
+export function hideInventoryContainer() {
     inventoryContainer.style.display = 'none';
 }
 
 window.addEventListener('keydown', async function(e) {
     if (e.key === 'e') {
         console.log("e key pressed____________")
-        if (globalVars.inventoryToggledOn) {
+        if (window.globalVars.inventoryToggledOn) {
             hideInventoryContainer()
             enableWASD()
-            globalVars.inventoryToggledOn = false
+            window.globalVars.inventoryToggledOn = false
         } else {
             renderUserInventory()
             disableWASD()
-            globalVars.inventoryToggledOn = true
+            window.globalVars.inventoryToggledOn = true
         }
     }
-    else if (e.code === 'Escape' && globalVars.inventoryToggledOn) {
+    else if (e.code === 'Escape' && window.globalVars.inventoryToggledOn) {
         hideInventoryContainer()
         enableWASD()
-        globalVars.inventoryToggledOn = false
+        window.globalVars.inventoryToggledOn = false
     }
     else if (e.key === 't') {
         //?for testing purposes

@@ -4,7 +4,7 @@ import { parseInventoryObjArrayToGetJustItems, retrieveInventoryData, renderInve
 // var userInventory = ['duct tape', 'rusty knife', 'hair gel']
 // var inventoryOfThisNpc = ['wrench', 'screws', 'shoelace']
 
-export var globalVars = {
+window.globalVars = {
     inventoryToggledOn: false,
     trade: false,
     chat: false,
@@ -22,9 +22,9 @@ export var globalVars = {
 
 export var questionData = {
     interactionModeQuestion: { type: "radio", text: "", choices: ["Trade", "Chat"], when: true },
-    offerQuestion: { type: "radio", text: "Offer to trade your:", choices: [...globalVars.userInventoryItems], when: globalVars.trade},
-    receiveQuestion: { type: "radio", text: "In exchange for:", choices: [...globalVars.npcInventoryItems], when: globalVars.trade},
-    chatQuestion: { type: "input", text: "Type to chat", when: globalVars.chat }
+    offerQuestion: { type: "radio", text: "Offer to trade your:", choices: [...window.globalVars.userInventoryItems], when: window.globalVars.trade},
+    receiveQuestion: { type: "radio", text: "In exchange for:", choices: [...window.globalVars.npcInventoryItems], when: window.globalVars.trade},
+    chatQuestion: { type: "input", text: "Type to chat", when: window.globalVars.chat }
 }
 
 var interactionContainer = document.getElementById('interactionContainer');
@@ -128,17 +128,17 @@ function hideInteractionContainer() {
 
 
 function finishInteraction() {
-    globalVars.currentQuestionIndex = 0
-    globalVars.trade = false
-    globalVars.chat = false
-    globalVars.dialogueList = []
-    globalVars.tradeRequestData = {}
-    globalVars.npcDataObject = {}
-    globalVars.npcInventoryItems = []
-    globalVars.npcInventoryObjArray = []
-    globalVars.userInventoryObjArray = []
-    globalVars.userInventoryItems = []
-    globalVars.chatInputValue = ''
+    window.globalVars.currentQuestionIndex = 0
+    window.globalVars.trade = false
+    window.globalVars.chat = false
+    window.globalVars.dialogueList = []
+    window.globalVars.tradeRequestData = {}
+    window.globalVars.npcDataObject = {}
+    window.globalVars.npcInventoryItems = []
+    window.globalVars.npcInventoryObjArray = []
+    window.globalVars.userInventoryObjArray = []
+    window.globalVars.userInventoryItems = []
+    window.globalVars.chatInputValue = ''
     interactionObject = ''
     
 
@@ -149,9 +149,9 @@ function finishInteraction() {
 
 function setInteractionModeFlag(interactionMode) {
     if (interactionMode == 'Trade') {
-        globalVars.trade = true
+        window.globalVars.trade = true
     } else if (interactionMode == 'Chat') {
-        globalVars.chat = true
+        window.globalVars.chat = true
     } else {
         console.log("Error in getting input value of first question")
     }
@@ -174,7 +174,7 @@ async function fetchCharacterData(characterSearchableName) {
 
 
 function populateInteractionContainerWithNpcData(npcDataObject) {
-    globalVars.npcDataObject.searchable_name = interactionObject
+    window.globalVars.npcDataObject.searchable_name = interactionObject
 
     npcNameEl.innerHTML = npcDataObject.full_name
     npcHeadshotContainer.style.backgroundImage = `url('../images/characterHeadshots/${npcDataObject.searchable_name}.png')`
@@ -189,8 +189,8 @@ const endGameItems = ['Botanical Elixir ', 'Aetheric Spanner']
 // var nextBtn = document.getElementById('nextButton')
 window.addEventListener('keydown', async function(e) {
     retrieveInventoryData()
-    const hasEndGameItems = endGameItems.every(item => globalVars.userInventoryItems.includes(item))
-    if (e.key === ' ' && globalVars.currentQuestionIndex == 0 && interactionObject!='') {
+    const hasEndGameItems = endGameItems.every(item => window.globalVars.userInventoryItems.includes(item))
+    if (e.key === ' ' && window.globalVars.currentQuestionIndex == 0 && interactionObject!='') {
         disableWASD()  
             if (interactionObject === 'Spaceship' && hasEndGameItems) {
                 endGame()
@@ -201,55 +201,55 @@ window.addEventListener('keydown', async function(e) {
                 enableWASD()
                 return
             }   
-        globalVars.npcDataObject = await fetchCharacterData(interactionObject)
-        populateInteractionContainerWithNpcData(globalVars.npcDataObject)
+        window.globalVars.npcDataObject = await fetchCharacterData(interactionObject)
+        populateInteractionContainerWithNpcData(window.globalVars.npcDataObject)
         showInteractionContainer()
         askEitherQuestionType(questionData.interactionModeQuestion)
-        globalVars.currentQuestionIndex ++
-    } else if (e.code === 'Enter' && globalVars.currentQuestionIndex == 1) {
+        window.globalVars.currentQuestionIndex ++
+    } else if (e.code === 'Enter' && window.globalVars.currentQuestionIndex == 1) {
         var interactionModeInputValue = getRadioInputValue()
         if (!interactionModeInputValue) {
             console.log("Tried to press enter before any input option selected")
             return
         }
         setInteractionModeFlag(interactionModeInputValue)
-        if (globalVars.trade) {
-            console.log('EventListener() trade chosen; userInventoryItems________',globalVars.userInventoryItems)
+        if (window.globalVars.trade) {
+            console.log('EventListener() trade chosen; userInventoryItems________',window.globalVars.userInventoryItems)
             askEitherQuestionType(questionData.offerQuestion)
-            renderInventoryItemDetailsInUl(dialogueUl, globalVars.userInventoryObjArray)
-        } else if (globalVars.chat) {
+            renderInventoryItemDetailsInUl(dialogueUl, window.globalVars.userInventoryObjArray)
+        } else if (window.globalVars.chat) {
             askEitherQuestionType(questionData.chatQuestion)
         }
-        globalVars.currentQuestionIndex ++ 
-    } else if (e.code === 'Enter' && globalVars.chat && globalVars.currentQuestionIndex >= 2) { 
-        globalVars.chatInputValue = getTextInputValue()
-        if (globalVars.chatInputValue=="") {
+        window.globalVars.currentQuestionIndex ++ 
+    } else if (e.code === 'Enter' && window.globalVars.chat && window.globalVars.currentQuestionIndex >= 2) { 
+        window.globalVars.chatInputValue = getTextInputValue()
+        if (window.globalVars.chatInputValue=="") {
             console.log("Tried to press enter before any input option selected")
             return
         }
-        globalVars.dialogueList.push(`User: "${globalVars.chatInputValue}"`)
-        globalVars.currentQuestionIndex ++
-        processChatMessage(globalVars.chatInputValue)
-    } else if (e.code === 'Enter' && globalVars.trade && globalVars.currentQuestionIndex == 2) {
-        globalVars.tradeRequestData.itemOfferedByUser = getRadioInputValue()
-        if (!globalVars.tradeRequestData.itemOfferedByUser) {
+        window.globalVars.dialogueList.push(`User: "${window.globalVars.chatInputValue}"`)
+        window.globalVars.currentQuestionIndex ++
+        processChatMessage(window.globalVars.chatInputValue)
+    } else if (e.code === 'Enter' && window.globalVars.trade && window.globalVars.currentQuestionIndex == 2) {
+        window.globalVars.tradeRequestData.itemOfferedByUser = getRadioInputValue()
+        if (!window.globalVars.tradeRequestData.itemOfferedByUser) {
             console.log("Tried to press enter before any input option selected")
             return
         }
         askEitherQuestionType(questionData.receiveQuestion)
         clearUl(dialogueUl)
-        renderInventoryItemDetailsInUl(dialogueUl, globalVars.npcInventoryObjArray)
-        globalVars.currentQuestionIndex ++
-    } else if (e.code === 'Enter' && globalVars.trade && globalVars.currentQuestionIndex == 3) {
-        globalVars.tradeRequestData.itemRequestedByUser = getRadioInputValue()
-        if (!globalVars.tradeRequestData.itemRequestedByUser) {
+        renderInventoryItemDetailsInUl(dialogueUl, window.globalVars.npcInventoryObjArray)
+        window.globalVars.currentQuestionIndex ++
+    } else if (e.code === 'Enter' && window.globalVars.trade && window.globalVars.currentQuestionIndex == 3) {
+        window.globalVars.tradeRequestData.itemRequestedByUser = getRadioInputValue()
+        if (!window.globalVars.tradeRequestData.itemRequestedByUser) {
             console.log("Tried to press enter before any input option selected")
             return
         }
-        globalVars.currentQuestionIndex ++ 
+        window.globalVars.currentQuestionIndex ++ 
         clearUl(dialogueUl)
         processTradeOffer()
-    } else if (e.code === 'Escape' && globalVars.currentQuestionIndex > 0) {
+    } else if (e.code === 'Escape' && window.globalVars.currentQuestionIndex > 0) {
         console.log("interactionMenu.js eventListener escape-key__________")
         finishInteraction()
         enableWASD()
@@ -269,24 +269,24 @@ async function processChatMessage() {
     var prompt = createPromptForNpcResponseToChat(reqObj)
     var unformattedPromptResponse = await fetchOpenAiApi(prompt)
     var promptResponse = removeAnythingOutsideOfQuotes(unformattedPromptResponse)
-    var npcText = `${globalVars.npcDataObject.full_name}: "${promptResponse}"`
-    globalVars.dialogueList.push(npcText)
+    var npcText = `${window.globalVars.npcDataObject.full_name}: "${promptResponse}"`
+    window.globalVars.dialogueList.push(npcText)
 
-    for (let line of globalVars.dialogueList) {
+    for (let line of window.globalVars.dialogueList) {
         appendLiToUl(dialogueUl, line)
     }
 }
 
 function formatDialogueListAsString() {
-    var string = globalVars.dialogueList.join("\n")
+    var string = window.globalVars.dialogueList.join("\n")
     return string
 }
 
 
 function createChatPromptFetchReqObj() {
-    var role = globalVars.npcDataObject.role
-    var bio = globalVars.npcDataObject.bio
-    var mostRecentMessage = globalVars.chatInputValue
+    var role = window.globalVars.npcDataObject.role
+    var bio = window.globalVars.npcDataObject.bio
+    var mostRecentMessage = window.globalVars.chatInputValue
     var chatHistory = formatDialogueListAsString()
 
     var chatPromptReqObj = {
@@ -299,16 +299,16 @@ function createChatPromptFetchReqObj() {
 }
 
 function createTradeRequestPromptFetchReqObj() {
-    var role = globalVars.npcDataObject.role
-    var bio = globalVars.npcDataObject.bio
-    var itemOfferedByUser = globalVars.tradeRequestData.itemOfferedByUser
-    var itemRequestedByUser = globalVars.tradeRequestData.itemRequestedByUser
-    var offerDecision = globalVars.tradeOfferDecision
+    var role = window.globalVars.npcDataObject.role
+    var bio = window.globalVars.npcDataObject.bio
+    var itemOfferedByUser = window.globalVars.tradeRequestData.itemOfferedByUser
+    var itemRequestedByUser = window.globalVars.tradeRequestData.itemRequestedByUser
+    var offerDecision = window.globalVars.tradeOfferDecision
     
-    var userInventoryItemsStr = globalVars.userInventoryItems.join(", ")
-    var npcInventoryItemsStr = globalVars.npcInventoryItems.join(", ")
-    var descriptionOfItemOfferedByUser = findDescriptionBasedOnItemNameInJson(itemOfferedByUser, globalVars.userInventoryObjArray)
-    var descriptionOfItemRequestedByUser = findDescriptionBasedOnItemNameInJson(itemRequestedByUser, globalVars.npcInventoryObjArray)
+    var userInventoryItemsStr = window.globalVars.userInventoryItems.join(", ")
+    var npcInventoryItemsStr = window.globalVars.npcInventoryItems.join(", ")
+    var descriptionOfItemOfferedByUser = findDescriptionBasedOnItemNameInJson(itemOfferedByUser, window.globalVars.userInventoryObjArray)
+    var descriptionOfItemRequestedByUser = findDescriptionBasedOnItemNameInJson(itemRequestedByUser, window.globalVars.npcInventoryObjArray)
 
     var tradeReqPromptReqObj = {
         role: role,
@@ -327,12 +327,12 @@ function createTradeRequestPromptFetchReqObj() {
 
 
 async function processTradeOffer() {
-    globalVars.tradeOfferDecision = await fetchTradeOfferResponse()
-    console.log("processTradeOffer() offerDecision________", globalVars.tradeOfferDecision)
+    window.globalVars.tradeOfferDecision = await fetchTradeOfferResponse()
+    console.log("processTradeOffer() offerDecision________", window.globalVars.tradeOfferDecision)
     var reqObj = await createTradeRequestPromptFetchReqObj()
     var prompt = createPromptForNpcResponseToTradeRequest(reqObj)
     var promptResponse = await fetchOpenAiApi(prompt)
-    var tradeSummary = `*User offers ${globalVars.tradeRequestData.itemOfferedByUser} in exchange for ${globalVars.tradeRequestData.itemRequestedByUser}.*`
+    var tradeSummary = `*User offers ${window.globalVars.tradeRequestData.itemOfferedByUser} in exchange for ${window.globalVars.tradeRequestData.itemRequestedByUser}.*`
     var dialogueText = `NPC: ${promptResponse}`
     appendLiToUl(dialogueUl, tradeSummary)
     appendLiToUl(dialogueUl, dialogueText)
@@ -355,8 +355,8 @@ export function appendLiToUl(ul, text) {
 // }
 
 async function fetchTradeOfferResponse() {
-    var idOfitemOfferedByUser = findIdBasedOnItemNameInJson(globalVars.tradeRequestData.itemOfferedByUser, globalVars.userInventoryObjArray)
-    var idOfItemRequestedByUser = findIdBasedOnItemNameInJson(globalVars.tradeRequestData.itemRequestedByUser, globalVars.npcInventoryObjArray)
+    var idOfitemOfferedByUser = findIdBasedOnItemNameInJson(window.globalVars.tradeRequestData.itemOfferedByUser, window.globalVars.userInventoryObjArray)
+    var idOfItemRequestedByUser = findIdBasedOnItemNameInJson(window.globalVars.tradeRequestData.itemRequestedByUser, window.globalVars.npcInventoryObjArray)
     var responseToTradeOffer = await fetch(`/api/gamedata/trade/${idOfItemRequestedByUser}/${idOfitemOfferedByUser}`, {
         method: 'PUT',
         headers: {
