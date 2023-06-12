@@ -1,12 +1,12 @@
 const { Schema, model } = require('mongoose');
 
 const inventorySchema = new mongoose.Schema({
-    character_id: {
+    full_name: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Character',
     },
 
-    item_id: {
+    item_name: {
         type: mongoose.Schema.Types.Object.Id,
         ref: 'Item',
 
