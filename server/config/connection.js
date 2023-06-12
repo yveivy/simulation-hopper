@@ -1,5 +1,14 @@
-const mongoose = require('mongoose');
+const { connect, connection } = require('mongoose');
+require('dotenv/config')
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/techmatchup');
+let connectionString;
 
-module.exports = mongoose.connection;
+if (process.env.NODE_ENV === 'production') {
+    connectionString = process.env.SERVER_MONGODB_URI;
+} else {
+    connectionString = process.env.LOCAL_MONGODB_URI;
+}
+
+connect(connectionString);
+
+module.exports = connection;
