@@ -1,13 +1,28 @@
-const db = require('../config/connection');
-const { Tech } = require('../models');
+const mongoose = require('mongoose');
+const seedCharacters = require('./characterData');
+const seedItems = require('./itemData');
+const seedInventory = require('/inventoryData');
+require('dotenv').config();
 
-const techData = require('./techData.json');
-
-db.once('open', async () => {
-  await Tech.deleteMany({});
-
-  const technologies = await Tech.insertMany(techData);
-
-  console.log('Technologies seeded!');
-  process.exit(0);
+mongoose.connect(process.env.MONGODB_URI, {
+  userNewUrlParser: true,
+  useUnifiedTopology: true,
 });
+
+const seedDatabase = async () => {
+  try {
+    await seedCharacters();
+
+    await seedItems();
+
+    await seedInventory();
+
+    console.log('Database seeding completed successfully.');
+  } catch (error) {
+    console.error('Error seeding database:', error);
+  } finally {
+    mongoose.disconnect();
+  }
+};
+
+seedDatabase();
