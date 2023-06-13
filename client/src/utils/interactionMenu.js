@@ -356,18 +356,18 @@ export function appendLiToUl(ul, text) {
 //     return reqBody
 // }
 
-export async function fetchTradeOfferResponse() {
-    try {
-        const { data } = await client.mutate({
-          mutation: ADD_THOUGHT,
-          variables: {
-            thoughtText: "This is a new thought",
-            thoughtAuthor: "Elon Musk"
-          },
-        });
-        console.log(data);
-        return data
-    } catch (error) {
-        console.error(error);
-    }
-}
+// export async function fetchTradeOfferResponse() {
+//     try {
+//         const { data } = await client.mutate({
+//           mutation: ADD_THOUGHT,
+//           variables: {
+//             thoughtText: "This is a new thought",
+//             thoughtAuthor: "Elon Musk"
+//           },
+//         });
+//         console.log(data);
+//         return data
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }

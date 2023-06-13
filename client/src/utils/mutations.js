@@ -36,20 +36,20 @@ export const CREATE_TRADE_OFFER = gql`
   }
 `;
 
-export async function fetchTradeOfferResponse() {
-  var idOfitemOfferedByUser = findIdBasedOnItemNameInJson(window.globalVars.tradeRequestData.itemOfferedByUser, window.globalVars.userInventoryObjArray)
-  var idOfItemRequestedByUser = findIdBasedOnItemNameInJson(window.globalVars.tradeRequestData.itemRequestedByUser, window.globalVars.npcInventoryObjArray)
-  var responseToTradeOffer = await fetch(`/api/gamedata/trade/${idOfItemRequestedByUser}/${idOfitemOfferedByUser}`, {
-      method: 'PUT',
-      headers: {
-          'Content-Type': 'application/json',
-      }
-  })
-  var offerDecisionObj = await responseToTradeOffer.json()
-  var offerDecision = offerDecisionObj.offerDecision
-  console.log("fetchTradeOfferResponse() offerDecision________", offerDecision)
-  return offerDecision
-}
+// export async function fetchTradeOfferResponse() {
+//   var idOfitemOfferedByUser = findIdBasedOnItemNameInJson(window.globalVars.tradeRequestData.itemOfferedByUser, window.globalVars.userInventoryObjArray)
+//   var idOfItemRequestedByUser = findIdBasedOnItemNameInJson(window.globalVars.tradeRequestData.itemRequestedByUser, window.globalVars.npcInventoryObjArray)
+//   var responseToTradeOffer = await fetch(`/api/gamedata/trade/${idOfItemRequestedByUser}/${idOfitemOfferedByUser}`, {
+//       method: 'PUT',
+//       headers: {
+//           'Content-Type': 'application/json',
+//       }
+//   })
+//   var offerDecisionObj = await responseToTradeOffer.json()
+//   var offerDecision = offerDecisionObj.offerDecision
+//   console.log("fetchTradeOfferResponse() offerDecision________", offerDecision)
+//   return offerDecision
+// }
 
 
 // export function createChatPromptFetchReqObj() {

@@ -5,20 +5,20 @@ import { QUERY_INVENTORY } from './queries.js';
 var inventoryContainer = document.querySelector("#inventory-container")
 var inventoryUl = document.querySelector("#inventory-ul")
 
-export async function fetchResetInventoryData() {
-    try {
-        const { data } = await client.mutate({
-          mutation: ADD_THOUGHT,
-          variables: {
-            thoughtText: "This is a new thought",
-            thoughtAuthor: "Elon Musk"
-          },
-        });
-        console.log(data);
-      } catch (error) {
-        console.error(error);
-      }
-}
+// export async function fetchResetInventoryData() {
+//     try {
+//         const { data } = await client.mutate({
+//           mutation: ADD_THOUGHT,
+//           variables: {
+//             thoughtText: "This is a new thought",
+//             thoughtAuthor: "Elon Musk"
+//           },
+//         });
+//         console.log(data);
+//       } catch (error) {
+//         console.error(error);
+//       }
+// }
 
 export async function fetchInventory(characterSearchableName) {
     try {
