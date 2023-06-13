@@ -3,7 +3,6 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
 
   type Character {
-    character_id: Int!
     searchable_name: String!
     full_name: String!
     role: String!
@@ -17,7 +16,6 @@ const typeDefs = gql`
   }
 
   type Item {
-    item_id: Int!
     searchable_item: String!
     item_name: String!
     description: String!
@@ -30,8 +28,8 @@ const typeDefs = gql`
   }
 
   type Inventory {
-    full_name: Character!
-    item_name: Item!
+    searchable_name: Character!
+    searchable_item: Item!
   }
 
   type Query {

@@ -9,13 +9,13 @@ const resolvers = {
    inventoryByCharacter: async (_, { character }) => {
       try {
         const inventory = await Inventory.findAll({
-          attributes: { exclude: [ 'id', 'character_id', 'item_id']},
+          attributes: { exclude: [ 'full_name', 'item_name']},
           include: [
 
           { 
             model: Characters,
             where: { searchable_name: character },
-            attributes: { exclude: ['character_id', 'searchable_name', 'full_name', 'role', 'bio'] }
+            attributes: { exclude: ['searchable_name', 'full_name', 'role', 'bio'] }
           },
 
           {
@@ -58,7 +58,7 @@ const resolvers = {
   },
   
   Mutation: {
-    testPut: () => 'Test put route is working',
+    // testPut: () => 'Test put route is working',
 
     trade: async (_, { item1, item2}) => {
       //logic to swap items and update the inventory and return updated inventory object
