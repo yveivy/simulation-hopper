@@ -1,42 +1,36 @@
 import { questionData } from "./interactionMenu.js";
 import { appendLiToUl, disableWASD, enableWASD, clearUl} from "./interactionMenu.js";
+import client from './apolloClient'
+import { QUERY_INVENTORY } from './queries.js';
 var inventoryContainer = document.querySelector("#inventory-container")
 var inventoryUl = document.querySelector("#inventory-ul")
 
 export async function fetchResetInventoryData() {
     try {
-        const response = await fetch('api/gamedata/reset-inventory', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        const { data } = await client.mutate({
+          mutation: ADD_THOUGHT,
+          variables: {
+            thoughtText: "This is a new thought",
+            thoughtAuthor: "Elon Musk"
+          },
         });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
         console.log(data);
-        return data;
-    } catch (error) {
-        console.error('Error:', error);
-    }
+      } catch (error) {
+        console.error(error);
+      }
 }
 
 export async function fetchInventory(characterSearchableName) {
     try {
-        const response = await fetch(`/api/gamedata/inventory/${characterSearchableName}`);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const inventory = await response.json();
-        return inventory;
-    } catch (e) {
-        console.log('There was a problem with your fetch operation: ' + e.message);
-    }
+        const { data } = await client.query({ 
+            query: QUERY_INVENTORY,
+            variables: { searchableName: characterSearchableName }
+        });
+        console.log(data);
+        return data
+      } catch (error) {
+        console.error(error);
+      }
 }
 
 export function parseInventoryObjArrayToGetJustItems(inventoryObjArray) {

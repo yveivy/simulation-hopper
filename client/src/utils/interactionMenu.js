@@ -1,6 +1,7 @@
 import { fetchOpenAiApi, createPromptForNpcResponseToTradeRequest, createPromptForNpcResponseToChat } from './ai.js';
 import { parseInventoryObjArrayToGetJustItems, retrieveInventoryData, renderInventoryItemDetailsInUl, findDescriptionBasedOnItemNameInJson, findIdBasedOnItemNameInJson, fetchResetInventoryData} from './inventory.js';
-
+import client from './apolloClient'
+import { QUERY_CHARACTER_DATA } from './queries.js';
 // var userInventory = ['duct tape', 'rusty knife', 'hair gel']
 // var inventoryOfThisNpc = ['wrench', 'screws', 'shoelace']
 
@@ -160,15 +161,14 @@ export function setInteractionModeFlag(interactionMode) {
 
 export async function fetchCharacterData(characterSearchableName) {
     try {
-        const response = await fetch(`/api/gamedata/biography/${characterSearchableName}`);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const npcData = await response.json();
-        return npcData;
-    } catch (e) {
-        console.log('There was a problem with your fetch operation: ' + e.message);
+        const { data } = await client.query({
+            query: QUERY_CHARACTER_DATA,
+            variables: { searchableName: characterSearchableName }
+        });
+        console.log(data);
+        return data
+    } catch (error) {
+        console.error(error);
     }
 }
 
@@ -357,16 +357,17 @@ export function appendLiToUl(ul, text) {
 // }
 
 export async function fetchTradeOfferResponse() {
-    var idOfitemOfferedByUser = findIdBasedOnItemNameInJson(window.globalVars.tradeRequestData.itemOfferedByUser, window.globalVars.userInventoryObjArray)
-    var idOfItemRequestedByUser = findIdBasedOnItemNameInJson(window.globalVars.tradeRequestData.itemRequestedByUser, window.globalVars.npcInventoryObjArray)
-    var responseToTradeOffer = await fetch(`/api/gamedata/trade/${idOfItemRequestedByUser}/${idOfitemOfferedByUser}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    })
-    var offerDecisionObj = await responseToTradeOffer.json()
-    var offerDecision = offerDecisionObj.offerDecision
-    console.log("fetchTradeOfferResponse() offerDecision________", offerDecision)
-    return offerDecision
+    try {
+        const { data } = await client.mutate({
+          mutation: ADD_THOUGHT,
+          variables: {
+            thoughtText: "This is a new thought",
+            thoughtAuthor: "Elon Musk"
+          },
+        });
+        console.log(data);
+        return data
+    } catch (error) {
+        console.error(error);
+    }
 }
