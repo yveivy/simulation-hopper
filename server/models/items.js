@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose'); 
 
-const itemSchema = new mongoose.Schema({
+const itemSchema = new Schema({
     searchable_item: {
         type: String,
         required: false,
@@ -21,6 +21,6 @@ const itemSchema = new mongoose.Schema({
     collection: 'items',
 });
 
-const Item = mongoose.model('Item', itemSchema);
+const Item = model('Item', itemSchema);
 
 module.exports = Item;

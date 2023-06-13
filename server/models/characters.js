@@ -1,12 +1,7 @@
 const { Schema, model } = require('mongoose');
 
-const characterSchema = new mongoose.Schema({
-    character_id: {
-        type: Number,
-        required: true,
-        unique: true,
-    },
-
+const characterSchema = new Schema({
+  
     searchable_name: {
         type: String,
         required: true,
@@ -33,6 +28,6 @@ const characterSchema = new mongoose.Schema({
     collection: 'characters',
 });
 
-const Character = mongoose.model('Character', characterSchema);
+const Character = model('Character', characterSchema);
 
 module.exports = Character;
