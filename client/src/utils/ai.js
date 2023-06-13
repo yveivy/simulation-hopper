@@ -71,7 +71,7 @@ return prompt
 }
 
 //ToDO:
-export function createPromptForRobotAdvice() {
+export function createPromptForRobotAdvice(reqObj) {
     var bio = reqObj.bio
     var chatHistory = reqObj.chatHistory
 
