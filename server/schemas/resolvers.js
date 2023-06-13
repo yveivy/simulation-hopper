@@ -123,8 +123,13 @@ const { client, userinfo } = require('../config/db')
 const resolvers = {
   Query: {
     userSaveFile: async () => {
+<<<<<<< HEAD
         const database = client.db('simulationHopperDb');
         const collection = database.collection(userinfo.username);
+=======
+      const database = client.db('simulationHopperDB');
+      const collection = database.collection(userinfo.username);
+>>>>>>> main
       try {
         const dbData = await collection.findOne(); // Retrieve the data from the collection
         return dbData;
@@ -134,77 +139,32 @@ const resolvers = {
       }
     }
   },
-  Character: {
-    abe: (parent) => {
-      return parent.abe;
-    },
-    barf: (parent) => {
-      return parent.barf;
-    },
-    hydra: (parent) => {
-      return parent.hydra;
-    },
-    shady: (parent) => {
-      return parent.shady;
-    },
-    taylor: (parent) => {
-      return parent.taylor
-    },
-    violet: (parent) => {
-      return parent.violet
-    },
-    zara: (parent) => {
-      return parent.zara
-    }
-  },
-  CharacterObject: {
-    detail: (characterObject) => {
-      return characterObject.detail
-    },
-    inventory: (characterObject) => {
-      const inventory = characterObject.inventory
-      return Object.keys(inventory).map((key) => ({
-        key,
-        ...inventory[key],
-      }));
-    },
-    wishlist: (characterObject) => {
-      return characterObject.wishlist
-    }
-  },
-  InventoryContainer: {
-    allItems: (inventoryItem) => {
-      return inventoryItem;
-    }
-  },
-  InventoryItem: {
-    key: (inventoryObject) => {
-      return inventoryObject.key
-    },
-    description: (inventoryObject) => {
-      return inventoryObject.description
-    },
-    name: (inventoryObject) => {
-      return inventoryObject.name
-    }
-  },
-  CharacterDetail: {
-    bio: (characterDetail) => {
-      console.log(characterDetail);
-      return characterDetail.bio
-    },
-    name: (characterDetail) => {
-      return characterDetail.name
-    },
-    role: (characterDetail) => {
-      return characterDetail.role
-    }
-  },
   Userinfo: {
     username: (parent) => parent.username,
     password: (parent) => parent.password,
   },  
-
+  Character: {
+    abe: (parent) => {
+      return parent.inventory.abe;
+    },
+    barf: (parent) => { 
+      return parent.inventory.barf; 
+    },
+    hydra: (parent) => {
+      return parent.inventory.hydra;
+    },
+    shady: (parent) => {
+      return parent.inventory.shady;
+    },
+    taylor: (parent) => {
+      return parent.inventory.taylor;
+    },
+    violet: (parent) => {
+      return parent.inventory.violet;
+    },
+    zara: (parent) => {
+      return parent.inventory.zara;
+    }
+  },
 };
-
 module.exports = resolvers;
