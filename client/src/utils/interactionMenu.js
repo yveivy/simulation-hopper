@@ -347,6 +347,8 @@ export function appendLiToUl(ul, text) {
     ul.appendChild(li)
 }
 
+
+
 // function createReqBodyToCheckTrade (itemOfferedByUser, itemRequestedByUser) {
 //     var tradeRequestData = {
 //         "itemOfferedByUser": itemOfferedByUser,
