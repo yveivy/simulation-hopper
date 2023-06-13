@@ -81,7 +81,8 @@ type Query {
 type Collection {
   _id: ID
   userinfo: Userinfo
-  characters: Character
+  playerLocation: PlayerLocParams
+  inventory: Character
 }
 
 type Userinfo {
@@ -89,38 +90,41 @@ type Userinfo {
   password: String
 }
 
+type PlayerLocParams {
+  x: Int
+  y: Int
+}
+
 type Character {
-  abe: CharacterObject!
-  barf: CharacterObject!
-  hydra: CharacterObject!
-  shady: CharacterObject!
-  taylor: CharacterObject!
-  violet: CharacterObject!
-  zara: CharacterObject!
+  abe: InventoryObject
+  barf: InventoryObject
+  hydra: InventoryObject
+  shady: InventoryObject
+  taylor: InventoryObject
+  violet: InventoryObject
+  zara: InventoryObject
 }
 
-type CharacterObject {
-  detail: CharacterDetail
-  inventory: [InventoryItem]
-  wishlist: String
-}
 
-type CharacterDetail {
-  bio: String
-  name: String
-  role: String
+type InventoryObject {
+  hasMet: Boolean
+  balm: Boolean
+  compass: Boolean
+  elixir: Boolean
+  feather: Boolean
+  harp: Boolean
+  lantern: Boolean
+  logBook: Boolean
+  locket: Boolean
+  medicalKit: Boolean
+  newt: Boolean
+  pocketWatch: Boolean
+  scope: Boolean
+  spanner: Boolean
+  spade: Boolean
+  striders: Boolean
+  translator: Boolean
 }
-
-type InventoryItem {
-  key: String
-  description: String
-  name: String
-}
-
-type InventoryContainer {
-  allItems: InventoryItem
-}
-
 
 
 
