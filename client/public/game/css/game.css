@@ -184,3 +184,64 @@ ul {
   opacity: 0; 
 }
 
+.image-container1 {
+  position: absolute;
+  z-index: 2; /* Increase the z-index to make images appear in front of the canvas */
+}
+
+.image-container1 img {
+  height: 576px;
+  width: 1024px;
+}
+.crawl-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  /* Adjust width and height as needed */
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+}
+
+.crawl-text {
+  position: absolute;
+  top: 100%; /* Start the text below the container */
+  animation: crawl 50s linear forwards; /* Adjust the animation duration as needed */
+}
+
+@keyframes crawl {
+  0% {
+    top: 100%;
+    transform: rotateX(20deg) translateZ(0);
+  }
+  100% {
+    top: -3000px; /* Adjust the distance the text scrolls */
+    transform: rotateX(20deg) translateZ(-3000px);
+  }
+}
+
+/* Add additional styling for the crawl text as needed */
+.crawl-text p {
+
+  font-size: 44px;
+  color: yellow;
+  text-align: center;
+  line-height: 1.5;
+  opacity: 1; /* Ensure the text remains visible throughout the animation */
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+/* setting the styling for the dialogue box for the animation, and the p tag */
+#dialogue-image {
+  position: relative;
+  z-index: 4; /* Set the desired z-index value */
+}
+#text-container{
+  position: absolute;
+  z-index: 5; 
+  top: 77%; /* Adjust the vertical position */
+  left: 50%; /* Adjust the horizontal position */
+  transform: translate(-50%, -50%); 
+}
