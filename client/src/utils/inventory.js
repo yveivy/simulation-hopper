@@ -24,10 +24,9 @@ export async function fetchInventory(characterSearchableName) {
     try {
         const { data } = await client.query({ 
             query: QUERY_INVENTORY,
-            variables: { searchableName: characterSearchableName }
         });
         console.log(data);
-        return data
+        return data.characters[characterSearchableName]
       } catch (error) {
         console.error(error);
       }

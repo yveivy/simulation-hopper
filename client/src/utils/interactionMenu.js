@@ -162,11 +162,10 @@ export function setInteractionModeFlag(interactionMode) {
 export async function fetchCharacterData(characterSearchableName) {
     try {
         const { data } = await client.query({
-            query: QUERY_CHARACTER_DATA,
-            variables: { searchableName: characterSearchableName }
+            query: QUERY_CHARACTER_DATA
         });
         console.log(data);
-        return data
+        return data.characters[characterSearchableName]
     } catch (error) {
         console.error(error);
     }
