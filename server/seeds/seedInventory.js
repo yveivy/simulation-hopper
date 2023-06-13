@@ -1,12 +1,14 @@
-const { Inventory, Character, Item } = require('../models');
+const { Inventory, Characters, Items } = require('../models');
 const inventoryData = require('./inventoryData');
 
 const seedInventory = async () => {
     try {
         //Retrieve all characters and items from the database
 
-        const characters = await Character.find({});
-        const items = await Item.find({});
+        const characters = await Characters.find({});
+        console.log('Characters:', characters);
+        const items = await Items.find({});
+        console.log('Items:', items);
 
         //Map the character and item names to their corresponding object IDs
         const characterIdMap = {};
@@ -19,8 +21,12 @@ const seedInventory = async () => {
         items.forEach((item) => {
             itemIdMap[item.searchable_item] = item.searchable_item;
         });
+
+        console.log('Character ID Map:', characterIdMap);
+        console.log('Item ID Map:', itemIdMap);
         //check for existing inventory entries
        const existingInventory = await Inventory.find({});
+       console.log('Existing Inventory Entries:', existingInventory);
         //If entries exist, delete before seeding
        if (existingInventory.length > 0) {
         await Inventory.deleteMany({});
@@ -33,6 +39,8 @@ const seedInventory = async () => {
             character:characterIdMap[entry.searchable_name],
             item: itemIdMap[entry.searchable_item],
         }));
+
+        console.log('Inventory Seeds:', inventorySeeds);
 
         //Insert the inventory seeds into the database 
         await Inventory.deleteMany({});
