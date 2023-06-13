@@ -1,7 +1,7 @@
-const Character = require('./characters');
-const Item = require('./items');
+const Characters = require('./characters');
+const Items = require('./items');
 const Inventory = require('./inventory');
 const User = require('./user');
 
 
-module.exports = { Character, Item, Inventory, User };
+module.exports = { Characters, Items, Inventory, User };
