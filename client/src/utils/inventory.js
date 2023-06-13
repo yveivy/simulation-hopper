@@ -14,9 +14,9 @@ export async function retrieveInventoryData() {
     window.globalVars.npcInventoryObjArray = await fetchInventory(window.interactionObject)
     window.globalVars.userInventoryObjArray = await fetchInventory('barf')
     window.globalVars.npcInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.npcInventoryObjArray)
-    questionData.receiveQuestion.choices = [...window.globalVars.npcInventoryItems]
+    // questionData.receiveQuestion.choices = [...window.globalVars.npcInventoryItems]
     window.globalVars.userInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.userInventoryObjArray)
-    questionData.offerQuestion.choices = [...window.globalVars.userInventoryItems]
+    // questionData.offerQuestion.choices = [...window.globalVars.userInventoryItems]
 }
 
 export function findDescriptionBasedOnItemNameInJson(itemNameToSearch, objArray) {

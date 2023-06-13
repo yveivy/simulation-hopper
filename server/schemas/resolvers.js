@@ -123,13 +123,8 @@ const { client, userinfo } = require('../config/db')
 const resolvers = {
   Query: {
     userSaveFile: async () => {
-<<<<<<< HEAD
-        const database = client.db('simulationHopperDb');
-        const collection = database.collection(userinfo.username);
-=======
       const database = client.db('simulationHopperDB');
       const collection = database.collection(userinfo.username);
->>>>>>> main
       try {
         const dbData = await collection.findOne(); // Retrieve the data from the collection
         return dbData;

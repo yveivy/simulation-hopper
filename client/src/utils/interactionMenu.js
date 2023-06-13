@@ -111,13 +111,13 @@
 //     return questionText
 // }
 
-// export function disableWASD() {
-//     window.WASDenabled = false;
-// }
+export function disableWASD() {
+    window.WASDenabled = false;
+}
 
-// export function enableWASD() {
-//     window.WASDenabled = true
-// }
+export function enableWASD() {
+    window.WASDenabled = true
+}
 
 // export function showInteractionContainer() {
 //     interactionContainer.style.display = 'flex';

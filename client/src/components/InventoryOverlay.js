@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import { enableWASD, disableWASD } from "../utils/interactionMenu";
 import { fetchInventory } from "../utils/db/fetches";
 import { parseInventoryObjArrayToGetJustItems } from "../utils/inventory";
+import "../css/overlay.css"
 
 const InventoryOverlay = () => {
-  const [inventory, setInventory] = useState([]);
+  const [inventory, setInventory] = useState([{"item": {"id": "1", "item_name": "testName", "description": "testDescription"}}]);
   const [isVisible, setIsVisible] = useState(false);
 
   const fetchAndSetInventory = async () => {
@@ -24,7 +25,11 @@ const InventoryOverlay = () => {
           setIsVisible(false);
           enableWASD();
         } else {
-          await fetchAndSetInventory();
+          try {
+            await fetchAndSetInventory();
+          } catch {
+            console.log("inventoryOvelay.js fetchAndSetInventory failed")
+          }
           setIsVisible(true);
           disableWASD();
         }

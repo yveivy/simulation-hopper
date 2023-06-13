@@ -23,7 +23,8 @@ export async function fetchInventory(characterSearchableName) {
             query: QUERY_INVENTORY,
             variables: { searchableName: characterSearchableName }
         });
-        console.log(data);
+        console.log("fetchInventory")
+        console.log("fetchInventory_______", data);
         return data
       } catch (error) {
         console.error(error);
