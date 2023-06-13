@@ -1,42 +1,36 @@
-import { globalVars, questionData } from "./interactionMenu.js";
+import { questionData } from "./interactionMenu.js";
 import { appendLiToUl, disableWASD, enableWASD, clearUl} from "./interactionMenu.js";
+import client from './apolloClient'
+import { QUERY_INVENTORY } from './queries.js';
 var inventoryContainer = document.querySelector("#inventory-container")
 var inventoryUl = document.querySelector("#inventory-ul")
 
-export async function fetchResetInventoryData() {
-    try {
-        const response = await fetch('api/gamedata/reset-inventory', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log(data);
-        return data;
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+// export async function fetchResetInventoryData() {
+//     try {
+//         const { data } = await client.mutate({
+//           mutation: ADD_THOUGHT,
+//           variables: {
+//             thoughtText: "This is a new thought",
+//             thoughtAuthor: "Elon Musk"
+//           },
+//         });
+//         console.log(data);
+//       } catch (error) {
+//         console.error(error);
+//       }
+// }
 
 export async function fetchInventory(characterSearchableName) {
     try {
-        const response = await fetch(`/api/gamedata/inventory/${characterSearchableName}`);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const inventory = await response.json();
-        return inventory;
-    } catch (e) {
-        console.log('There was a problem with your fetch operation: ' + e.message);
-    }
+        const { data } = await client.query({ 
+            query: QUERY_INVENTORY,
+            variables: { searchableName: characterSearchableName }
+        });
+        console.log(data);
+        return data
+      } catch (error) {
+        console.error(error);
+      }
 }
 
 export function parseInventoryObjArrayToGetJustItems(inventoryObjArray) {
@@ -49,12 +43,12 @@ export function parseInventoryObjArrayToGetJustItems(inventoryObjArray) {
 }
 
 export async function retrieveInventoryData() {
-    globalVars.npcInventoryObjArray = await fetchInventory(interactionObject)
-    globalVars.userInventoryObjArray = await fetchInventory('barf')
-    globalVars.npcInventoryItems = parseInventoryObjArrayToGetJustItems(globalVars.npcInventoryObjArray)
-    questionData.receiveQuestion.choices = [...globalVars.npcInventoryItems]
-    globalVars.userInventoryItems = parseInventoryObjArrayToGetJustItems(globalVars.userInventoryObjArray)
-    questionData.offerQuestion.choices = [...globalVars.userInventoryItems]
+    window.globalVars.npcInventoryObjArray = await fetchInventory(window.interactionObject)
+    window.globalVars.userInventoryObjArray = await fetchInventory('barf')
+    window.globalVars.npcInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.npcInventoryObjArray)
+    questionData.receiveQuestion.choices = [...window.globalVars.npcInventoryItems]
+    window.globalVars.userInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.userInventoryObjArray)
+    questionData.offerQuestion.choices = [...window.globalVars.userInventoryItems]
 }
 
 
@@ -86,39 +80,42 @@ export function findIdBasedOnItemNameInJson(itemNameToSearch, objArray) {
     return foundId
 }
 
-async function renderUserInventory() {
+export async function renderUserInventory() {
     showInventoryContainer()
-    globalVars.userInventoryObjArray = await fetchInventory('barf')
-    globalVars.userInventoryItems = parseInventoryObjArrayToGetJustItems(globalVars.userInventoryObjArray)
+    window.globalVars.userInventoryObjArray = await fetchInventory('barf')
+    window.globalVars.userInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.userInventoryObjArray)
     clearUl(inventoryUl)
-    renderInventoryItemDetailsInUl(inventoryUl, globalVars.userInventoryObjArray)
+    renderInventoryItemDetailsInUl(inventoryUl, window.globalVars.userInventoryObjArray)
 }
 
-function showInventoryContainer() {
+export function showInventoryContainer() {
     inventoryContainer.style.display = 'flex';
 }
 
-function hideInventoryContainer() {
+export function hideInventoryContainer() {
     inventoryContainer.style.display = 'none';
 }
 
 window.addEventListener('keydown', async function(e) {
+    if (e.key === 'w' || e.key === 'a' || e.key === 's' || e.key === 'd' || e.key === " ") {
+        return
+    }
     if (e.key === 'e') {
         console.log("e key pressed____________")
-        if (globalVars.inventoryToggledOn) {
+        if (window.globalVars.inventoryToggledOn) {
             hideInventoryContainer()
             enableWASD()
-            globalVars.inventoryToggledOn = false
+            window.globalVars.inventoryToggledOn = false
         } else {
             renderUserInventory()
             disableWASD()
-            globalVars.inventoryToggledOn = true
+            window.globalVars.inventoryToggledOn = true
         }
     }
-    else if (e.code === 'Escape' && globalVars.inventoryToggledOn) {
+    else if (e.code === 'Escape' && window.globalVars.inventoryToggledOn) {
         hideInventoryContainer()
         enableWASD()
-        globalVars.inventoryToggledOn = false
+        window.globalVars.inventoryToggledOn = false
     }
     else if (e.key === 't') {
         //?for testing purposes

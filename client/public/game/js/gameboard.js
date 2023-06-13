@@ -5,8 +5,8 @@ const backgroundImage = new Image();
 backgroundImage.src = './images/MapProjectZoomedPng1.png';
 canvas.width = 1024;
 canvas.height = 576;
-let interactionObject = []
-let WASDenabled = true;
+window.interactionObject = []
+window.WASDenabled = true;
 
 const movementSpeedMultiplier = 6
 
@@ -240,31 +240,31 @@ function animate() {
 
 
                     console.log("Interacting with Zara");
-                    interactionObject = "zara-sparks"
+                    window.interactionObject = "zara-sparks"
                 } else if (interaction.position.value === 6060) {
                     console.log("Interacting with Beryl and Basil Hydra");
-                    interactionObject = "beryl-and-basil-hydra"
+                    window.interactionObject = "beryl-and-basil-hydra"
                 } else if (interaction.position.value === 3030) {
                     console.log("Interacting with Abe");
-                    interactionObject = "abe-harmony"
+                    window.interactionObject = "abe-harmony"
                 } else if (interaction.position.value === 2020) {
                     console.log("Interacting with Sketchy Schemer");
-                    interactionObject = "shady-schemer"
+                    window.interactionObject = "shady-schemer"
                 } else if (interaction.position.value === 1010) {
                     console.log("Interacting with Taylor");
-                    interactionObject = "taylor-tuck"
+                    window.interactionObject = "taylor-tuck"
                 } else if (interaction.position.value === 5050) {
                     console.log("Interacting with Violet");
-                    interactionObject = "violet-meadows"
+                    window.interactionObject = "violet-meadows"
                 } else if (interaction.position.value === 9090) {
                     console.log("interacting with the Ship");
-                    interactionObject = "Spaceship"
+                    window.interactionObject = "Spaceship"
                     //if barf has item(s) in inventory and spacebar is pressed then function EndGame()
                 } 
                 
                 break;
             } else{   //this is important to the interactions // 
-                interactionObject = ''   
+                window.interactionObject = ''   
                
             }
         }
@@ -377,7 +377,7 @@ function animate() {
 //listen for the keydown 
 let lastkey = ''
 window.addEventListener('keydown', (e) => {
-    if (!WASDenabled) return
+    if (!window.WASDenabled) return
     // console.log('e.key') //logging the keydown event
     switch (e.key) {  //switch case for keydown 
         case 'w':
@@ -482,7 +482,8 @@ function preloadImages() {
     for (let i = 0; i < numImages; i++) {
         const img = new Image();
         img.onload = function () {
-            loadedImages++;
+           
+         loadedImages++;
             if (loadedImages === numImages) {
 
             }
