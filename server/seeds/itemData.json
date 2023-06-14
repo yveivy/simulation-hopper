@@ -1,21 +1,21 @@
 [
     {
-      "searchable_item": "log-book",
+      "searchable_item": "logBook",
       "item_name": "Astronaut's Log Book",
       "description": "A weathered and out of print logbook filled with handwritten accounts of a legendary astronaut. The book is filled with vivid description's and details of all the places he visited. You can almost imagine it, but it would be even better if it was illustrated."
     },
     {
-      "searchable_item": "medical-kit",
+      "searchable_item": "medicalKit",
       "item_name": "Medical Kit",
       "description": "Barf has used most of the bandaids but there still may be a few drops of antibiotic and a bit of gauze."
     },
     {
-      "searchable_item": "pocket-watch",
+      "searchable_item": "pocketWatch",
       "item_name": "Timekeeper's Pocket Watch",
       "description": "A beautifully engraved pocket watch with intricate gears and a mesmerizing ticking sound that lulls even the most fitful sleeper to sleep"
     },
     {
-      "searchable_item": "universal-translator",
+      "searchable_item": "translator",
       "item_name": "Universal Translator",
       "description": "A device loaded with software that allows the traveler to understand and communicate in different alien species by translating languages and dialects in real-time. Extremely useful, for space-travel. But it is glitching and currently only translates Zork, the language of a reclusive species that hasn't been seen in eons."
     },
@@ -30,7 +30,7 @@
       "description": "A unique tool that appears to be an ordinary wrench at first glance but possesses hidden mechanisms and modifications specifically designed for repairing intricate machinery found on futuristic spacecraft"
     },
     {
-      "searchable_item": "eye-of-newt",
+      "searchable_item": "newt",
       "item_name": "Eye of Newt",
       "description": "You don't want to know"
     },

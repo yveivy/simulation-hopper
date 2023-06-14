@@ -28,6 +28,6 @@ const characterSchema = new Schema({
     collection: 'characters',
 });
 
-const Character = model('Character', characterSchema);
+const Characters = model('Characters', characterSchema);
 
-module.exports = Character;
+module.exports = Characters;

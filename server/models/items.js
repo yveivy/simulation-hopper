@@ -21,6 +21,6 @@ const itemSchema = new Schema({
     collection: 'items',
 });
 
-const Item = model('Item', itemSchema);
+const Items = model('Items', itemSchema);
 
-module.exports = Item;
+module.exports = Items;

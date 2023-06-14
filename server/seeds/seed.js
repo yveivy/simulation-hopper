@@ -3,7 +3,6 @@ const { Characters, Items } = require('../models');
 
 const characterData = require('./characterData');
 const itemData = require('./itemData');
-const seedInventory = require('./seedInventory');
 require('dotenv').config();
 
 
@@ -21,9 +20,7 @@ const seedDatabase = async () => {
     await Items.deleteMany({});
     await Items.insertMany(itemData);
 
-    await seedInventory();
-
-    console.log('Database seeding completed successfully.');
+    console.log('Database seeding for characters and items completed successfully.');
   } catch (error) {
     console.error('Error seeding database:', error);
   }
