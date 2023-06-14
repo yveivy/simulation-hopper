@@ -39,7 +39,6 @@ async function createNewUserAndSeedDatabase(userinfo) {
       userinfo,
       playerLocation,
       inventory: {
-        "inventory": {
           "abe": {
             "hasMet": false,
             "balm": false,
@@ -172,8 +171,7 @@ async function createNewUserAndSeedDatabase(userinfo) {
             "spade": true,
             "striders": false,
             "translator": false
-          }
-        }   
+          } 
       }
     };
 

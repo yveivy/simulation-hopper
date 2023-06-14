@@ -2,7 +2,7 @@ import React from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import InteractionOverlay from './components/InteractionOverlay';
 import InventoryOverlay from "./components/InventoryOverlay"
-import client from './apolloClient'
+import client from './utils/apolloClient'
 
 function GameOverlay() {
   return (

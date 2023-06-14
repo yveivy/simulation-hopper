@@ -117,6 +117,7 @@
 // comment out everything above this line to use J resolvers
 
 const { client, userinfo } = require('../config/db')
+const saveFileAPI = require('../utils/saveFileAPI')
 
 
 
@@ -140,26 +141,50 @@ const resolvers = {
   },  
   Character: {
     abe: (parent) => {
-      return parent.inventory.abe;
+      return parent.abe;
     },
     barf: (parent) => { 
-      return parent.inventory.barf; 
+      return parent.barf; 
     },
     hydra: (parent) => {
-      return parent.inventory.hydra;
+      return parent.hydra;
     },
     shady: (parent) => {
-      return parent.inventory.shady;
+      return parent.shady;
     },
     taylor: (parent) => {
-      return parent.inventory.taylor;
+      return parent.taylor;
     },
     violet: (parent) => {
-      return parent.inventory.violet;
+      return parent.violet;
     },
     zara: (parent) => {
-      return parent.inventory.zara;
+      return parent.zara;
     }
   },
+
+
+  Mutation: {
+    tradeItems: async (_, { characterName, tradeWith, itemToTrade, itemToAcquire }, { dataSources }) => {
+      const userSaveFile = await dataSources.saveFileAPI.getUserSaveFile();
+
+      if (!userSaveFile) {
+        throw new Error("User save file not found");
+      }
+
+      const characterInventory = userSaveFile.inventory[characterName];
+      const tradeWithInventory = userSaveFile.inventory[tradeWith];
+
+
+      characterInventory[itemToTrade] = false;
+      characterInventory[itemToAcquire] = true;
+      tradeWithInventory[itemToTrade] = true;
+      tradeWithInventory[itemToAcquire] = false;
+
+      await dataSources.saveFileAPI.saveUserSaveFile(userSaveFile);
+
+      return userSaveFile;
+    }
+  }
 };
 module.exports = resolvers;

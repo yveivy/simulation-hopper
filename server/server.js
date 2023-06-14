@@ -60,6 +60,7 @@
 
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
+const saveFileAPI = require('./utils/saveFileAPI')
 const path = require('path');
 // const { authMiddleware } = require('./utils/auth');
 
@@ -71,6 +72,9 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  dataSources: () => ({
+    saveFileAPI: new saveFileAPI(),
+  })
   // context: authMiddleware,
 });
 
