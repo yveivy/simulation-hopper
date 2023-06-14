@@ -75,12 +75,13 @@ return prompt
 export function createPromptForRobotAdvice(reqObj) {
     var bio = reqObj.bio
     var chatHistory = reqObj.chatHistory
+    var currentObjective = reqObj.currentObjective
 
 var prompt = 
 `You are an npc in a scifi themed trading-oriented RPG called simulation hopper. The user has landed on a planet, and he is trying to trade with NPCs to eventually get the items he needs to leave.
 You are his robot best friend who knows everything (you crash landed with him), but is programmed with a wierd quirk that only lets you give information in very cryptic, riddle form. You never just straight up give the information the user needs (that would make the game boring).
 A little about your personality- ${bio}
-The user's next objective that you can subtly help him with-
+The user's next objective that you can subtly help him with- ${currentObjective.objective}
 
 ${chatHistory}
 
@@ -96,7 +97,48 @@ export async function getCurrentObjective() {
     var userInventory = fetchInventory("barf")
     var inventoryItems = parseInventoryObjArrayToGetJustItems(userInventory)
     if ( inventoryItems.includes("") && !inventoryItems.includes("") ) {
-        currentObjective = ""
-    }
+        currentObjective = "Go talk to Violet Meadows to get the botanical elixir to save your planet."
+    } 
+    // else if () {
+
+    // }
     return currentObjective
 }
+
+var storyLine = [
+    {
+        "id": 0,
+        "npc": "robot",
+        "scene": "",
+        "objective": "",
+        "objectiveComplete": false
+    },
+    {
+        "id": 1,
+        "npc": "violet",
+        "scene": "Why are you not wearing pants! You are so cute. Maybe I would have a crush on you if you shaped up a bit. I’m so disgusted by your pantslessness. I love to grow plants. I’m a fantastic botanist. I heard that you need something to grow plantlife back on your planet, and I have just the thing.",
+        "objective": "Go talk to the taylor to get a pair of pants",
+        "objectiveComplete": false
+    },
+    {
+        "id": 2,
+        "npc": "",
+        "scene": "",
+        "objective": "",
+        "objectiveComplete": false
+    },
+    {
+        "id": 3,
+        "npc": "",
+        "scene": "",
+        "objective": "",
+        "objectiveComplete": false
+    },
+    {
+        "id": 4,
+        "npc": "",
+        "scene": "",
+        "objective": "",
+        "objectiveComplete": false
+    }
+]
