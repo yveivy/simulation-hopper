@@ -126,6 +126,15 @@ type InventoryObject {
   translator: Boolean
 }
 
+type Mutation {
+  tradeItems(
+    characterName: String!
+    tradeWith: String!
+    itemToTrade: String!
+    itemToAcquire: String!
+  ): Collection
+}
+
 
 
 `;
