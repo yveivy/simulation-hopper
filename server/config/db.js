@@ -11,7 +11,7 @@ const playerLocation = {
   y: 1
 }
 
-const uri = 'mongodb+srv://jomsey:user1234@cluster0.sf4qafq.mongodb.net/simulationHopperDB';
+const uri = 'mongodb+srv://edwardwells87:Koolaid88!!!!@cluster0.quwyqyg.mongodb.net/';
 const client = new MongoClient(uri);
 
 async function createNewUserAndSeedDatabase(userinfo) {
