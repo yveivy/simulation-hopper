@@ -20,7 +20,7 @@
 
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://jomsey:user1234@cluster0.sf4qafq.mongodb.net/simulationHopperDB', {
+mongoose.connect('mongodb+srv://willrcline:Wi11C1ine$@cluster0.01hpv40.mongodb.net/simulationHopperDB', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

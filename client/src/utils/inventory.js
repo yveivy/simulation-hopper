@@ -1,37 +1,5 @@
 import { questionData } from "./interactionMenu.js";
-import { appendLiToUl, disableWASD, enableWASD, clearUl} from "./interactionMenu.js";
-import client from './apolloClient'
-import { QUERY_INVENTORY } from './queries.js';
-var inventoryContainer = document.querySelector("#inventory-container")
-var inventoryUl = document.querySelector("#inventory-ul")
-
-// export async function fetchResetInventoryData() {
-//     try {
-//         const { data } = await client.mutate({
-//           mutation: ADD_THOUGHT,
-//           variables: {
-//             thoughtText: "This is a new thought",
-//             thoughtAuthor: "Elon Musk"
-//           },
-//         });
-//         console.log(data);
-//       } catch (error) {
-//         console.error(error);
-//       }
-// }
-
-export async function fetchInventory(characterSearchableName) {
-    try {
-        const { data } = await client.query({ 
-            query: QUERY_INVENTORY,
-            variables: { searchableName: characterSearchableName }
-        });
-        console.log(data);
-        return data
-      } catch (error) {
-        console.error(error);
-      }
-}
+import {fetchInventory } from "./db/fetches"
 
 export function parseInventoryObjArrayToGetJustItems(inventoryObjArray) {
     var inventoryItems = []
@@ -43,23 +11,15 @@ export function parseInventoryObjArrayToGetJustItems(inventoryObjArray) {
 }
 
 export async function retrieveInventoryData() {
-    window.globalVars.npcInventoryObjArray = await fetchInventory(window.interactionObject)
-    window.globalVars.userInventoryObjArray = await fetchInventory('barf')
-    window.globalVars.npcInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.npcInventoryObjArray)
-    questionData.receiveQuestion.choices = [...window.globalVars.npcInventoryItems]
-    window.globalVars.userInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.userInventoryObjArray)
-    questionData.offerQuestion.choices = [...window.globalVars.userInventoryItems]
-}
-
-
-export function renderInventoryItemDetailsInUl(ul, inventory) {
-    for (var item of inventory) {
-        var name = item.item.item_name
-        var description = item.item.description
-
-        appendLiToUl(ul, `Item name: ${name}`)
-        appendLiToUl(ul, `Description: ${description}`)
-        appendLiToUl(ul, "&nbsp;")
+    try {
+        window.globalVars.npcInventoryObjArray = await fetchInventory(window.interactionObject)
+        window.globalVars.userInventoryObjArray = await fetchInventory('barf')
+        window.globalVars.npcInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.npcInventoryObjArray)
+        // questionData.receiveQuestion.choices = [...window.globalVars.npcInventoryItems]
+        window.globalVars.userInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.userInventoryObjArray)
+        // questionData.offerQuestion.choices = [...window.globalVars.userInventoryItems]
+    } catch {
+        console.log ("retrieveInventoryData() failed")
     }
 }
 
@@ -79,46 +39,3 @@ export function findIdBasedOnItemNameInJson(itemNameToSearch, objArray) {
     console.log("findIdBasedOnItemNameInJson() foundId",foundId)
     return foundId
 }
-
-export async function renderUserInventory() {
-    showInventoryContainer()
-    window.globalVars.userInventoryObjArray = await fetchInventory('barf')
-    window.globalVars.userInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.userInventoryObjArray)
-    clearUl(inventoryUl)
-    renderInventoryItemDetailsInUl(inventoryUl, window.globalVars.userInventoryObjArray)
-}
-
-export function showInventoryContainer() {
-    inventoryContainer.style.display = 'flex';
-}
-
-export function hideInventoryContainer() {
-    inventoryContainer.style.display = 'none';
-}
-
-window.addEventListener('keydown', async function(e) {
-    if (e.key === 'w' || e.key === 'a' || e.key === 's' || e.key === 'd' || e.key === " ") {
-        return
-    }
-    if (e.key === 'e') {
-        console.log("e key pressed____________")
-        if (window.globalVars.inventoryToggledOn) {
-            hideInventoryContainer()
-            enableWASD()
-            window.globalVars.inventoryToggledOn = false
-        } else {
-            renderUserInventory()
-            disableWASD()
-            window.globalVars.inventoryToggledOn = true
-        }
-    }
-    else if (e.code === 'Escape' && window.globalVars.inventoryToggledOn) {
-        hideInventoryContainer()
-        enableWASD()
-        window.globalVars.inventoryToggledOn = false
-    }
-    else if (e.key === 't') {
-        //?for testing purposes
-        console.log("t key pressed____________")
-    }
-})

@@ -1,3 +1,6 @@
+import {parseInventoryObjArrayToGetJustItems} from "./inventory"
+import { fetchInventory } from "./db/fetches";
+
 export async function fetchOpenAiApi(prompt) {
     var promptResponseNotJson = await fetch('/api/openai/', {
         method: 'POST',
@@ -28,7 +31,7 @@ export function createPromptForNpcResponseToTradeRequest(reqObj) {
     var offerDecision = reqObj.offerDecision
 
 var prompt = 
-`You are an npc in a scifi themed trading-oriented RPG called planet hopper. User has crash landed on your planet, and he is trying to trade with you and other NPCs to eventually get the items he needs to get off the planet. The different NPCs value items differently depending on their personal preferences. Their personal preferences regarding various items will alter their willingness to accept the user's offers to trade.
+`You are an npc in a scifi themed trading-oriented RPG called simulation hopper. User has crash landed on your simulation, and he is trying to trade with you and other NPCs to eventually get the items he needs to get off the simulation. The different NPCs value items differently depending on their personal preferences. Their personal preferences regarding various items will alter their willingness to accept the user's offers to trade.
 Here's a little information about you:
 Role- ${role}
 Bio- ${bio}.
@@ -55,7 +58,7 @@ export function createPromptForNpcResponseToChat(reqObj) {
     var chatHistory = reqObj.chatHistory
 
 var prompt = 
-`You are an npc in a scifi themed trading-oriented RPG called planet hopper. User has crash landed on your planet, and he is trying to trade with you and other NPCs to eventually get the items he needs to get off the planet. In the meantime, He is chatting you up.
+`You are an npc in a scifi themed trading-oriented RPG called simulation hopper. User has crash landed on your simulation, and he is trying to trade with you and other NPCs to eventually get the items he needs to get off the simulation. In the meantime, He is chatting you up.
 Here's a little information about you:
 Role- ${role}
 Bio- ${bio}
@@ -66,4 +69,34 @@ Give me your verbal response in quotes to what user just said. Don't respond wit
 
 console.log("createPromptForNpcResponseToChat_______________", prompt)
 return prompt
+}
+
+//ToDO:
+export function createPromptForRobotAdvice(reqObj) {
+    var bio = reqObj.bio
+    var chatHistory = reqObj.chatHistory
+
+var prompt = 
+`You are an npc in a scifi themed trading-oriented RPG called simulation hopper. The user has landed on a planet, and he is trying to trade with NPCs to eventually get the items he needs to leave.
+You are his robot best friend who knows everything (you crash landed with him), but is programmed with a wierd quirk that only lets you give information in very cryptic, riddle form. You never just straight up give the information the user needs (that would make the game boring).
+A little about your personality- ${bio}
+The user's next objective that you can subtly help him with-
+
+${chatHistory}
+
+Give me your verbal response in quotes to what user just said. Don't respond with anything outside the quotes, or it will mess up the program`
+
+console.log("createPromptForRobotAdvice_______________", prompt)
+return prompt
+}
+
+
+export async function getCurrentObjective() {
+    var currentObjective = ""
+    var userInventory = fetchInventory("barf")
+    var inventoryItems = parseInventoryObjArrayToGetJustItems(userInventory)
+    if ( inventoryItems.includes("") && !inventoryItems.includes("") ) {
+        currentObjective = ""
+    }
+    return currentObjective
 }
