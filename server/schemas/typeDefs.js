@@ -136,6 +136,14 @@ type Mutation {
   ): userfile
 }
 
+type Mutation {
+  getCharacter(searchableName: String!): Character
+}
+
+type Mutation {
+  getItem(searchableItem: String!): Item
+}
+
 type Character {
   searchable_name: String
   full_name: String

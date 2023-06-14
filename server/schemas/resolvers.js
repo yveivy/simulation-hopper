@@ -203,7 +203,34 @@ const resolvers = {
       await dataSources.saveFileAPI.saveUserSaveFile(userSaveFile);
 
       return userSaveFile;
-    }
-  }
+    },
+    getCharacter: async (_, { searchableName }) => {
+      try {
+        const character = await Characters.findOne({ searchable_name: searchableName });
+        
+        if (!character) {
+          throw new Error('Character not found');
+        }
+        
+        return character;
+      } catch (error) {
+        throw new Error(`Failed to fetch character: ${error.message}`);
+      }
+    },
+    getItem: async (_, { searchableItem }) => {
+      try {
+        // Fetch the character by their searchable_name
+        const item = await Items.findOne({ searchable_item: searchableItem });
+        
+        if (!item) {
+          throw new Error('Item not found');
+        }
+        
+        return item;
+      } catch (error) {
+        throw new Error(`failed to fetch item: ${error.message}`);
+      }
+    },
+  },
 };
 module.exports = resolvers;
