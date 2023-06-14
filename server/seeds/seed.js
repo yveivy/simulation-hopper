@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const characterData = require('./characterData.json');
 const itemData = require('./itemData.json');
-const Characters = require('../models/characters')
-const Items = require('../models/items')
+const { Characters, Items } = require('../models');
 const db = require('../config/connection')
 require('dotenv').config();
 
