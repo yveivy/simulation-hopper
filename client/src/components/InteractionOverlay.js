@@ -5,13 +5,13 @@ import { fetchCharacterData } from "../utils/db/fetches";
 import { fetchOpenAiApi, createPromptForNpcResponseToChat, createPromptForNpcResponseToTradeRequest} from "../utils/ai.js"
 
 const InteractionOverlay = () => {
-    var interactionContainer = document.getElementById('interactionContainer');
-    var userInputContainer = document.getElementById('userInputContainer');
-    var dialogueContainer = document.getElementById('dialogueContainer');
-    var dialogueUl = document.getElementById('dialogueUl');
-    var npcBioContainer = document.getElementById('npcBioContainer')
-    var npcNameEl = document.querySelector("#npcName")
-    var npcHeadshotContainer = document.querySelector("#npcHeadshotContainer")
+    const interactionContainer = useRef(null);
+    const userInputContainer = useRef(null);
+    const dialogueContainer = useRef(null);
+    const dialogueUl = useRef(null);
+    const npcBioContainer = useRef(null);
+    const npcNameEl = useRef(null);
+    const npcHeadshotContainer = useRef(null);
 
 
     // const interactionContainer = useRef(null);
@@ -38,11 +38,11 @@ const InteractionOverlay = () => {
 
     const showInteractionContainer = () => {
         console.log("")
-        window.domEls.interactionContainer.style.display = 'flex';
+        interactionContainer.current.style.display = 'flex';
     }
     
     const hideInteractionContainer = () => {
-        window.domEls.interactionContainer.style.display = 'none';
+        interactionContainer.current.style.display = 'none';
     }
 
 
@@ -77,18 +77,18 @@ const InteractionOverlay = () => {
     const renderTextQuestion = (currentQuestion) => {
         clearUserInputContainer();
         let questionText = createQuestionText(currentQuestion);
-        userInputContainer.appendChild(questionText);
+        userInputContainer.current.appendChild(questionText);
         
         let input = document.createElement("input");
         input.type = "text";
         input.id = "chatInput";
-        userInputContainer.appendChild(input);
+        userInputContainer.current.appendChild(input);
     };
     
     const renderCheckBoxQuestion = (currentQuestion) => {
         clearUserInputContainer();
         let questionText = createQuestionText(currentQuestion);
-        userInputContainer.appendChild(questionText);
+        userInputContainer.current.appendChild(questionText);
         
         currentQuestion.choices.forEach((choice) => {
             let label = document.createElement("label");
@@ -102,12 +102,12 @@ const InteractionOverlay = () => {
             let choiceText = document.createTextNode(choice);
             label.appendChild(choiceText);
             
-            userInputContainer.appendChild(label);
+            userInputContainer.current.appendChild(label);
         });
     };
     
     const clearUserInputContainer = () => {
-        userInputContainer.innerHTML = "";
+        userInputContainer.current.innerHTML = "";
     };
     
     const clearUl = (ul) => {
@@ -129,12 +129,12 @@ const InteractionOverlay = () => {
         window.globalVars.npcDataObject.searchable_name = window.interactionObject
     
         npcNameEl.innerHTML = npcDataObject.full_name
-        npcHeadshotContainer.style.backgroundImage = `url('../images/characterHeadshots/${npcDataObject.searchable_name}.png')`
-        npcBioContainer.innerHTML = `Bio:  ${npcDataObject.bio}`
+        npcHeadshotContainer.current.style.backgroundImage = `url('../images/characterHeadshots/${npcDataObject.searchable_name}.png')`
+        npcBioContainer.current.innerHTML = `Bio:  ${npcDataObject.bio}`
     }
     
     const clearAllInteractionContainers = () => {
-        clearUl(dialogueUl)
+        clearUl(dialogueUl.current)
         clearUserInputContainer()
         hideInteractionContainer()
     }
@@ -146,7 +146,7 @@ const InteractionOverlay = () => {
     }
 
     const processChatMessage = async () => {
-        clearUl(dialogueUl)
+        clearUl(dialogueUl.current)
         clearChatInput()
         var reqObj = createChatPromptFetchReqObj()
         var prompt = createPromptForNpcResponseToChat(reqObj)
@@ -156,7 +156,7 @@ const InteractionOverlay = () => {
         window.globalVars.dialogueList.push(npcText)
     
         for (let line of window.globalVars.dialogueList) {
-            appendLiToUl(dialogueUl, line)
+            appendLiToUl(dialogueUl.current, line)
         }
     }
 
@@ -180,8 +180,8 @@ const InteractionOverlay = () => {
         var promptResponse = await fetchOpenAiApi(prompt)
         var tradeSummary = `*User offers ${window.globalVars.tradeRequestData.itemOfferedByUser} in exchange for ${window.globalVars.tradeRequestData.itemRequestedByUser}.*`
         var dialogueText = `NPC: ${promptResponse}`
-        appendLiToUl(dialogueUl, tradeSummary)
-        appendLiToUl(dialogueUl, dialogueText)
+        appendLiToUl(dialogueUl.current, tradeSummary)
+        appendLiToUl(dialogueUl.current, dialogueText)
         clearUserInputContainer()
         // appendTradeOfferSummaryToUserInputContainer:
     }
@@ -218,7 +218,7 @@ const InteractionOverlay = () => {
                     console.log('EventListener() trade chosen; userInventoryItems________',window.globalVars.userInventoryItems)
                     askEitherQuestionType(questionData.offerQuestion)
                     try {
-                        renderInventoryItemDetailsInUl(dialogueUl, window.globalVars.userInventoryObjArray)
+                        renderInventoryItemDetailsInUl(dialogueUl.current, window.globalVars.userInventoryObjArray)
                     } catch {
                         console.log("interactionOverlay.js DB Error: nothing in inventory")
                         // resetInteractionGlobalVars()
@@ -245,8 +245,8 @@ const InteractionOverlay = () => {
                     return
                 }
                 askEitherQuestionType(questionData.receiveQuestion)
-                clearUl(dialogueUl)
-                renderInventoryItemDetailsInUl(dialogueUl, window.globalVars.npcInventoryObjArray)
+                clearUl(dialogueUl.current)
+                renderInventoryItemDetailsInUl(dialogueUl.current, window.globalVars.npcInventoryObjArray)
                 window.globalVars.currentQuestionIndex ++
             } else if (e.code === 'Enter' && window.globalVars.trade && window.globalVars.currentQuestionIndex == 3) {
                 window.globalVars.tradeRequestData.itemRequestedByUser = getRadioInputValue()
@@ -255,7 +255,7 @@ const InteractionOverlay = () => {
                     return
                 }
                 window.globalVars.currentQuestionIndex ++ 
-                clearUl(dialogueUl)
+                clearUl(dialogueUl.current)
                 processTradeOffer()
             } else if (e.code === 'Escape' && window.globalVars.currentQuestionIndex > 0) {
                 console.log("interactionMenu.js eventListener escape-key__________")
@@ -275,22 +275,19 @@ const InteractionOverlay = () => {
 
 
     return (
-        <div id="interactionContainer">
+        <div ref={interactionContainer} id="interactionContainer">
             <div id="userInputAndDialogueContainer">
-            <div id='userInputContainer'></div>
-            <div id="dialogueContainer">
-                <ul id="dialogueUl"></ul>
+                <div ref={userInputContainer} id='userInputContainer'></div>
+                <div ref={dialogueContainer} id="dialogueContainer">
+                    <ul ref={dialogueUl} id="dialogueUl"></ul>
+                </div>
             </div>
-        </div>
-
             <div id="npcDetailsContainer">
-            <div id="npcNameContainer">
-                {/* <h2 id="npcName"></h2> */}
-            </div>
-            <div id="npcHeadshotContainer">
-            </div>
-            <div id="npcBioContainer">
-            </div>
+                <div id="npcNameContainer">
+                    {/* <h2 id="npcName"></h2> */}
+                </div>
+                <div ref={npcHeadshotContainer} id="npcHeadshotContainer"></div>
+                <div ref={npcBioContainer} id="npcBioContainer"></div>
             </div>            
         </div>
         )

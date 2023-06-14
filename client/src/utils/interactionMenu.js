@@ -25,9 +25,6 @@ export var questionData = {
     chatQuestion: { type: "input", text: "Type to chat", when: window.globalVars.chat }
 }
 
-window.domEls = {
-    interactionContainer: document.getElementById('interactionContainer')
-}
 // var userInputContainer = document.getElementById('userInputContainer');
 // var dialogueContainer = document.getElementById('dialogueContainer');
 // var dialogueUl = document.getElementById('dialogueUl');
