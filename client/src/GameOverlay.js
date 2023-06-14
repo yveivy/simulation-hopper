@@ -7,6 +7,7 @@ import client from './utils/db/apolloClient'
 import './css/overlay.css'
 import EndGame from './components/EndGame';
 
+
 function GameOverlay() {
   return (
     <ApolloProvider client={client}>
