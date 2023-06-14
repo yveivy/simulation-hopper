@@ -1,6 +1,10 @@
+
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+type Query {
+  userSaveFile: Collection
+}
 
 type Character { 
   searchable_name: String!
@@ -15,38 +19,69 @@ type Item {
   description: String!
 }
 
-type Inventory {
-  searchable_name: Character!
-  searchable_item: Item!
+type Collection {
+  _id: ID
+  userinfo: Userinfo
+  playerLocation: PlayerLocParams
+  inventory: Character
 }
 
-type User {
-  id: ID!
-  username: String!
-  email: String!
-  password: String!
+type Userinfo {
+  username: String
+  password: String
 }
 
-  type Query {
+type Query {
     test: String!
     biography(searchable_name: String!): Character!
     item(searchable_item: String!): Item!
     items: [Item]!
-    inventoryByCharacter(character: String!): [Inventory]!
-    inventory: [Inventory]!
-  }
+ }
 
-  type Mutation {
-    trade(item1: String!, item2: String!): Inventory!
-    createUser(username: String!, email: String!, password: String!): User!
-    loginUser(email: String!, password: String!): User!
-    logoutUser: Boolean!
-  }
+type PlayerLocParams {
+  x: Int
+  y: Int
+}
 
-  schema {
-    query: Query
-    mutation: Mutation
-  }
-`;
+type Character {
+  abe: InventoryObject
+  barf: InventoryObject
+  hydra: InventoryObject
+  shady: InventoryObject
+  taylor: InventoryObject
+  violet: InventoryObject
+  zara: InventoryObject
+}
+
+
+type InventoryObject {
+  hasMet: Boolean
+  balm: Boolean
+  compass: Boolean
+  elixir: Boolean
+  feather: Boolean
+  harp: Boolean
+  lantern: Boolean
+  logBook: Boolean
+  locket: Boolean
+  medicalKit: Boolean
+  newt: Boolean
+  pocketWatch: Boolean
+  scope: Boolean
+  spanner: Boolean
+  spade: Boolean
+  striders: Boolean
+  translator: Boolean
+}
+
+type Mutation {
+  tradeItems(
+    characterName: String!
+    tradeWith: String!
+    itemToTrade: String!
+    itemToAcquire: String!
+  ): Collection
+}
+
 
 module.exports = typeDefs;

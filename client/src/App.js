@@ -1,13 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
+import client from './utils/db/apolloClient'
 import NotFound from './pages/NotFound';
 import Home from "./pages/home/Home"
 
-const client = new ApolloClient({
-  uri: '/graphql',
-  cache: new InMemoryCache(),
-});
 
 function App() {
   return (
