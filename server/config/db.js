@@ -6,7 +6,7 @@ const userinfo = {
   password: 'pass1234'
 };
 
-const uri = 'mongodb+srv://willrcline:Wi11C1ine$@cluster0.01hpv40.mongodb.net/simulationHopperDB';
+// const uri = 'mongodb+srv://willrcline:Wi11C1ine$@cluster0.01hpv40.mongodb.net/simulationHopperDB';
 
 const playerLocation = {
   x: 1,
