@@ -1,4 +1,8 @@
 const { Schema, model } = require('mongoose'); 
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 const itemSchema = new Schema({
     searchable_item: {
         type: String,
@@ -16,5 +20,11 @@ const itemSchema = new Schema({
     timestamps: false,
     collection: 'items',
 });
+<<<<<<< HEAD
 const Items = model('Items', itemSchema);
+=======
+
+const Items = model('Items', itemSchema);
+
+>>>>>>> main
 module.exports = Items;

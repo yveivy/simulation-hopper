@@ -14,6 +14,16 @@
 
   },
   {
+<<<<<<< HEAD
+=======
+    "searchable_name": "zara",
+    "full_name": "Zara Sparks",
+    "role": "Mechanic",
+    "bio": "Zara is a spirited and skilled mechanic. She specializes in repairing machinery and always has a toolbox in her hand. She seems to know everything there is to know in the world of gears, engines and intricate machinery. She's ready to retire and move to the countryside, but after years of hearing the hum and whir of machinery, its just too quiet and she can't sleep."
+ 
+  },
+  {
+>>>>>>> main
     "searchable_name": "hydra",
     "full_name": "Beryl and Basil Hydra",
     "role": "Bickering duo",
@@ -21,6 +31,16 @@
     
   },
   {
+<<<<<<< HEAD
+=======
+    "searchable_name": "abe",
+    "full_name": "Abe Harmony",
+    "role": "Artist",
+    "bio":"Abe is a passionate and resilient soul, that embraces the struggle and sacrifice in pursuit of artistic expression. But lately he feels like he keeps painting the same scenes. Too bad he hates to travel. He'd rather read about someone else's adventures and illustrate the book."
+
+  },
+  {
+>>>>>>> main
     "searchable_name": "shady",
     "full_name": "Shady Schemer",
     "role": "Conman",

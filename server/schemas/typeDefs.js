@@ -1,6 +1,4 @@
 const { gql } = require('apollo-server-express');
-
-// Items: [Item]
 const typeDefs = gql`
 type Query {
   userSaveFile: userfile
@@ -21,6 +19,13 @@ type Userinfo {
   username: String
   password: String
 }
+
+type Query {
+    test: String!
+    biography(searchable_name: String!): Character!
+    item(searchable_item: String!): Item!
+    items: [Item]!
+ }
 
 type PlayerLocParams {
   x: Int
@@ -79,5 +84,4 @@ type Item {
 }
 
 `;
-
 module.exports = typeDefs;
