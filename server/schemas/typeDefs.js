@@ -76,15 +76,15 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
 type Query {
   userSaveFile: userfile
-  Characters:
-  Items:
+  Characters: [Character]
+  Items: [Item]
 }
 
 type userfile {
   _id: ID
   userinfo: Userinfo
   playerLocation: PlayerLocParams
-  inventory: Character
+  inventory: CharacterInventories
 }
 
 type Userinfo {
@@ -97,7 +97,7 @@ type PlayerLocParams {
   y: Int
 }
 
-type Character {
+type CharacterInventories {
   abe: InventoryObject
   barf: InventoryObject
   hydra: InventoryObject
@@ -106,7 +106,6 @@ type Character {
   violet: InventoryObject
   zara: InventoryObject
 }
-
 
 type InventoryObject {
   hasMet: Boolean
@@ -137,7 +136,18 @@ type Mutation {
   ): userfile
 }
 
+type Character {
+  searchable_name: String
+  full_name: String
+  role: String
+  bio: String
+}
 
+type Item {
+  searchable_item: String
+  item_name: String
+  description: String
+}
 
 `;
 

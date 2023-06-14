@@ -118,6 +118,7 @@
 
 const { client, userinfo } = require('../config/db')
 const saveFileAPI = require('../utils/saveFileAPI')
+const { Characters, Items } = require('../models/index')
 
 
 
@@ -133,13 +134,31 @@ const resolvers = {
         console.error('Failed to retrieve data from the database:', error);
         return null;
       }
-    }
+    },
+    Characters: async () => {
+      try {
+        // Fetch all characters from the Character collection
+        const characters = await Characters.find();
+        return characters;
+      } catch (error) {
+        throw new Error('Failed to fetch characters');
+      }
+    },
+    Items: async () => {
+      try {
+        // Fetch all items from the Item collection
+        const items = await Items.find();
+        return items;
+      } catch (error) {
+        throw new Error('Failed to fetch items');
+      }
+    },
   },
   Userinfo: {
     username: (parent) => parent.username,
     password: (parent) => parent.password,
   },  
-  Character: {
+  CharacterInventories: {
     abe: (parent) => {
       return parent.abe;
     },
