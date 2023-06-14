@@ -129,10 +129,9 @@ type InventoryObject {
 
 type Mutation {
   tradeItems(
-    characterName: String!
     tradeWith: String!
-    itemToTrade: String!
-    itemToAcquire: String!
+    barfGives: String!
+    barfGets: String!
   ): userfile
 }
 
@@ -149,6 +148,7 @@ type Character {
   full_name: String
   role: String
   bio: String
+  inventory: InventoryObject
 }
 
 type Item {

@@ -175,6 +175,140 @@ async function createNewUserAndSeedDatabase(userinfo) {
       }
     };
 
+    const abeInventory = {
+    "hasMet": false,
+    "balm": false,
+    "compass": true,
+    "elixir": false,
+    "feather": false,
+    "harp": false,
+    "lantern": false,
+    "logBook": false,
+    "locket": false,
+    "medicalKit": false,
+    "newt": false,
+    "pocketWatch": false,
+    "scope": true,
+    "spanner": false,
+    "spade": false,
+    "striders": false,
+    "translator": false
+    }
+    const barfInventory = {
+      "hasMet": true,
+      "balm": false,
+      "compass": false,
+      "elixir": false,
+      "feather": false,
+      "harp": false,
+      "lantern": false,
+      "logBook": true,
+      "locket": false,
+      "medicalKit": true,
+      "newt": false,
+      "pocketWatch": true,
+      "scope": false,
+      "spanner": false,
+      "spade": false,
+      "striders": false,
+      "translator": true
+    }
+    const hydraInventory = {
+      "hasMet": false,
+      "balm": true,
+      "compass": false,
+      "elixir": false,
+      "feather": false,
+      "harp": false,
+      "lantern": false,
+      "logBook": false,
+      "locket": false,
+      "medicalKit": false,
+      "newt": true,
+      "pocketWatch": false,
+      "scope": false,
+      "spanner": false,
+      "spade": false,
+      "striders": false,
+      "translator": false
+    }
+    const shadyInventory = {
+      "hasMet": false,
+      "balm": false,
+      "compass": false,
+      "elixir": false,
+      "feather": true,
+      "harp": false,
+      "lantern": false,
+      "logBook": false,
+      "locket": true,
+      "medicalKit": false,
+      "newt": false,
+      "pocketWatch": false,
+      "scope": false,
+      "spanner": false,
+      "spade": false,
+      "striders": false,
+      "translator": false
+    }
+    const taylorInventory = {
+      "hasMet": false,
+      "balm": false,
+      "compass": false,
+      "elixir": false,
+      "feather": false,
+      "harp": false,
+      "lantern": true,
+      "logBook": false,
+      "locket": false,
+      "medicalKit": false,
+      "newt": false,
+      "pocketWatch": false,
+      "scope": false,
+      "spanner": false,
+      "spade": false,
+      "striders": true,
+      "translator": false
+    }
+    const violetInventory = {
+      "hasMet": false,
+      "balm": false,
+      "compass": false,
+      "elixir": true,
+      "feather": false,
+      "harp": true,
+      "lantern": false,
+      "logBook": false,
+      "locket": false,
+      "medicalKit": false,
+      "newt": false,
+      "pocketWatch": false,
+      "scope": false,
+      "spanner": false,
+      "spade": false,
+      "striders": false,
+      "translator": false
+    }
+    const zaraInventory = {
+      "hasMet": false,
+      "balm": false,
+      "compass": false,
+      "elixir": false,
+      "feather": false,
+      "harp": false,
+      "lantern": false,
+      "logBook": false,
+      "locket": false,
+      "medicalKit": false,
+      "newt": false,
+      "pocketWatch": false,
+      "scope": false,
+      "spanner": true,
+      "spade": true,
+      "striders": false,
+      "translator": false
+    }
+
     // Insert the document into the collection
     const result = await collection.insertOne(newUserSaveFile);
     console.log(`${result.insertedCount} document inserted.`);

@@ -181,24 +181,22 @@ const resolvers = {
       return parent.zara;
     }
   },
-
-
   Mutation: {
-    tradeItems: async (_, { characterName, tradeWith, itemToTrade, itemToAcquire }, { dataSources }) => {
+    tradeItems: async (_, { tradeWith, barfGives, barfGets }, { dataSources }) => {
       const userSaveFile = await dataSources.saveFileAPI.getUserSaveFile();
 
       if (!userSaveFile) {
         throw new Error("User save file not found");
       }
-
+      const characterName = "barf"
       const characterInventory = userSaveFile.inventory[characterName];
       const tradeWithInventory = userSaveFile.inventory[tradeWith];
 
 
-      characterInventory[itemToTrade] = false;
-      characterInventory[itemToAcquire] = true;
-      tradeWithInventory[itemToTrade] = true;
-      tradeWithInventory[itemToAcquire] = false;
+      characterInventory[barfGives] = false;
+      characterInventory[barfGets] = true;
+      tradeWithInventory[barfGives] = true;
+      tradeWithInventory[barfGets] = false;
 
       await dataSources.saveFileAPI.saveUserSaveFile(userSaveFile);
 
