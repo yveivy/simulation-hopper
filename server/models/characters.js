@@ -1,11 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-<<<<<<< HEAD
 const characterSchema = new Schema({  
-=======
-const characterSchema = new Schema({
-  
->>>>>>> main
     searchable_name: {
         type: String,
         required: true,
