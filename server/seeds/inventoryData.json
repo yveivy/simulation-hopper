@@ -1,66 +1,66 @@
 [
     {
-      "full_name":"Barf",
-      "item_name":"Astronaut's Log Book"
+      "searchable_name":"barf",
+      "searchable_item":"log-book"
     },
     {
-      "full_name":"Barf",
-      "item_name":"Medical Kit"
+      "searchable_name":"barf",
+      "searchable_item":"medical-kit"
     },
     {
-      "full_name":"Barf",
-      "item_name":"Timekeeper's Pocket Watch"
+      "searchable_name":"barf",
+      "searchable_item":"pocket-watch"
     },
     {
-      "full_name":"Barf",
-      "item_name":"Universal Translator"
+      "searchable_name":"barf",
+      "searchable_item":"universal-translator"
     },
     {
-      "full_name":"Zara Sparks",
-      "item_name":"Gossamer Grove Spade"
+      "searchable_name":"zara",
+      "searchable_item":"spade"
     },
     {
-      "full_name":"Zara Sparks",
-      "item_name":"Aetheric Spanner"
+      "searchable_name":"zara",
+      "searchable_item":"spanner"
     },
     {
-      "full_name":"Beryl and Basil Hydra",
-      "item_name":"Eye of Newt"
+      "searchable_name":"hydra",
+      "searchable_item":"eye-of-newt"
     },
     {
-      "full_name":"Beryl and Basil Hydra",
-      "item_name":"Healing Balm of Beryl"
+      "searchable_name":"hydra",
+      "searchable_item":"balm"
     },
     {
-      "full_name":"Abe Harmony",
-      "item_name":"Solar Compass"
+      "searchable_name":"abe",
+      "searchable_item":"compass"
     },
     {
-      "full_name":"Abe Harmony",
-      "item_name":"Stellar Scope"
+      "searchable_name":"abe",
+      "searchable_item":"scope"
     },
     {
-     "full_name":"Shady Schemer",
-      "item_name":"Crimson Feather"
+     "searchable_name":"shady",
+      "searchable_item":"feather"
     },
     {
-      "full_name":"Shady Schemer",
-      "item_name":"Arcane Locket"
+      "searchable_name":"shady",
+      "searchable_item":"locket"
     },
     {
-      "full_name":"Taylor Tuck",
-      "item_name":"Stealth Striders"
+      "searchable_name":"taylor",
+      "searchable_item":"striders"
     },
     {
-     "full_name":"Taylor Tuck",
-      "item_name":"Wispfire Lantern"
+     "searchable_name":"taylor",
+      "searchable_item":"lantern"
     },
     {
-      "full_name":"Violet Meadows",
-      "item_name":"Botanical Elixir"
+      "searchable_name":"violet",
+      "searchable_item":"elixir"
     },
     {
-      "full_name":"Violet Meadows",
-      "item_name":"Starlight Harp"
+      "searchable_name":"violet",
+      "searchable_item":"harp"
     }
 ]

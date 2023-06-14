@@ -1,13 +1,13 @@
 const { Schema, model } = require('mongoose');
 
-const inventorySchema = new mongoose.Schema({
-    full_name: {
-        type: mongoose.Schema.Types.ObjectId,
+const inventorySchema = new Schema({
+    searchable_name: {
+        type: Schema.Types.ObjectId,
         ref: 'Character',
     },
 
-    item_name: {
-        type: mongoose.Schema.Types.Object.Id,
+    searchable_item: {
+        type: Schema.Types.ObjectId,
         ref: 'Item',
 
     },
@@ -18,6 +18,6 @@ const inventorySchema = new mongoose.Schema({
     collection: 'inventory',
 });
 
-const Inventory = mongoose.model('Inventory', inventorySchema);
+const Inventory = model('Inventory', inventorySchema);
 
 module.exports = Inventory;
