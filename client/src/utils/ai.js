@@ -1,4 +1,5 @@
-import {fetchInventory, parseInventoryObjArrayToGetJustItems} from "./inventory"
+import {parseInventoryObjArrayToGetJustItems} from "./inventory"
+import { fetchInventory } from "./db/fetches";
 
 export async function fetchOpenAiApi(prompt) {
     var promptResponseNotJson = await fetch('/api/openai/', {

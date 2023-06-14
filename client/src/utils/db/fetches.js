@@ -17,6 +17,19 @@ import client from "./apolloClient"
 //       }
 // }
 
+export async function fetchCharacterData(characterSearchableName) {
+  try {
+      const { data } = await client.query({
+          query: QUERY_CHARACTER_DATA
+      });
+      console.log(data);
+      return data.characters[characterSearchableName]
+  } catch (error) {
+      console.error(error);
+  }
+}
+
+
 export async function fetchInventory(characterSearchableName) {
     try {
         const { data } = await client.query({ 
