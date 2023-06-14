@@ -75,10 +75,12 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 type Query {
-  userSaveFile: Collection
+  userSaveFile: userfile
+  Characters:
+  Items:
 }
 
-type Collection {
+type userfile {
   _id: ID
   userinfo: Userinfo
   playerLocation: PlayerLocParams
@@ -132,7 +134,7 @@ type Mutation {
     tradeWith: String!
     itemToTrade: String!
     itemToAcquire: String!
-  ): Collection
+  ): userfile
 }
 
 
