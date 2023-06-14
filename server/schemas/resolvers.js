@@ -1,15 +1,11 @@
-
-const { Characters, Items, Inventory, User} = require('../models');
+const { Characters, Items } = require('../models/index')
 const { client, userinfo } = require('../config/db')
 const saveFileAPI = require('../utils/saveFileAPI')
 
 const resolvers = {
   Query: {
-    test: () => 'Test get route is working',
-
-
-
-    biography: async (_, { searchable_name }) => {
+    // retrive information about a single character
+    getOneCharacterInfo: async (_, { searchable_name }) => {
       try {
         const character = await Characters.findOne({ searchable_name });
         if (!character) {
@@ -26,8 +22,8 @@ const resolvers = {
         throw new Error('Internal server error')
       }
     },
-
-    item: async (_, { searchable_item }) => {
+    // retrieve info about a single item -- input variable = searchable_item
+    getOneItem: async (_, { searchable_item }) => {
       try {
         const foundItem = await Items.findOne({ searchable_item });
 
@@ -44,8 +40,8 @@ const resolvers = {
         throw new Error('Internal server error');
       }
     },
-
-    items: async () => {
+    // references Items model which houses information about all items
+    getItems: async () => {
       try {
         const allItems = await Items.find({}, { item_name: 1, description: 1 });
 
@@ -58,9 +54,7 @@ const resolvers = {
         throw new Error('Internal server error');
       }
     },
-
-const resolvers = {
-  Query: {
+    // User Save File References the db collection which contains the users game progress.
     userSaveFile: async () => {
       const database = client.db('simulationHopperDB');
       const collection = database.collection(userinfo.username);
@@ -71,13 +65,23 @@ const resolvers = {
         console.error('Failed to retrieve data from the database:', error);
         return null;
       }
-    }
+    },
+    // references Characters model which houses information about all characters
+    getAllCharacters: async () => {
+      try {
+        // Fetch all characters from the Character collection
+        const characters = await Characters.find();
+        return characters;
+      } catch (error) {
+        throw new Error('Failed to fetch characters');
+      }
+    },
   },
   Userinfo: {
     username: (parent) => parent.username,
     password: (parent) => parent.password,
   },  
-  Character: {
+  CharacterInventories: {
     abe: (parent) => {
       return parent.abe;
     },
@@ -99,30 +103,29 @@ const resolvers = {
     zara: (parent) => {
       return parent.zara;
     }
-
-
+  },
   Mutation: {
-    tradeItems: async (_, { characterName, tradeWith, itemToTrade, itemToAcquire }, { dataSources }) => {
+    tradeItems: async (_, { tradeWith, barfGives, barfGets }, { dataSources }) => {
       const userSaveFile = await dataSources.saveFileAPI.getUserSaveFile();
 
       if (!userSaveFile) {
         throw new Error("User save file not found");
       }
-
+      const characterName = "barf"
       const characterInventory = userSaveFile.inventory[characterName];
       const tradeWithInventory = userSaveFile.inventory[tradeWith];
 
 
-      characterInventory[itemToTrade] = false;
-      characterInventory[itemToAcquire] = true;
-      tradeWithInventory[itemToTrade] = true;
-      tradeWithInventory[itemToAcquire] = false;
+      characterInventory[barfGives] = false;
+      characterInventory[barfGets] = true;
+      tradeWithInventory[barfGives] = true;
+      tradeWithInventory[barfGets] = false;
 
       await dataSources.saveFileAPI.saveUserSaveFile(userSaveFile);
 
       return userSaveFile;
-    }
-  }
+    },
+  },
 };
 
 

@@ -1,29 +1,16 @@
 const mongoose = require('mongoose');
+const characterData = require('./characterData.json');
+const itemData = require('./itemData.json');
 const { Characters, Items } = require('../models');
-
-const characterData = require('./characterData');
-const itemData = require('./itemData');
+const db = require('../config/connection')
 require('dotenv').config();
 
+db.once('open', async () => {
+  await Characters.deleteMany({});
+  await Items.deleteMany({});
+  const characters = await Characters.insertMany(characterData);
+  const items = await Items.insertMany(itemData);
 
-console.log('MONGODB_URI:', process.env.MONGODB_URI);
-mongoose.connect('mongodb+srv://yveivy:Yevette1@classactivities.fq7zpnf.mongodb.net/gameDB', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  console.log('Character and Item info seeded');
+  process.exit(0);
 });
-
-const seedDatabase = async () => {
-  try {
-    await Characters.deleteMany({});
-    await Characters.insertMany(characterData);
-
-    await Items.deleteMany({});
-    await Items.insertMany(itemData);
-
-    console.log('Database seeding for characters and items completed successfully.');
-  } catch (error) {
-    console.error('Error seeding database:', error);
-  }
-};
-
-seedDatabase();
