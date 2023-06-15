@@ -20,13 +20,6 @@ type Userinfo {
   password: String
 }
 
-type Query {
-    test: String!
-    biography(searchable_name: String!): Character!
-    item(searchable_item: String!): Item!
-    items: [Item]!
- }
-
 type PlayerLocParams {
   x: Int
   y: Int
@@ -68,6 +61,7 @@ type Mutation {
     barfGives: String!
     barfGets: String!
   ): userfile
+  markCharacterAsMet(characterName: String!): Boolean
 }
 
 type Character {

@@ -1,9 +1,9 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const characterData = require('./characterData.json');
 const itemData = require('./itemData.json');
 const { Characters, Items } = require('../models');
 const db = require('../config/connection')
-require('dotenv').config();
 
 db.once('open', async () => {
   await Characters.deleteMany({});
