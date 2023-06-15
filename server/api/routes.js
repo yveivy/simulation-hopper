@@ -3,7 +3,7 @@ const router = require('express').Router();
 const {callOpenAiApi, getOpenAiApiKey} = require('./ai.js');
 
 
-router.post('/', async (req, res) => {
+router.post('/openai', async (req, res) => {
     var prompt = req.body.prompt
     try {
         var promptResponse = await callOpenAiApi(prompt)

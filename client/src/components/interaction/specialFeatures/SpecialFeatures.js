@@ -1,8 +1,9 @@
 import React from "react"
 import "../../../css/overlay1.css"
+import { disableWASD } from "../../../utils/interactionMenu";
 import Violet from "./Violet"
 
-const SpecialFeatures = ({ setShowChat, setShowSpecialFeatures }) => {
+const SpecialFeatures = ({ setShowAnything, setShowChat, setShowSpecialFeatures }) => {
 
     const handleTab = () => {
         setShowSpecialFeatures(false);
@@ -11,6 +12,8 @@ const SpecialFeatures = ({ setShowChat, setShowSpecialFeatures }) => {
     const handleClose = () => {
         setShowChat(false);
         setShowSpecialFeatures(false);
+        setShowAnything(false)
+        disableWASD()
       };
 
   return (

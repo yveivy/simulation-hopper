@@ -3,15 +3,15 @@ import Chat from "./chat/Chat"
 import SpecialFeatures from "./specialFeatures/SpecialFeatures"
 import "../../css/overlay1.css"
 
-const Interaction = ({showChat, setShowChat, showSpecialFeatures, setShowSpecialFeatures}) => {
+const Interaction = ({setShowAnything, showChat, setShowChat, showSpecialFeatures, setShowSpecialFeatures}) => {
 
     return (
         <div>
             {showChat && 
-                <Chat setShowChat={setShowChat} setShowSpecialFeatures={setShowSpecialFeatures} />
+                <Chat setShowAnything={setShowAnything} setShowChat={setShowChat} setShowSpecialFeatures={setShowSpecialFeatures} />
             }
             {showSpecialFeatures && 
-                <SpecialFeatures setShowChat={setShowChat} setShowSpecialFeatures={setShowSpecialFeatures}/>
+                <SpecialFeatures setShowAnything={setShowAnything} setShowChat={setShowChat} setShowSpecialFeatures={setShowSpecialFeatures}/>
             }
         </div>
     );

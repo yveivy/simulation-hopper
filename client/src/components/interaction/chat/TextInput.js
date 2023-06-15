@@ -1,23 +1,24 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { fetchOpenAiApi } from '../../../utils/ai';
-import { useDialogue } from '../../../utils/dialogue';
+import { DialogueContext} from './Chat';
 import "../../../css/overlay1.css"
 
 export const TextInput = () => {
     // var interactionObject = window.interactionObject
     var interactionObject = "NPC"
 
-    const { addDialogue } = useDialogue()
+    const { addDialogue, dialogueList } = useContext(DialogueContext);
     const [inputText, setInputText] = useState("");
 
-    const handleSubmit = (event) => {
-        console.log("TextInput.js submit text_______")
+    const handleSubmit = async (event) => {
+        
         event.preventDefault();
         addDialogue('Barf', inputText); // User's dialogue
         //ToDO: choose prompt (based on user) 
-        var prompt = "test prompt"
-        const npcResponse = fetchOpenAiApi(prompt); // Some function that generates NPC response
+        // var prompt = "test prompt"
+        const npcResponse = await fetchOpenAiApi(inputText); // Some function that generates NPC response
         addDialogue(interactionObject, npcResponse); // NPC's dialogue
+        console.log("TextInput.js dialogueList_______", dialogueList)
         setInputText(''); // Clear the input field
     };
 
