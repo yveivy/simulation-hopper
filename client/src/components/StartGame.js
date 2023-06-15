@@ -1,29 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import AnimationStartGif from '../images/AnimationStartGif.gif';
 
 const VideoComponent = () => {
-  const gameSaved = true; // Replace with your variable or state value
+  const [visible, setVisible] = useState(false);
 
-  const handleVideoClick = () => {
-    if (!gameSaved) {
-      // Perform additional actions or show a message when the game is not saved
-      console.log("Game not saved. Cannot play video.");
-      return;
+  useEffect(() => {
+    const hasVisitedBefore = localStorage.getItem('hasVisitedBefore');
+    if (!hasVisitedBefore) {
+      localStorage.setItem('hasVisitedBefore', true);
+      setVisible(true);
     }
-    // Perform any other actions needed when the game is saved
 
-    // Play video
-    const video = document.getElementById('videoElement');
-    if (video) {
-      video.play();
-    }
-  };
+    const timeout = setTimeout(() => {
+      setVisible(false);
+    }, 81000); // 82 seconds = 82000 milliseconds
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <div>
-      <video id="videoElement" onClick={handleVideoClick} controls>
-        <source src="../src/images/AnimationGif.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      {visible && (
+        <img src={AnimationStartGif} alt="AnimationStartGif" className="StartGif" />
+      )}
     </div>
   );
 };

@@ -184,4 +184,13 @@ ul {
 .image-container {
   opacity: 0; 
 }
+.StartGif {
+  z-index: 4;
+  opacity: 1;
+  transition: opacity 0.5s ease; 
+}
 
+.HideGif {
+  opacity: 0;
+  pointer-events: none; 
+}
