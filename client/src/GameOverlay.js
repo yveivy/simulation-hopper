@@ -4,7 +4,9 @@ import InteractionOverlay from './components/InteractionOverlay';
 import InventoryOverlay from "./components/InventoryOverlay"
 import client from './utils/db/apolloClient'
 // import 'bootstrap/dist/css/bootstrap.min.css';
-// import './css/overlay.css'
+
+import VideoComponent from './components/StartGame';
+import './css/overlay.css'
 import EndGame from './components/EndGame';
 import Chat from "./components/interaction/chat/Chat"
 import Interaction from "./components/interaction/Interaction"
@@ -46,8 +48,8 @@ function GameOverlay() {
           showSpecialFeatures={showSpecialFeatures}
           setShowSpecialFeatures={setShowSpecialFeatures}
         />
+        <VideoComponent />
         <InventoryOverlay />
-
         <EndGame />
       </div>
     </ApolloProvider>
@@ -55,3 +57,4 @@ function GameOverlay() {
 }
 
 export default GameOverlay;
+

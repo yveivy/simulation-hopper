@@ -61,6 +61,7 @@ type Mutation {
     barfGives: String!
     barfGets: String!
   ): userfile
+  markCharacterAsMet(characterName: String!): Boolean
 }
 
 type Character {

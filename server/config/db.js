@@ -13,9 +13,7 @@ const playerLocation = {
   y: 1
 }
 
-const uri = process.env.MONGODB_URI
-// const uri = 'mongodb+srv://willrcline:Wi11C1ine$@cluster0.01hpv40.mongodb.net/simulationHopperDB';
-const client = new MongoClient(uri);
+const client = new MongoClient(process.env.MONGODB_URI);
 
 async function createNewUserAndSeedDatabase(userinfo) {
   // Connection URL

@@ -1,29 +1,8 @@
-// const { connect, connection } = require('mongoose');
-// require('dotenv/config')
-
-// let connectionString;
-
-// if (process.env.NODE_ENV === 'production') {
-//     connectionString = process.env.SERVER_MONGODB_URI;
-// } else {
-//     connectionString = process.env.LOCAL_MONGODB_URI;
-// }
-
-// connect(connectionString);
-
-// module.exports = connection;
-
-
-// ===================
-// Comment out everything above this line to use J's connection
-// (vice versa for Yevettes)
-require('dotenv').config();
-console.log();
+require('dotenv').config()
 const mongoose = require('mongoose');
 
-var uri = process.env.MONGODB_URI
-var uri = "mongodb+srv://willrcline:Wi11C1ine$@cluster0.01hpv40.mongodb.net/"
-mongoose.connect(uri, {
+
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
