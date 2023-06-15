@@ -17,10 +17,13 @@
 // ===================
 // Comment out everything above this line to use J's connection
 // (vice versa for Yevettes)
-
+require('dotenv').config();
+console.log();
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://edwardwells87:Koolaid88!!!!@cluster0.quwyqyg.mongodb.net/', {
+var uri = process.env.MONGODB_URI
+var uri = "mongodb+srv://willrcline:Wi11C1ine$@cluster0.01hpv40.mongodb.net/"
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

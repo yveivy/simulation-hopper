@@ -1,5 +1,13 @@
 import { gql } from '@apollo/client';
 
+export const QUERY_ONE_ITEM_DETAILS = gql`
+query Query($searchableItem: String!) {
+  getOneItem(searchable_item: $searchableItem) {
+    description
+    item_name
+  }
+}`
+
 export const QUERY_INVENTORY = gql`
 query Query {
   userSaveFile {
@@ -9,7 +17,6 @@ query Query {
         compass
         elixir
         feather
-        hasMet
         harp
         lantern
         locket
@@ -28,7 +35,6 @@ query Query {
         compass
         elixir
         feather
-        hasMet
         harp
         lantern
         locket
@@ -47,7 +53,6 @@ query Query {
         compass
         elixir
         feather
-        hasMet
         harp
         lantern
         locket
@@ -66,7 +71,6 @@ query Query {
         compass
         elixir
         feather
-        hasMet
         harp
         lantern
         locket
@@ -85,7 +89,6 @@ query Query {
         compass
         elixir
         feather
-        hasMet
         harp
         lantern
         locket
@@ -104,7 +107,6 @@ query Query {
         compass
         elixir
         feather
-        hasMet
         harp
         lantern
         locket
@@ -123,7 +125,6 @@ query Query {
         compass
         elixir
         feather
-        hasMet
         harp
         lantern
         locket
@@ -141,6 +142,7 @@ query Query {
   }
 }
 `;
+
 
 export const QUERY_CHARACTER_DATA = gql`
   query Characters {

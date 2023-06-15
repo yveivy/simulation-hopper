@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb');
+require('dotenv').config();
 
 // this is where we pass in user info. we will alter this to grab user input from where user Creates Their Account. during testing, it is a static value as defined below
 const userinfo = {
@@ -6,14 +7,14 @@ const userinfo = {
   password: 'pass1234'
 };
 
-// const uri = 'mongodb+srv://willrcline:Wi11C1ine$@cluster0.01hpv40.mongodb.net/simulationHopperDB';
 
 const playerLocation = {
   x: 1,
   y: 1
 }
 
-const uri = 'mongodb+srv://edwardwells87:Koolaid88!!!!@cluster0.quwyqyg.mongodb.net/';
+const uri = process.env.MONGODB_URI
+// const uri = 'mongodb+srv://willrcline:Wi11C1ine$@cluster0.01hpv40.mongodb.net/simulationHopperDB';
 const client = new MongoClient(uri);
 
 async function createNewUserAndSeedDatabase(userinfo) {
