@@ -4,14 +4,20 @@ import { useDialogue } from '../../../utils/dialogue';
 import "../../../css/overlay1.css"
 
 export const TextInput = () => {
+    // var interactionObject = window.interactionObject
+    var interactionObject = "NPC"
+
     const { addDialogue } = useDialogue()
     const [inputText, setInputText] = useState("");
 
     const handleSubmit = (event) => {
+        console.log("TextInput.js submit text_______")
         event.preventDefault();
-        addDialogue('User', inputText); // User's dialogue
-        const npcResponse = fetchOpenAiApi(inputText); // Some function that generates NPC response
-        addDialogue('NPC', npcResponse); // NPC's dialogue
+        addDialogue('Barf', inputText); // User's dialogue
+        //ToDO: choose prompt (based on user) 
+        var prompt = "test prompt"
+        const npcResponse = fetchOpenAiApi(prompt); // Some function that generates NPC response
+        addDialogue(interactionObject, npcResponse); // NPC's dialogue
         setInputText(''); // Clear the input field
     };
 

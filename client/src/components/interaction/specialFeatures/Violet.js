@@ -1,7 +1,5 @@
 import React from "react"
-import Dialogue from "./Dialogue"
-import TextInput from "./TextInput"
-import "../../css/overlay1.css"
+import "../../../css/overlay1.css"
 
 const Violet = () => {
   
