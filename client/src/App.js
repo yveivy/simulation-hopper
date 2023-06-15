@@ -4,6 +4,7 @@ import { ApolloProvider } from '@apollo/client';
 import client from './utils/db/apolloClient'
 import NotFound from './pages/NotFound';
 import Home from "./pages/home/Home"
+import RegistrationForm from './components/createAccount';
 
 
 function App() {

@@ -1,5 +1,6 @@
 const { Characters, Items } = require('../models/index')
 const { client, userinfo } = require('../config/db')
+const { newUserData } = require('../seeds/newUserData')
 const saveFileAPI = require('../utils/saveFileAPI')
 
 const resolvers = {
@@ -142,6 +143,20 @@ const resolvers = {
 
       // Return the updated hasMet value
       return characterInventory.hasMet;
+    },
+    createNewUser: async (_, { username, password }, { dataSources }) => {
+      const saveFileAPI = dataSources.saveFileAPI;
+      const collectionName = username; // Set the collection name to the username
+      const userinfo = { username, password }
+      const newUserSaveFile = {
+        userinfo: userinfo,
+        ...newUserData
+      };
+      console.log('userinfo____', userinfo)
+      console.log('newUserData_____', newUserData)
+      await saveFileAPI.createNewCollection(collectionName, newUserSaveFile);
+
+      return newUserSaveFile;
     },
   },
 };
