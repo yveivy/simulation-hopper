@@ -8,7 +8,6 @@ class saveFileAPI {
     const collection = database.collection(collectionName);
     try {
       const dbData = await collection.findOne();
-      console.log(dbData)
       return dbData;
       } catch (error) {
         console.error('Failed to retrieve data from the database:', error);

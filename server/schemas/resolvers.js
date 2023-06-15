@@ -58,6 +58,7 @@ const resolvers = {
     userSaveFile: async () => {
       const database = client.db('simulationHopperDB');
       const collection = database.collection(userinfo.username);
+      console.log('line 61')
       try {
         const dbData = await collection.findOne(); // Retrieve the data from the collection
         return dbData;
@@ -124,6 +125,23 @@ const resolvers = {
       await dataSources.saveFileAPI.saveUserSaveFile(userSaveFile);
 
       return userSaveFile;
+    },
+    markCharacterAsMet: async (_, { characterName }, { dataSources }) => {
+      const userSaveFile = await dataSources.saveFileAPI.getUserSaveFile();
+
+      if (!userSaveFile) {
+        throw new Error("User save file not found");
+      }
+
+      const characterInventory = userSaveFile.inventory[characterName];
+
+      // Update the hasMet value for the character
+      characterInventory.hasMet = true;
+
+      await dataSources.saveFileAPI.saveUserSaveFile(userSaveFile);
+
+      // Return the updated hasMet value
+      return characterInventory.hasMet;
     },
   },
 };
