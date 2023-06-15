@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react"
-import { useDialogue } from "../../../utils/dialogue";
+import React, { useContext } from "react"
+import { DialogueContext } from "./Chat"
 
 import "../../../css/overlay1.css"
 
+
+
 const Dialogue = () => {
-  const { dialogueList } = useDialogue()
+  const { dialogueList } = useContext(DialogueContext)
   
   return (
     <div id="dialogue-container">
