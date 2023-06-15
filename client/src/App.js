@@ -27,7 +27,7 @@ function App() {
             />
             <Route path="/login" 
             element={<Login onFormSwitch={toggleForm} />} />
-            
+
             <Route path="/register" 
             element={<Register onFormSwitch={toggleForm} />} />
             {/* <Route 
