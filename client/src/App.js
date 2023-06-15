@@ -9,12 +9,6 @@ import Register from './components/login/Register';
 
 
 function App() {
-  const [currentForm, setCurrentForm] = useState('login');
-  
-  const toggleForm = (formName) => {
-    setCurrentForm(formName);
-
-  };
 
   return (
     <ApolloProvider client={client}>
@@ -26,10 +20,10 @@ function App() {
               element={<Home />}
             />
             <Route path="/login" 
-            element={<Login onFormSwitch={toggleForm} />} />
+            element={<Login />} />
 
             <Route path="/register" 
-            element={<Register onFormSwitch={toggleForm} />} />
+            element={<Register />} />
             {/* <Route 
               path="/game" 
             /> */}
