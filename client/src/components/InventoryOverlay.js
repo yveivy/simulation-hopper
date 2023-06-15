@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from "react";
 import { enableWASD, disableWASD } from "../utils/interactionMenu";
-import { fetchInventory } from "../utils/db/fetches";
-import { parseInventoryObjArrayToGetJustItems } from "../utils/inventory";
+import { fetchInventory, fetchOneItemDetails } from "../utils/db/fetches";
+import { parseInventoryObjToGetJustItems } from "../utils/inventory";
 import "../css/overlay.css"
 
 const InventoryOverlay = () => {
@@ -10,9 +10,17 @@ const InventoryOverlay = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const fetchAndSetInventory = async () => {
-    const inventoryObjArray = await fetchInventory('barf');
-    const inventoryItems = parseInventoryObjArrayToGetJustItems(inventoryObjArray);
-    setInventory(inventoryItems);
+    const inventoryObj = await fetchInventory('barf');
+    const inventoryItems = parseInventoryObjToGetJustItems(inventoryObj);
+    const inventoryItemsWithDetails = []
+    //ToDo: Get descriptions of items in someone's inventory:
+    for (let itemSearchableName of inventoryItems) {
+      console.log("fetchAndSetInventory() itemSearchableName_________", itemSearchableName)
+      var itemDetails = await fetchOneItemDetails(itemSearchableName)
+      inventoryItemsWithDetails.push(itemDetails)
+    }
+    console.log("inventoryOverlay.js fetchAndSetInventory() inventoryItemsWithDetails_____________", inventoryItemsWithDetails)
+    setInventory(inventoryItemsWithDetails);
   }
 
   useEffect(() => {
@@ -28,7 +36,7 @@ const InventoryOverlay = () => {
           try {
             await fetchAndSetInventory();
           } catch {
-            console.log("inventoryOvelay.js fetchAndSetInventory failed")
+            console.log("inventoryOverlay.js fetchAndSetInventory failed")
           }
           setIsVisible(true);
           disableWASD();
@@ -58,10 +66,10 @@ const InventoryOverlay = () => {
     <div id="inventory-container">
       <h3 id="inventory-header">Your Inventory</h3>
       <ul id="inventory-ul">
-        {inventory.map((item) => (
-          <li key={item.item.id}>
-            <p>Item name: {item.item.item_name}</p>
-            <p>Description: {item.item.description}</p>
+        {inventory.map((item, index) => (
+          <li key={index}>
+            <p>Item name: {item.getOneItem.item_name}</p>
+            <p>Description: {item.getOneItem.description}</p>
           </li>
         ))}
       </ul>

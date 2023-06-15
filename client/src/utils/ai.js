@@ -1,4 +1,4 @@
-import {parseInventoryObjArrayToGetJustItems} from "./inventory"
+import {parseInventoryObjToGetJustItems} from "./inventory"
 import { fetchInventory } from "./db/fetches";
 
 export async function fetchOpenAiApi(prompt) {
@@ -91,12 +91,52 @@ return prompt
 }
 
 
-export async function getCurrentObjective() {
+export async function updateCurrentObjective() {
     var currentObjective = ""
     var userInventory = fetchInventory("barf")
-    var inventoryItems = parseInventoryObjArrayToGetJustItems(userInventory)
+    var inventoryItems = parseInventoryObjToGetJustItems(userInventory)
     if ( inventoryItems.includes("") && !inventoryItems.includes("") ) {
         currentObjective = ""
     }
     return currentObjective
 }
+
+
+//increment checkpoint to user save file
+var storyLine = [
+    {
+        "checkpoint": 0,
+        "npc": "robot",
+        "openingScene": "",
+        "objective": "",
+        "objectiveComplete": false
+    },
+    {
+        "checkpoint": 1,
+        "npc": "violet",
+        "openingScene": "Why are you not wearing pants! You are so cute. Maybe I would have a crush on you if you shaped up a bit. I’m so disgusted by your pantslessness. I love to grow plants. I’m a fantastic botanist. I heard that you need something to grow plantlife back on your planet, and I have just the thing.",
+        "objective": "Go talk to the taylor to get a pair of pants",
+        "objectiveComplete": false
+    },
+    {
+        "checkpoint": 2,
+        "npc": "",
+        "openingScene": "",
+        "objective": "",
+        "objectiveComplete": false
+    },
+    {
+        "checkpoint": 3,
+        "npc": "",
+        "openingScene": "",
+        "objective": "",
+        "objectiveComplete": false
+    },
+    {
+        "checkpoint": 4,
+        "npc": "",
+        "openingScene": "",
+        "objective": "",
+        "objectiveComplete": false
+    }
+]
