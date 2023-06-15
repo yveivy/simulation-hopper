@@ -1,7 +1,9 @@
 import React from "react"
 import "../../../css/overlay1.css"
+import Violet from "./Violet"
 
 const SpecialFeatures = ({ setShowChat, setShowSpecialFeatures }) => {
+
     const handleTab = () => {
         setShowSpecialFeatures(false);
         setShowChat(true);
@@ -16,7 +18,11 @@ const SpecialFeatures = ({ setShowChat, setShowSpecialFeatures }) => {
         <nav className="interaction-nav">
           <button onClick={handleClose}>Close</button>
           <button onClick={handleTab}>Chat</button>
-        </nav>      
+        </nav> 
+
+        {window.interactionObject === "violet" &&
+          <Violet />
+        } 
     </div>
   )
 }
