@@ -44,7 +44,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className='wrapper'>
       <header>
         <h1>Simulation Hopper</h1>
       </header>

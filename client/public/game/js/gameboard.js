@@ -530,98 +530,98 @@ function endGame() {
 const introImages = document.querySelectorAll('.image-container1');
 const introNumImages = introImages.length;
 
-gsap.set(introImages, { opacity: 0 });
+// gsap.set(introImages, { opacity: 0 });
 
-function hideCanvas() {
-  const canvas = document.querySelector('#gameCanvas');
-  canvas.style.display = 'none';
-}
+// function hideCanvas() {
+//   const canvas = document.querySelector('#gameCanvas');
+//   canvas.style.display = 'none';
+// }
 
-function startSlideshow1() {
-  gsap.set(introImages[0], { opacity: 1 });
-  gsap.to(introImages[0], { duration: 1.5, opacity: 0, delay: 3, onComplete: fadeInSecondImage });
-}
+// function startSlideshow1() {
+//   gsap.set(introImages[0], { opacity: 1 });
+//   gsap.to(introImages[0], { duration: 1.5, opacity: 0, delay: 3, onComplete: fadeInSecondImage });
+// }
 
-function fadeInSecondImage() {
-  gsap.set(introImages[1], { opacity: 0 });
-  gsap.to(introImages[1], { duration: 1.5, opacity: 1, delay: 1, onComplete: fadeOutSecondImage });
-}
+// function fadeInSecondImage() {
+//   gsap.set(introImages[1], { opacity: 0 });
+//   gsap.to(introImages[1], { duration: 1.5, opacity: 1, delay: 1, onComplete: fadeOutSecondImage });
+// }
 
-function fadeOutSecondImage() {
-  gsap.to(introImages[1], { duration: 1.5, opacity: 0, delay: 3, onComplete: fadeInThirdImage });
-}
+// function fadeOutSecondImage() {
+//   gsap.to(introImages[1], { duration: 1.5, opacity: 0, delay: 3, onComplete: fadeInThirdImage });
+// }
 
-function fadeInThirdImage() {
-  gsap.set(introImages[2], { opacity: 0 });
-  gsap.to(introImages[2], { duration: 1.5, opacity: 1, delay: 1, onComplete: fadeOutThirdImage });
-}
+// function fadeInThirdImage() {
+//   gsap.set(introImages[2], { opacity: 0 });
+//   gsap.to(introImages[2], { duration: 1.5, opacity: 1, delay: 1, onComplete: fadeOutThirdImage });
+// }
 
-function fadeOutThirdImage() {
-  gsap.to(introImages[2], { duration: 1.5, opacity: 0, delay: 3, onComplete: fadeInFinalImage });
-}
+// function fadeOutThirdImage() {
+//   gsap.to(introImages[2], { duration: 1.5, opacity: 0, delay: 3, onComplete: fadeInFinalImage });
+// }
 
-function fadeInFinalImage() {
-  gsap.set(introImages[3], { opacity: 0 });
-  gsap.to(introImages[3], { duration: 1.5, opacity: 1, delay: 1, onComplete: fadeOutFinalImage });
-}
+// function fadeInFinalImage() {
+//   gsap.set(introImages[3], { opacity: 0 });
+//   gsap.to(introImages[3], { duration: 1.5, opacity: 1, delay: 1, onComplete: fadeOutFinalImage });
+// }
 
-function fadeOutFinalImage() {
-  gsap.to(introImages[3], { duration: 1.5, opacity: 0, delay: 3, onComplete: showCanvas });
-}
+// function fadeOutFinalImage() {
+//   gsap.to(introImages[3], { duration: 1.5, opacity: 0, delay: 3, onComplete: showCanvas });
+// }
 
-function showCanvas() {
-  const canvas = document.querySelector('#gameCanvas');
-  canvas.style.display = 'block';
-}
+// function showCanvas() {
+//   const canvas = document.querySelector('#gameCanvas');
+//   canvas.style.display = 'block';
+// }
 
 
 
-hideCanvas(); // Hide the canvas initially
+// hideCanvas(); // Hide the canvas initially
 
-//need to make a function that renders dialog box png and then animates the p tag across the image based on z index 
-gsap.set("#dialogue-container2", { opacity: 0 });
+// //need to make a function that renders dialog box png and then animates the p tag across the image based on z index 
+// gsap.set("#dialogue-container2", { opacity: 0 });
 
-window.onload = function() {
-  startSlideshow1();
-  setTimeout(startAnimation,20000); // Delay of 28 seconds (28000 milliseconds)
-};
+// window.onload = function() {
+//   startSlideshow1();
+//   setTimeout(startAnimation,20000); // Delay of 28 seconds (28000 milliseconds)
+// };
 
-function startAnimation() {
-  gsap.to("#dialogue-container2", {
-    duration: 1,
-    opacity: 1,
-    onStart: typeText
-  });
-}
+// function startAnimation() {
+//   gsap.to("#dialogue-container2", {
+//     duration: 1,
+//     opacity: 1,
+//     onStart: typeText
+//   });
+// }
 
-function typeText() {
-  const text = document.getElementById("text");
-  const textContent = text.innerHTML.trim();
-  text.innerHTML = "";
+// function typeText() {
+//   const text = document.getElementById("text");
+//   const textContent = text.innerHTML.trim();
+//   text.innerHTML = "";
 
-  let charIndex = 0;
-  const typing = setInterval(function() {
-    text.innerHTML += textContent[charIndex];
-    charIndex++;
+//   let charIndex = 0;
+//   const typing = setInterval(function() {
+//     text.innerHTML += textContent[charIndex];
+//     charIndex++;
 
-    if (charIndex >= textContent.length) {
-      clearInterval(typing);
-      setTimeout(fadeOut, 60000); // Delay of 1 minute (60000 milliseconds)
-    }
-  }, 100); // Typing speed: 100 milliseconds per character
-}
+//     if (charIndex >= textContent.length) {
+//       clearInterval(typing);
+//       setTimeout(fadeOut, 60000); // Delay of 1 minute (60000 milliseconds)
+//     }
+//   }, 100); // Typing speed: 100 milliseconds per character
+// }
 
-function fadeOut() {
-  gsap.to("#dialogue-container2", {
-    duration: 1,
-    opacity: 0,
-    onComplete: removeDialogueContainer
-  });
-}
+// function fadeOut() {
+//   gsap.to("#dialogue-container2", {
+//     duration: 1,
+//     opacity: 0,
+//     onComplete: removeDialogueContainer
+//   });
+// }
 
-function removeDialogueContainer() {
-  document.getElementById("dialogue-container2").style.display = "none";
-}
+// function removeDialogueContainer() {
+//   document.getElementById("dialogue-container2").style.display = "none";
+// }
 console.log(`Character position: x = ${characterX}, y = ${characterY}`)
 
 
