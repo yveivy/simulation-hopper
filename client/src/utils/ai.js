@@ -56,6 +56,7 @@ export function createPromptForNpcResponseToChat(reqObj) {
     var role = reqObj.role
     var bio = reqObj.bio
     var chatHistory = reqObj.chatHistory
+    var name = reqObj.name
 
 var prompt = 
 `You are an npc in a scifi themed trading-oriented RPG called simulation hopper. User has crash landed on your simulation, and he is trying to trade with you and other NPCs to eventually get the items he needs to get off the simulation. In the meantime, He is chatting you up.
@@ -64,6 +65,7 @@ Role- ${role}
 Bio- ${bio}
 
 ${chatHistory}
+${name}:
 
 Give me your verbal response in quotes to what user just said. Don't respond with anything outside the quotes, or it will mess up the program`
 
@@ -75,6 +77,7 @@ return prompt
 export function createPromptForRobotAdvice(reqObj) {
     var bio = reqObj.bio
     var chatHistory = reqObj.chatHistory
+    var name = reqObj.name
 
 var prompt = 
 `You are an npc in a scifi themed trading-oriented RPG called simulation hopper. The user has landed on a planet, and he is trying to trade with NPCs to eventually get the items he needs to leave.
@@ -83,11 +86,25 @@ A little about your personality- ${bio}
 The user's next objective that you can subtly help him with-
 
 ${chatHistory}
+${name}:
 
 Give me your verbal response in quotes to what user just said. Don't respond with anything outside the quotes, or it will mess up the program`
 
 console.log("createPromptForRobotAdvice_______________", prompt)
 return prompt
+}
+
+export function createPrompt(){
+
+}
+
+export function formatDialogueForPrompt(dialogueList) {
+    var formattedAndInListForm = []
+    dialogueList.forEach((dialogue, index) => (
+        formattedAndInListForm.push(`${dialogue.speaker}: ${dialogue.text}`)
+    ))
+    var chatHistory = formattedAndInListForm.join("\n")
+    return chatHistory
 }
 
 
