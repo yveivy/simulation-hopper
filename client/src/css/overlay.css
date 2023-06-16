@@ -194,3 +194,11 @@ ul {
   opacity: 0;
   pointer-events: none; 
 }
+.invisible {
+  display: none;
+}
+.visible {
+  width: 100%;
+  height: 100%;
+  z-index: 6;
+}

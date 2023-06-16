@@ -7,13 +7,14 @@ import client from './utils/db/apolloClient'
 import VideoComponent from './components/StartGame';
 import './css/overlay.css'
 import EndGame from './components/EndGame';
-
+import InnerMind from './components/InnerMind';
 
 function GameOverlay() {
   return (
     <ApolloProvider client={client}>
       <div>
         <VideoComponent />
+        <InnerMind />
         <InteractionOverlay />
         
         <InventoryOverlay />
