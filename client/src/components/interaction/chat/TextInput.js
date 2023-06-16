@@ -1,30 +1,38 @@
 import { useState, useContext } from 'react'
-import { createPromptForNpcResponseToChat, fetchOpenAiApi, formatDialogueForPrompt } from '../../../utils/ai';
+import { createPromptForNpcResponseToChat, createPromptRobotResponseToChat, fetchOpenAiApi, formatDialogueForPrompt } from '../../../utils/ai';
 import { DialogueContext} from './Chat';
+import { fetchOneCharacterData } from '../../../utils/db/fetches';
 import "../../../css/overlay1.css"
 
 export const TextInput = () => {
     // var interactionObject = window.interactionObject
-    var interactionObject = "Violet"
+    // var interactionObject = "violet"
 
     const { addDialogue, dialogueList } = useContext(DialogueContext);
     const [inputText, setInputText] = useState("");
 
     const handleSubmit = async (event) => {
+        var interactionObject = window.interactionObject
+        console.log("interactionObject_______", interactionObject)
         
         event.preventDefault();
         const localCopyOfDialogueList = [...dialogueList, {speaker: 'Barf', text: inputText}]; //local copy
-        addDialogue('Barf', inputText); // User's dialogue
-        //ToDO: choose prompt (based on user) 
-        // var prompt = "test prompt"
-        //ToDo: get bio for character
-        
-        if (window.interactionObject)
+        addDialogue('Barf', inputText);
         var chatHistory = formatDialogueForPrompt(localCopyOfDialogueList)
-        var reqObj = {"name": "Violet", "role": "Botanist", "bio": "loves plants and is hot redhead", "chatHistory": chatHistory}
-        var prompt = createPromptForNpcResponseToChat(reqObj)
+        var npcFullName;
+        var prompt;
+        if (interactionObject === "") {
+            // interactionObject = "robot"
+            prompt = createPromptRobotResponseToChat(chatHistory)
+            npcFullName = "Robot"
+        } else {
+            var npcData = await fetchOneCharacterData(interactionObject)
+            console.log(`npcData for ${interactionObject}_____________`, npcData)
+            prompt = createPromptForNpcResponseToChat(npcData.full_name, npcData.bio, npcData.role, chatHistory)
+            npcFullName = npcData.full_name
+        }
         const npcResponse = await fetchOpenAiApi(prompt); // Some function that generates NPC response
-        addDialogue(interactionObject, npcResponse); // NPC's dialogue
+        addDialogue(npcFullName, npcResponse); // NPC's dialogue
         console.log("TextInput.js dialogueList_______", localCopyOfDialogueList)
         setInputText(''); // Clear the input field
     };

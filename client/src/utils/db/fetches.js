@@ -1,5 +1,5 @@
 import { QUERY_INVENTORY, QUERY_ONE_ITEM_DETAILS } from "./queries";
-import { QUERY_CHARACTER_DATA } from "./queries";
+import { QUERY_ONE_CHARACTER_DATA } from "./queries";
 import client from "./apolloClient"
 
 // export async function fetchResetInventoryData() {
@@ -17,13 +17,14 @@ import client from "./apolloClient"
 //       }
 // }
 
-export async function fetchCharacterData(characterSearchableName) {
+export async function fetchOneCharacterData(characterSearchableName) {
   try {
       const { data } = await client.query({
-          query: QUERY_CHARACTER_DATA
+          query: QUERY_ONE_CHARACTER_DATA,
+          variables: { searchableName: characterSearchableName }
       });
-      console.log(data.characters[characterSearchableName]);
-      return data.characters[characterSearchableName]
+      console.log("fetchOneCharacterData__________", data.getOneCharacterInfo);
+      return data.getOneCharacterInfo
   } catch (error) {
       console.error(error);
   }

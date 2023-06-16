@@ -24,12 +24,19 @@ function GameOverlay() {
     const handleKeyDown = async (event) => {
         switch(event.code) {
             case 'Space':
-              if (window.interactionObject !== "" && !showAnything) {
+              if (window.interactionObject !== "" && window.interactionObject !== "spaceship" && !showAnything) {
                 setShowChat(true);
                 setShowAnything(true)
                 disableWASD()
               }
               break;
+              case 'KeyR':
+                if ( !showAnything) {
+                  setShowChat(true);
+                  setShowAnything(true)
+                  disableWASD()
+                }
+                break;
             case "KeyE":
               if (!showInventory && !showAnything) {
                 try {
