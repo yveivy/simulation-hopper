@@ -10,7 +10,7 @@ const InnerMind = () => {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.code === "Space") {
-        if (window.interactionObject === "abe-harmony") {
+        if (window.interactionObject === "shaman") {
           setIsGifVisible(true);
           setFirstGifClass("visible");
 
