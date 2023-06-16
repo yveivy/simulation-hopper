@@ -7,6 +7,7 @@ import client from './utils/db/apolloClient'
 import VideoComponent from './components/StartGame';
 import './css/overlay.css'
 import EndGame from './components/EndGame';
+import InnerMind from './components/InnerMind';
 import Interaction from "./components/interaction/Interaction"
 import { enableWASD, disableWASD } from './utils/interactionMenu';
 import { fetchInventory, fetchOneItemDetails } from './utils/db/fetches';
@@ -97,6 +98,7 @@ function GameOverlay() {
           setShowAnything={setShowAnything}
         />
         <VideoComponent />
+        <InnerMind />
         {showInventory &&
           <InventoryOverlay setShowAnything={setShowAnything} inventory={inventory} setInventory={setInventory} />
         }

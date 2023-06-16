@@ -196,6 +196,81 @@
 //             } catch {
 //                 console.log("interactionOverlay.js retrieveInventoryData() failed")
 //             }
+//             if (e.key === ' ' && window.globalVars.currentQuestionIndex == 0 && window.interactionObject!='' || 'shaman') {
+//                 disableWASD()  
+//                 try {
+//                     window.globalVars.npcDataObject = await fetchCharacterData(window.interactionObject)
+//                     populateInteractionContainerWithNpcData(window.globalVars.npcDataObject)
+//                 } catch {
+//                     console.log("interactionOverlay.js tried to fetch npc data but failed")
+//                 }
+//                 showInteractionContainer()
+//                 askEitherQuestionType(questionData.interactionModeQuestion)
+//                 window.globalVars.currentQuestionIndex ++
+//             } else if (e.code === 'Enter' && window.globalVars.currentQuestionIndex == 1) {
+//                 var interactionModeInputValue = getRadioInputValue()
+//                 if (!interactionModeInputValue) {
+//                     console.log("Tried to press enter before any input option selected")
+//                     return
+//                 }
+//                 setInteractionModeFlag(interactionModeInputValue)
+//                 if (window.globalVars.trade) {
+//                     console.log('EventListener() trade chosen; userInventoryItems________',window.globalVars.userInventoryItems)
+//                     askEitherQuestionType(questionData.offerQuestion)
+//                     try {
+//                         renderInventoryItemDetailsInUl(dialogueUl.current, window.globalVars.userInventoryObjArray)
+//                     } catch {
+//                         console.log("interactionOverlay.js DB Error: nothing in inventory")
+//                         // resetInteractionGlobalVars()
+//                         // clearAllInteractionContainers()
+//                         return
+//                     }
+//                 } else if (window.globalVars.chat) {
+//                     askEitherQuestionType(questionData.chatQuestion)
+//                 }
+//                 window.globalVars.currentQuestionIndex ++ 
+//             } else if (e.code === 'Enter' && window.globalVars.chat && window.globalVars.currentQuestionIndex >= 2) { 
+//                 window.globalVars.chatInputValue = getTextInputValue()
+//                 if (window.globalVars.chatInputValue=="") {
+//                     console.log("Tried to press enter before any input option selected")
+//                     return
+//                 }
+//                 window.globalVars.dialogueList.push(`User: "${window.globalVars.chatInputValue}"`)
+//                 window.globalVars.currentQuestionIndex ++
+//                 processChatMessage(window.globalVars.chatInputValue)
+//             } else if (e.code === 'Enter' && window.globalVars.trade && window.globalVars.currentQuestionIndex == 2) {
+//                 window.globalVars.tradeRequestData.itemOfferedByUser = getRadioInputValue()
+//                 if (!window.globalVars.tradeRequestData.itemOfferedByUser) {
+//                     console.log("Tried to press enter before any input option selected")
+//                     return
+//                 }
+//                 askEitherQuestionType(questionData.receiveQuestion)
+//                 clearUl(dialogueUl.current)
+//                 renderInventoryItemDetailsInUl(dialogueUl.current, window.globalVars.npcInventoryObjArray)
+//                 window.globalVars.currentQuestionIndex ++
+//             } else if (e.code === 'Enter' && window.globalVars.trade && window.globalVars.currentQuestionIndex == 3) {
+//                 window.globalVars.tradeRequestData.itemRequestedByUser = getRadioInputValue()
+//                 if (!window.globalVars.tradeRequestData.itemRequestedByUser) {
+//                     console.log("Tried to press enter before any input option selected")
+//                     return
+//                 }
+//                 window.globalVars.currentQuestionIndex ++ 
+//                 clearUl(dialogueUl.current)
+//                 processTradeOffer()
+//             } else if (e.code === 'Escape' && window.globalVars.currentQuestionIndex > 0) {
+//                 console.log("interactionMenu.js eventListener escape-key__________")
+//                 resetInteractionGlobalVars()
+//                 clearAllInteractionContainers()
+//     useEffect(() => {
+//         const handleKeyDown = async (e) => {
+//             if (e.key === 'w' || e.key === 'a' || e.key === 's' || e.key === 'd' || e.key === 'e') {
+//                 return
+//             }
+//             try {
+//                 await retrieveInventoryData()
+//             } catch {
+//                 console.log("interactionOverlay.js retrieveInventoryData() failed")
+//             }
 //             if (e.key === ' ' && window.globalVars.currentQuestionIndex == 0 && window.interactionObject!='') {
 //                 disableWASD()  
 //                 try {
