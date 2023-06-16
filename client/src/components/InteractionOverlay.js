@@ -196,7 +196,7 @@ const InteractionOverlay = () => {
             } catch {
                 console.log("interactionOverlay.js retrieveInventoryData() failed")
             }
-            if (e.key === ' ' && window.globalVars.currentQuestionIndex == 0 && window.interactionObject!='') {
+            if (e.key === ' ' && window.globalVars.currentQuestionIndex == 0 && window.interactionObject!='' || 'shaman') {
                 disableWASD()  
                 try {
                     window.globalVars.npcDataObject = await fetchCharacterData(window.interactionObject)
