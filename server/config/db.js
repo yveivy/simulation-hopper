@@ -26,15 +26,11 @@ async function createNewUserAndSeedDatabase(userinfo) {
   try {
     // Connect to the MongoDB server
     await client.connect();
-
     // Access the database
     const db = client.db(dbName);
-
     const collectionName = userinfo.username
-
     // Create a new collection
     const collection = db.collection(collectionName);
-
     // Create the document to be inserted
     const newUserSaveFile = {
       userinfo,

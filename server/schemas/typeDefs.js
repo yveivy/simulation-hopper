@@ -62,6 +62,7 @@ type Mutation {
     barfGets: String!
   ): userfile
   markCharacterAsMet(characterName: String!): Boolean
+  createNewUser(username: String!, password: String!): userfile!
 }
 
 type Character {
