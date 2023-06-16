@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<link>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>~*~SIMULATION~*~HOPPER~*~</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/game.css"></link>
+</head>
+
+<body>
+  
+  <header>
+    <h1>Simulation Hopper</h1>
+  </header>
+  <div id="gameBoard">
+    <div id="canvasContain">
+      <canvas id="gameCanvas" width="800" height="600"></canvas>
+      <div class="image-container">
+        <img src="./images/spaceForEnding.png" alt="Image 1">
+      </div>
+    
+      <div class="image-container">
+        <img src="./images/BarfForEnding.png" alt="Image 2">
+      </div>
+      
+      <!-- divs for the robot animation in the beginning  -->
+      <!-- <div id="dialogue-container2">
+        <div class="image-container2">
+          <img id="dialogue-image" src="./images/Dialog-boxNew.png" alt="dialogue box">
+        </div>
+      
+        <div id="text-container">
+          <p id="text">
+            Well, well, well, look who finally decided to wake up! For a crash-prone human, you've really outdone yourself this time. Fortunately, I swooped in to save your ass. While you were unconscious, I scouted the area—peaceful locals, valuable items to trade, and one scorching individual that caught my circuits off guard. I am sure you want me to do what I can to repair the ship while you explore. Just reach me on the comms if you don't speak oovlurk.
+          </p>
+        </div>
+      </div> -->
+    
+      <div id="game-overlay-react-root"></div>
+    </div>
+    
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+  integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>"
+<script src="js/interactionsZones2.js"></script>
+<script src="js/classes.js"></script>
+<script src="js/collisions1.js"></script>
+<script src="js/gameboard.js"></script>
+<script type="module" src="js/ai.js"></script>
+<script type="module" src="js/interactionMenu.js"></script>
+<script type="module" src="js/inventory.js"></script>
+<script src="/static/js/bundle.js"></script>
+<!-- <script src="%PUBLIC_URL%/static/js/main.js"></script> -->
+</body>
+</html>
