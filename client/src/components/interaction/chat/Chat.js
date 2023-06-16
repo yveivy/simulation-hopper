@@ -30,7 +30,7 @@ const Chat = ({ setShowAnything, setShowChat, setShowSpecialFeatures }) => {
     <div className="interaction-container" id="chat-container">
         <nav className="interaction-nav">
           <button onClick={handleClose}>Close</button>
-          <button onClick={handleTab}>Trade</button>
+          <button onClick={handleTab}>Special</button>
         </nav>
         <DialogueContext.Provider value={{ dialogueList, addDialogue }}>
           <Dialogue />

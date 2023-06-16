@@ -2,7 +2,9 @@ import { findDescriptionBasedOnItemNameInJson} from './inventory.js';
 // // var userInventory = ['duct tape', 'rusty knife', 'hair gel']
 // // var inventoryOfThisNpc = ['wrench', 'screws', 'shoelace']
 
+
 window.globalVars = {
+    userObjectives: "",
     inventoryToggledOn: false,
     trade: false,
     chat: false,
@@ -39,6 +41,7 @@ export function disableWASD() {
 export function enableWASD() {
     window.WASDenabled = true
 }
+
 
 
 export function resetInteractionGlobalVars() {

@@ -65,8 +65,8 @@
     "description": "A remarkable tool that harmonizes the art of gardening with a touch of enchantment. Crafted by an ancient order of mystical faeries, the spade gives the unique experience of effortlessly tending to beloved plants without the worry of breaking a nail or experiencing discomfort."
   },
   {
-    "searchable_item": "spanner",
-    "item_name": "Aetheric Spanner",
+    "searchable_item": "repairTool",
+    "item_name": "Spaceship Repair Tool",
     "description": "A unique tool that appears to be an ordinary wrench at first glance but possesses hidden mechanisms and modifications specifically designed for repairing intricate machinery found on futuristic spacecraft"
   },
   {

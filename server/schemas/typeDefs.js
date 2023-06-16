@@ -49,7 +49,7 @@ type InventoryObject {
   newt: Boolean
   pocketWatch: Boolean
   scope: Boolean
-  spanner: Boolean
+  repairTool: Boolean
   spade: Boolean
   striders: Boolean
   translator: Boolean

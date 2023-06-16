@@ -3,6 +3,7 @@ import { createPromptForNpcResponseToChat, createPromptRobotResponseToChat, fetc
 import { DialogueContext} from './Chat';
 import { fetchOneCharacterData } from '../../../utils/db/fetches';
 import "../../../css/overlay1.css"
+import { updateUserObjectives } from '../../../utils/inventory';
 
 export const TextInput = () => {
     // var interactionObject = window.interactionObject
@@ -23,7 +24,8 @@ export const TextInput = () => {
         var prompt;
         if (interactionObject === "") {
             // interactionObject = "robot"
-            prompt = createPromptRobotResponseToChat(chatHistory)
+            updateUserObjectives()
+            prompt = createPromptRobotResponseToChat(chatHistory, window.globalVars.userObjectives)
             npcFullName = "Robot"
         } else {
             var npcData = await fetchOneCharacterData(interactionObject)

@@ -54,7 +54,7 @@ async function createNewUserAndSeedDatabase(userinfo) {
             "newt": false,
             "pocketWatch": false,
             "scope": true,
-            "spanner": false,
+            "repairTool": false,
             "spade": false,
             "striders": false,
             "translator": false
@@ -73,7 +73,7 @@ async function createNewUserAndSeedDatabase(userinfo) {
             "newt": false,
             "pocketWatch": true,
             "scope": false,
-            "spanner": false,
+            "repairTool": false,
             "spade": false,
             "striders": false,
             "translator": true
@@ -92,7 +92,7 @@ async function createNewUserAndSeedDatabase(userinfo) {
             "newt": true,
             "pocketWatch": false,
             "scope": false,
-            "spanner": false,
+            "repairTool": false,
             "spade": false,
             "striders": false,
             "translator": false
@@ -111,7 +111,7 @@ async function createNewUserAndSeedDatabase(userinfo) {
             "newt": false,
             "pocketWatch": false,
             "scope": false,
-            "spanner": false,
+            "repairTool": false,
             "spade": false,
             "striders": false,
             "translator": false
@@ -130,7 +130,7 @@ async function createNewUserAndSeedDatabase(userinfo) {
             "newt": false,
             "pocketWatch": false,
             "scope": false,
-            "spanner": false,
+            "repairTool": false,
             "spade": false,
             "striders": true,
             "translator": false
@@ -149,7 +149,7 @@ async function createNewUserAndSeedDatabase(userinfo) {
             "newt": false,
             "pocketWatch": false,
             "scope": false,
-            "spanner": false,
+            "repairTool": false,
             "spade": false,
             "striders": false,
             "translator": false
@@ -168,7 +168,7 @@ async function createNewUserAndSeedDatabase(userinfo) {
             "newt": false,
             "pocketWatch": false,
             "scope": false,
-            "spanner": true,
+            "repairTool": true,
             "spade": true,
             "striders": false,
             "translator": false
