@@ -13,7 +13,7 @@ const Dialogue = () => {
       <ul className="dialogue-ul">
         {dialogueList.map((dialogue, index) => (
           <li key={index}>
-            <strong>{dialogue.speaker}</strong>: {dialogue.text}
+            {dialogue.speaker}: {dialogue.text}
           </li>
         ))}
       </ul>

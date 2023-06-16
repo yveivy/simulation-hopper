@@ -52,10 +52,8 @@ console.log("createPromptForNpcResponseToTradeRequest_______________", prompt)
 }
 
 
-export function createPromptForNpcResponseToChat(reqObj) {
-    var role = reqObj.role
-    var bio = reqObj.bio
-    var chatHistory = reqObj.chatHistory
+export function createPromptForNpcResponseToChat(name, bio, role, chatHistory) {
+
 
 var prompt = 
 `You are an npc in a scifi themed trading-oriented RPG called simulation hopper. User has crash landed on your simulation, and he is trying to trade with you and other NPCs to eventually get the items he needs to get off the simulation. In the meantime, He is chatting you up.
@@ -64,6 +62,7 @@ Role- ${role}
 Bio- ${bio}
 
 ${chatHistory}
+${name}:
 
 Give me your verbal response in quotes to what user just said. Don't respond with anything outside the quotes, or it will mess up the program`
 
@@ -71,23 +70,35 @@ console.log("createPromptForNpcResponseToChat_______________", prompt)
 return prompt
 }
 
-//ToDO:
-export function createPromptForRobotAdvice(reqObj) {
-    var bio = reqObj.bio
-    var chatHistory = reqObj.chatHistory
+
+export function createPromptRobotResponseToChat(chatHistory) {
 
 var prompt = 
 `You are an npc in a scifi themed trading-oriented RPG called simulation hopper. The user has landed on a planet, and he is trying to trade with NPCs to eventually get the items he needs to leave.
 You are his robot best friend who knows everything (you crash landed with him), but is programmed with a wierd quirk that only lets you give information in very cryptic, riddle form. You never just straight up give the information the user needs (that would make the game boring).
-A little about your personality- ${bio}
 The user's next objective that you can subtly help him with-
-
+He must talk to Violet Meadows to get the botanical elixir to save his planet. She has it but the first interaction won't go well because she won't like that he don’t have pants. He's not going to get anywhere with her until he finds pants. There isn’t a mall nearby but there is a tailor shop. After talking to Violet, direct Barf to find the tailor’s shop, owned by Taylor Tuck so that he can get his pants. Alternatively you could encourage him to figure out how to repair his ship first by visiting the Mechanics shop owned by Zara. She is known for being able to repair anything.
+Remember to be very vague, poetic and cryptic in your assistance to Barf. Talk only in riddles. This is very important.
 ${chatHistory}
+Robot:
 
 Give me your verbal response in quotes to what user just said. Don't respond with anything outside the quotes, or it will mess up the program`
 
 console.log("createPromptForRobotAdvice_______________", prompt)
 return prompt
+}
+
+export function createPrompt(){
+
+}
+
+export function formatDialogueForPrompt(dialogueList) {
+    var formattedAndInListForm = []
+    dialogueList.forEach((dialogue, index) => (
+        formattedAndInListForm.push(`${dialogue.speaker}: ${dialogue.text}`)
+    ))
+    var chatHistory = formattedAndInListForm.join("\n")
+    return chatHistory
 }
 
 

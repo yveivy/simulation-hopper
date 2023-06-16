@@ -2,7 +2,7 @@ import React, { useEffect, useState, createContext } from "react"
 import Dialogue from "./Dialogue"
 import TextInput from "./TextInput"
 import "../../../css/overlay1.css"
-import { disableWASD } from "../../../utils/interactionMenu";
+import { enableWASD } from "../../../utils/interactionMenu";
 
 export const DialogueContext = createContext();
 
@@ -23,7 +23,7 @@ const Chat = ({ setShowAnything, setShowChat, setShowSpecialFeatures }) => {
     setShowChat(false);
     setShowSpecialFeatures(false);
     setShowAnything(false)
-    disableWASD()
+    enableWASD()
   };
 
   return (

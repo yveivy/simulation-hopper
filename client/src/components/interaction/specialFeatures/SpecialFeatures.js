@@ -1,6 +1,6 @@
 import React from "react"
 import "../../../css/overlay1.css"
-import { disableWASD } from "../../../utils/interactionMenu";
+import { enableWASD } from "../../../utils/interactionMenu";
 import Violet from "./Violet"
 
 const SpecialFeatures = ({ setShowAnything, setShowChat, setShowSpecialFeatures }) => {
@@ -13,7 +13,7 @@ const SpecialFeatures = ({ setShowAnything, setShowChat, setShowSpecialFeatures 
         setShowChat(false);
         setShowSpecialFeatures(false);
         setShowAnything(false)
-        disableWASD()
+        enableWASD()
       };
 
   return (

@@ -144,62 +144,14 @@ query Query {
 `;
 
 
-export const QUERY_CHARACTER_DATA = gql`
-  query Characters {
-    userSaveFile {
-      characters {
-        abe {
-          detail {
-            name
-            bio
-            role
-          }
-        }
-        barf {
-          detail {
-            name
-            bio
-            role
-          }
-        }
-        hydra {
-          detail {
-            name
-            bio
-            role
-          }
-        }
-        shady {
-          detail {
-            name
-            bio
-            role
-          }
-        }
-        taylor {
-          detail {
-            name
-            bio
-            role
-          }
-        }
-        violet {
-          detail {
-            name
-            bio
-            role
-          }
-        }
-        zara {
-          detail {
-            name
-            bio
-            role
-          }
-        }
-      }
-    }
+export const QUERY_ONE_CHARACTER_DATA = gql`
+query Query($searchableName: String!) {
+  getOneCharacterInfo(searchable_name: $searchableName) {
+    bio
+    full_name
+    role
   }
+}
 `;
 
 // query CharacterData($characterSearchableName: String) {
