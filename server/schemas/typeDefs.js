@@ -13,6 +13,7 @@ type userfile {
   userinfo: Userinfo
   playerLocation: PlayerLocParams
   inventory: CharacterInventories
+  token: String
 }
 
 type Userinfo {
@@ -63,6 +64,7 @@ type Mutation {
   ): userfile
   markCharacterAsMet(characterName: String!): Boolean
   createNewUser(username: String!, password: String!): userfile!
+  userLogIn(username: String!, password: String!): userfile!
 }
 
 type Character {

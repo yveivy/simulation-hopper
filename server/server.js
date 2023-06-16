@@ -43,10 +43,16 @@ app.use('/api', router);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
+} else {
+  app.use(express.static(path.join(__dirname, '../client/public')));
 }
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
+  if (process.env.NODE_ENV === 'production') {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+} else {
+  res.sendFile(path.join(__dirname, '../client/public/game/index.html'))
+}
 });
 
 

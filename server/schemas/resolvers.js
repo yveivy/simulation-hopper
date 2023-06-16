@@ -165,6 +165,35 @@ const resolvers = {
 
       return newUserSaveFile;
     },
+    userLogIn: async (_, {username, password }) => {
+      const database = client.db('simulationHopperDB');
+      const collection = database.collection(username);
+      try {
+        const dbData = await collection.findOne(); // Retrieve the data from the collection
+        const hashedPw = dbData.userinfo.password
+        const result = await new Promise((resolve, reject) => {
+          bcrypt.compare(password, hashedPw, (err, result) => {
+          if (err) {
+            console.error(err)
+            reject (err)
+          } else {
+            resolve(result);
+          }
+        });
+      });
+
+      if (result) {
+        console.log('match')
+        return dbData;
+      } else {
+        console.log('no match')
+        return null;
+      }
+      } catch (error) {
+        console.error('Incorrect Credentials', error);
+        return null;
+      }
+    }
   },
 };
 
