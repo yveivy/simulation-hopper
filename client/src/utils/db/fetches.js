@@ -1,4 +1,4 @@
-import { QUERY_INVENTORY } from "./queries";
+import { QUERY_INVENTORY, QUERY_ONE_ITEM_DETAILS } from "./queries";
 import { QUERY_CHARACTER_DATA } from "./queries";
 import client from "./apolloClient"
 
@@ -22,13 +22,26 @@ export async function fetchCharacterData(characterSearchableName) {
       const { data } = await client.query({
           query: QUERY_CHARACTER_DATA
       });
-      console.log(data);
+      console.log(data.characters[characterSearchableName]);
       return data.characters[characterSearchableName]
   } catch (error) {
       console.error(error);
   }
 }
 
+export async function fetchOneItemDetails(itemSearchableName) {
+  console.log("fetchOneItemDetails_______")
+  try {
+      const { data } = await client.query({ 
+          query: QUERY_ONE_ITEM_DETAILS,
+          variables: { searchableItem: itemSearchableName }
+      });
+      console.log("fetchOneItemDetails_______", data);
+      return data
+    } catch (error) {
+      console.error(error);
+    }
+}
 
 export async function fetchInventory(characterSearchableName) {
     try {
@@ -36,9 +49,8 @@ export async function fetchInventory(characterSearchableName) {
             query: QUERY_INVENTORY,
             variables: { searchableName: characterSearchableName }
         });
-        console.log("fetchInventory")
-        console.log("fetchInventory_______", data);
-        return data
+        console.log("fetchInventory_______", data.userSaveFile.inventory[characterSearchableName]);
+        return data.userSaveFile.inventory[characterSearchableName]
       } catch (error) {
         console.error(error);
       }

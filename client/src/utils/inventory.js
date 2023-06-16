@@ -1,22 +1,19 @@
 import { questionData } from "./interactionMenu.js";
 import {fetchInventory } from "./db/fetches"
 
-export function parseInventoryObjArrayToGetJustItems(inventoryObjArray) {
-    var inventoryItems = []
-    for (var item of inventoryObjArray) {
-        var name = item.item.item_name
-        inventoryItems.push(name)
-    }
-    return inventoryItems
+export function parseInventoryObjToGetJustItems(inventoryObj) {
+    var inventoryItems = Object.keys(inventoryObj).filter(key => inventoryObj[key] === true);
+    console.log("parseInventoryObjToGetJustItems() inventoryItems__________", inventoryItems)
+    return inventoryItems;
 }
 
 export async function retrieveInventoryData() {
     try {
         window.globalVars.npcInventoryObjArray = await fetchInventory(window.interactionObject)
         window.globalVars.userInventoryObjArray = await fetchInventory('barf')
-        window.globalVars.npcInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.npcInventoryObjArray)
+        window.globalVars.npcInventoryItems = parseInventoryObjToGetJustItems(window.globalVars.npcInventoryObjArray)
         // questionData.receiveQuestion.choices = [...window.globalVars.npcInventoryItems]
-        window.globalVars.userInventoryItems = parseInventoryObjArrayToGetJustItems(window.globalVars.userInventoryObjArray)
+        window.globalVars.userInventoryItems = parseInventoryObjToGetJustItems(window.globalVars.userInventoryObjArray)
         // questionData.offerQuestion.choices = [...window.globalVars.userInventoryItems]
     } catch {
         console.log ("retrieveInventoryData() failed")

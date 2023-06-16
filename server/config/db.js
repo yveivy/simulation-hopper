@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-require('dotenv').config()
+require('dotenv').config();
 
 // this is where we pass in user info. we will alter this to grab user input from where user Creates Their Account. during testing, it is a static value as defined below
 const userinfo = {

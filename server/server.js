@@ -2,7 +2,8 @@ const express = require('express');
 const { ApolloServer }= require('apollo-server-express');
 const SaveFileAPI = require('./utils/saveFileAPI')
 const path = require('path');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const router = require("./api/routes.js");
 require('dotenv').config()
 
 
@@ -37,6 +38,8 @@ const server = new ApolloServer({
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use('/api', router);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));

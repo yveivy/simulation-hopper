@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 import client from './utils/db/apolloClient'
 import NotFound from './pages/NotFound';
 import Home from "./pages/home/Home"
+import Login from './components/login/Login';
+import Register from './components/login/Register';
 
 
 function App() {
+
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -16,6 +19,11 @@ function App() {
               path="/" 
               element={<Home />}
             />
+            <Route path="/login" 
+            element={<Login />} />
+
+            <Route path="/register" 
+            element={<Register />} />
             {/* <Route 
               path="/game" 
             /> */}
