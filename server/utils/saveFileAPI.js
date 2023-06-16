@@ -1,12 +1,18 @@
-const { client, userinfo } = require('../config/db')
-
-class saveFileAPI {
+const { client } = require('../config/db');
+const { tokenVerifier } = require('./tokenVerifier');
+class SaveFileAPI {
+  constructor(req) {
+    this.req = req;
+  }
   getDatabase() {
     return client.db('simulationHopperDB');
   }
   async getUserSaveFile() {
     const database = client.db('simulationHopperDB');
-    const collectionName = userinfo.username
+    // const token = req?.headers?.authorization || req?.query?.token || req?.cookies?.token;
+    const token = 'token goes here';
+    const { username } = tokenVerifier(token);
+    const collectionName = username;
     const collection = database.collection(collectionName);
     try {
       const dbData = await collection.findOne();
@@ -19,14 +25,19 @@ class saveFileAPI {
 
   async saveUserSaveFile(data) {
     const database = client.db('simulationHopperDB');
-    const collectionName = userinfo.username
+
+    // const token = req?.headers?.authorization || req?.query?.token || req?.cookies?.token;
+    const token = 'token goes here';
+    const { username } = tokenVerifier(token)
+
+    const collectionName = username
     const collection = database.collection(collectionName);
 
     try {
-      await collection.replaceOne({}, data, { upsert: true }); // 
-      console.log('User save file saved successfully');
+      await collection.replaceOne({}, data, { upsert: true });
+      console.log(`Successfully updated ${collectionName}'s progress`);
     } catch (error) {
-      console.error('Failed to save user save file:', error);
+      console.error(`Failed to update ${collectionName}'s progress.`, error);
     }
   }
   async createNewCollection(collectionName, data) {
@@ -34,11 +45,11 @@ class saveFileAPI {
     const collection = database.collection(collectionName)
     try {
       await collection.insertOne(data);
-      console.log(`Created collection: ${collectionName} and seeded data`);
+      console.log(`Created account for "${collectionName}" and seeded data`);
     } catch (error) {
       console.error(`Failed to create collection: ${collectionName}`, error);
     }
   }
 }
 
-module.exports = saveFileAPI;
+module.exports = SaveFileAPI;

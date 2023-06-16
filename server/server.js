@@ -1,10 +1,10 @@
 const express = require('express');
 const { ApolloServer }= require('apollo-server-express');
-const saveFileAPI = require('./utils/saveFileAPI')
+const SaveFileAPI = require('./utils/saveFileAPI')
 const path = require('path');
+const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
-// const { authMiddleware } = require('./utils/auth');
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -15,9 +15,24 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   dataSources: () => ({
-    saveFileAPI: new saveFileAPI(),
-  })
-  // context: authMiddleware,
+    saveFileAPI: new SaveFileAPI(),
+  }),
+  context: ({ req, res }) => {
+    const token = req?.headers?.authorization || req?.query?.token || req?.cookies?.token;
+    let user = null;
+
+    if (token) {
+      try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        user = decoded;
+      } catch (err) {
+        // Handle invalid or expired token
+        throw new Error('Invalid or expired token');
+      }
+    }
+
+    return { user, res };
+  },
 });
 
 app.use(express.urlencoded({ extended: false }));

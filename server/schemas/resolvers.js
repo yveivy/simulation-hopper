@@ -1,7 +1,8 @@
-const { Characters, Items } = require('../models/index')
+const { Characters, Items, Users } = require('../models/index')
 const { client, userinfo } = require('../config/db')
 const { newUserData } = require('../seeds/newUserData')
-const saveFileAPI = require('../utils/saveFileAPI')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const resolvers = {
   Query: {
@@ -127,8 +128,8 @@ const resolvers = {
 
       return userSaveFile;
     },
-    markCharacterAsMet: async (_, { characterName }, { dataSources }) => {
-      const userSaveFile = await dataSources.saveFileAPI.getUserSaveFile();
+    markCharacterAsMet: async (_, { characterName }, { dataSources, req }) => {
+      const userSaveFile = await dataSources.saveFileAPI.getUserSaveFile(req);
 
       if (!userSaveFile) {
         throw new Error("User save file not found");
@@ -144,13 +145,19 @@ const resolvers = {
       // Return the updated hasMet value
       return characterInventory.hasMet;
     },
-    createNewUser: async (_, { username, password }, { dataSources }) => {
+    createNewUser: async (_, { username, password }, { dataSources, req, res }) => {
       const saveFileAPI = dataSources.saveFileAPI;
       const collectionName = username; // Set the collection name to the username
-      const userinfo = { username, password }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const userinfo = { username, password: hashedPassword }
+      const shhhhhh = process.env.JWT_SECRET_KEY
+      const token = jwt.sign({ username }, shhhhhh, { expiresIn: '1h' });
+
       const newUserSaveFile = {
         userinfo: userinfo,
-        ...newUserData
+        ...newUserData,
+        token
       };
       console.log('userinfo____', userinfo)
       console.log('newUserData_____', newUserData)
