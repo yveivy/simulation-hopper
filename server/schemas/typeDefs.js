@@ -1,7 +1,7 @@
 const { gql } = require('apollo-server-express');
 const typeDefs = gql`
 type Query {
-  userSaveFile: userfile
+  userSaveFile(token: String, username: String ): userfile!
   getAllCharacters: [Character]
   getOneCharacterInfo(searchable_name: String!): Character!
   getOneItem(searchable_item: String!): Item!
@@ -50,7 +50,7 @@ type InventoryObject {
   newt: Boolean
   pocketWatch: Boolean
   scope: Boolean
-  spanner: Boolean
+  repairTool: Boolean
   spade: Boolean
   striders: Boolean
   translator: Boolean
@@ -61,8 +61,9 @@ type Mutation {
     tradeWith: String!
     barfGives: String!
     barfGets: String!
+    token: String!
   ): userfile
-  markCharacterAsMet(characterName: String!): Boolean
+  markCharacterAsMet(characterName: String!, token: String!): Boolean
   createNewUser(username: String!, password: String!): userfile!
   userLogIn(username: String!, password: String!): userfile!
 }
