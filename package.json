@@ -21,6 +21,7 @@
     "concurrently": "^5.3.0"
   },
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
     "gsap": "^3.12.1"
