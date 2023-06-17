@@ -43,12 +43,17 @@ app.use('/api', router);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
+} else {
+  app.use(express.static(path.join(__dirname, '../client/public')));
 }
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
+  if (process.env.NODE_ENV === 'production') {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+} else {
+  res.sendFile(path.join(__dirname, '../client/public/game/index.html'))
+}
 });
-
 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
@@ -56,6 +61,7 @@ const startApolloServer = async () => {
   server.applyMiddleware({ app });
   
   db.once('open', () => {
+    console.log('Connected to MongoDB database')
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
       console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);

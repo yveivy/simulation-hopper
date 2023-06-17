@@ -95,3 +95,15 @@ export const CREATE_GAME_RESET = gql`
 //       console.error('Error:', error);
 //   }
 // }
+
+
+export const CREATE_NEW_USER = gql`
+  mutation Mutation($username: String!, $password: String!) {
+  createNewUser(username: $username, password: $password) {
+    userinfo {
+      username
+      password
+    }
+    token
+  }
+}`;

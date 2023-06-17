@@ -6,6 +6,7 @@ import NotFound from './pages/NotFound';
 import Home from "./pages/home/Home"
 import Login from './components/login/Login';
 import Register from './components/login/Register';
+import GameOverlay from './GameOverlay';
 
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
             <Route path="/register" 
             element={<Register />} />
             {/* <Route 
-              path="/game" 
+              path="/game"
+              element={< />} 
             /> */}
             <Route 
               path="*"
