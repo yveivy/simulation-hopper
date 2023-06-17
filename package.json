@@ -4,11 +4,12 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js --ignore client",
-    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "start": "nodemon server/server.js --ignore client",
+    "develop": "concurrently \"node server/server.js\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
-    "seed": "cd server && npm run seed",
-    "build": "cd client && npm run build"
+    "seed": "node server/seeds/seed.js",
+    "build": "cd client && npm run build",
+    "start-production": "NODE_ENV=production && concurrently \"node server/server.js\" \"cd client && npm start\""
   },
   "author": "",
   "license": "ISC",

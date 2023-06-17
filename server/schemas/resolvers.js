@@ -1,6 +1,12 @@
 const { Characters, Items } = require('../models/index')
-const { client, userinfo } = require('../config/db')
-const saveFileAPI = require('../utils/saveFileAPI')
+const { MongoClient } = require('mongodb')
+const { newUserData } = require('../seeds/newUserData')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const { tokenVerifier } = require('../utils/tokenVerifier')
+require('dotenv').config();
+
+const client = new MongoClient(process.env.MONGODB_URI);
 
 const resolvers = {
   Query: {
@@ -55,10 +61,17 @@ const resolvers = {
       }
     },
     // User Save File References the db collection which contains the users game progress.
-    userSaveFile: async () => {
-      const database = client.db('simulationHopperDB');
-      const collection = database.collection(userinfo.username);
-      console.log('line 61')
+    userSaveFile: async (_, { username, token }) => {
+      const database = client.db(process.env.DB_NAME);
+      let collectionName;
+      // allow front end to supply token from localStorage as argument
+      if (token) {
+        collectionName = tokenVerifier(token).username
+        // allow username supplied by login/create user function to be used as argument
+      } else if (username) {
+        collectionName = username
+      }
+      const collection = database.collection(collectionName);
       try {
         const dbData = await collection.findOne(); // Retrieve the data from the collection
         return dbData;
@@ -106,13 +119,18 @@ const resolvers = {
     }
   },
   Mutation: {
-    tradeItems: async (_, { tradeWith, barfGives, barfGets }, { dataSources }) => {
-      const userSaveFile = await dataSources.saveFileAPI.getUserSaveFile();
+    tradeItems: async (_, { tradeWith, barfGives, barfGets, token } ) => {
+      const database = client.db(process.env.DB_NAME);
+      const collectionName = tokenVerifier(token).username
+      const collection = database.collection(collectionName)
+      const userSaveFile = await collection.findOne()
+      console.log("line 124", collectionName)
 
       if (!userSaveFile) {
         throw new Error("User save file not found");
       }
       const characterName = "barf"
+      console.log("line 130", userSaveFile)
       const characterInventory = userSaveFile.inventory[characterName];
       const tradeWithInventory = userSaveFile.inventory[tradeWith];
 
@@ -122,12 +140,15 @@ const resolvers = {
       tradeWithInventory[barfGives] = true;
       tradeWithInventory[barfGets] = false;
 
-      await dataSources.saveFileAPI.saveUserSaveFile(userSaveFile);
+      await await collection.replaceOne({}, userSaveFile, { upsert: true });
 
       return userSaveFile;
     },
-    markCharacterAsMet: async (_, { characterName }, { dataSources }) => {
-      const userSaveFile = await dataSources.saveFileAPI.getUserSaveFile();
+    markCharacterAsMet: async (_, { characterName, token } ) => {
+      const database = client.db(process.env.DB_NAME);
+      const collectionName = tokenVerifier(token).username
+      const collection = database.collection(collectionName)
+      const userSaveFile = await collection.findOne()
 
       if (!userSaveFile) {
         throw new Error("User save file not found");
@@ -138,11 +159,76 @@ const resolvers = {
       // Update the hasMet value for the character
       characterInventory.hasMet = true;
 
-      await dataSources.saveFileAPI.saveUserSaveFile(userSaveFile);
+      await collection.replaceOne({}, userSaveFile, { upsert: true });
 
       // Return the updated hasMet value
       return characterInventory.hasMet;
     },
+    createNewUser: async (_, { username, password }, { dataSources, req, res }) => {
+      const saveFileAPI = dataSources.saveFileAPI;
+      const collectionName = username; // Set the collection name to the username
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const userinfo = { username, password: hashedPassword }
+      const shhhhhh = process.env.JWT_SECRET_KEY
+      const token = jwt.sign({ username }, shhhhhh, { expiresIn: '1h' });
+
+      const newUserSaveFile = {
+        userinfo: userinfo,
+        ...newUserData,
+        token
+      };
+      console.log('userinfo____', userinfo)
+      console.log('newUserData_____', newUserData)
+      await saveFileAPI.createNewCollection(collectionName, newUserSaveFile);
+
+      return newUserSaveFile;
+    },
+    userLogIn: async (_, {username, password } ) => {
+      const database = client.db('simulationHopperDB');
+      const collection = database.collection(username);
+      try {
+        const dbData = await collection.findOne();
+        const hashedPw = dbData.userinfo.password
+        const result = await new Promise((resolve, reject) => {
+          bcrypt.compare(password, hashedPw, (err, result) => {
+          if (err) {
+            console.error(err)
+            reject (err)
+          } else {
+            resolve(result);
+          }
+        });
+      });
+      
+
+      if (result) {
+        try {
+          const shhhhhh = process.env.JWT_SECRET_KEY
+          const newToken = jwt.sign({ username }, shhhhhh, { expiresIn: '1h' });
+          console.log("newly generated token", newToken)
+
+          const insertNewToken = await collection.findOneAndUpdate(
+            { 'userinfo.username': username },
+            { $set: { 'token': newToken } },
+            { new: true }
+          )
+          const updatedResult = await collection.findOne(
+            { 'userinfo.username': username }
+          )
+          return updatedResult;
+        } catch (error) {
+          console.error('could not update token', error);
+        }
+      } else {
+        console.log('no match')
+        return null;
+      }
+      } catch (error) {
+        console.error('Incorrect Credentials', error);
+        return null;
+      }
+    }
   },
 };
 
