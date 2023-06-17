@@ -117,6 +117,17 @@ interactionZoneMap.forEach((row, j) => {
                 })
             );
         }
+        else if (symbol === 8080) {
+            interactions.push(
+                new Boundary({
+                    position: {
+                        value: symbol,
+                        x: k * Boundary.width + offsetBoundary.x,
+                        y: j * Boundary.height + offsetBoundary.y
+                    }
+                })
+            );
+        }
     });
 });
 
@@ -170,7 +181,7 @@ const background = new Sprite({
 })
 //adding foreground layers. will set to render last so they appear above the NewGuy 
 const foregroundImg = new Image()
-foregroundImg.src = "./images/gameLayers/MainForeground.png"
+foregroundImg.src = "./images/gameLayers/MainForeground1.png"
 const foreground = new Sprite({
     position: {
         x: offsetBoundary.x,
@@ -261,7 +272,10 @@ function animate() {
                     console.log("interacting with the Ship");
                     window.interactionObject = "Spaceship"
                     //if barf has item(s) in inventory and spacebar is pressed then function EndGame()
-                } 
+                }  else if (interaction.position.value === 8080) {
+                    console.log("interacting with the shaman");
+                    window.interactionObject = "shaman"
+                }
                 
                 break;
             } else{   //this is important to the interactions // 
@@ -435,32 +449,8 @@ window.addEventListener('keyup', (e) => {
 
 
 
-function animateTheIntroZoom() {
-    var tl = gsap.timeline();
 
-    // Add animation for #intro element
-    tl.to("#infoButton", {
-        opacity: 0,
-        duration: 1
-    });
-
-    // Add animation for #startGame element
-    tl.to("#startGame", {
-        opacity: 0,
-        duration: 1
-    });
-
-    // Add animation for #handheldNintendo element
-    tl.to("#handheldNintendo", {
-        duration: 3,
-        scale: 3,
-        opacity: 0,
-        onComplete: function () {
-            window.location.href = "/game";
-        }
-    });
-}
-function animateTheIntroZoom() {
+function animateTheIntroZoom1() {
     var tl = gsap.to("#handheldNintendoContainer", {
         duration: 3,
         scale: 3,
