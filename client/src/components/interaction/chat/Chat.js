@@ -25,11 +25,12 @@ const Chat = ({ setShowAnything, setShowChat, setShowSpecialFeatures }) => {
     enableWASD()
   };
 
+
   return (
     <div className="interaction-container" id="chat-container">
         <nav className="interaction-nav">
-          <button onClick={handleClose}>Close</button>
-          <button onClick={handleTab}>Special</button>
+          <button className="close btn" onClick={handleClose}>Close</button>
+          <button className="trade btn" onClick={handleTab}>Special</button>
         </nav>
         <Dialogue />
         <TextInput />
