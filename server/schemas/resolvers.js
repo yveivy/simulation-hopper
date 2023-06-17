@@ -1,131 +1,66 @@
-
-// const { Characters, Items, Inventory, User} = require('../models');
-
-// const resolvers = {
-//   Query: {
-//     test: () => 'Test get route is working',
-
-
-//    inventoryByCharacter: async (_, { character }) => {
-//       try {
-//         const inventory = await Inventory.findAll({
-//           attributes: { exclude: [ 'id', 'character_id', 'item_id']},
-//           include: [
-
-//           { 
-//             model: Characters,
-//             where: { searchable_name: character },
-//             attributes: { exclude: ['character_id', 'searchable_name', 'full_name', 'role', 'bio'] }
-//           },
-
-//           {
-//             model: Items,
-//             attributes: { exclude: ['searchable_item'] },
-
-//           },
-//         ],
-          
-//         });
-
-//         return inventory; 
-
-//       } catch (error) {
-//         console.error(error);
-//         throw new Error('Internal server error');
-//       }
-//     },
-
-   
-
-
-
-//    inventory: async () => {
-      
-//    },
-
-//    biography: async (_, { searchableName }) => {
-
-//    },
-
-//    item: async (_, { searchableItem }) => {
-
-//    },
-
-//    items: async () => {
-
-//    },
-
-//   },
-  
-//   Mutation: {
-//     testPut: () => 'Test put route is working',
-
-//     trade: async (_, { item1, item2}) => {
-//       //logic to swap items and update the inventory and return updated inventory object
-//     },
-
-//     createUser: async (_, { username, email, password}) => {
-//       try {
-//         const dbUserData = await User.create({ username, email, password});
-//         return dbUserData;
-//       } catch (err){
-//         console.log(err);
-//         throw new Error('Failed to create user')
-//       }
-//     },
-
-//     loginUser: async (_, { email, password }, { req}) => {
-//       try {
-//         const dbUserData = await User.findOne({ where: { email} });
-
-//         if (!dbUserData) {
-//           throw new Error('Incorrect email or password. Please try again!');
-//         }
-
-//         const validPassword = await dbUserData.checkPassword(password);
-
-//         if (!validPassword) {
-//           throw new Error('Incorrect email or password. Please try again!');
-//         }
-
-//         req.session.loggedIn = true;
-//         return dbUserData;
-//       } catch (err) {
-//         console.log(err);
-//         throw new Error('Failed to login user');
-//       }
-//     },
-
-//     logoutUser: (_, __, { req }) => {
-//       if (req.session.loggedIn) {
-//         req.session.destroy();
-//         return true;
-//       } else {
-//         return false;
-//       }
-//     },
-//   },
-
-// };
-
-// module.exports = resolvers;
-
-
-
-
-// =======================
-// comment out everything above this line to use J resolvers
-
+const { Characters, Items, Users } = require('../models/index')
 const { client, userinfo } = require('../config/db')
-const saveFileAPI = require('../utils/saveFileAPI')
-
-
+const { newUserData } = require('../seeds/newUserData')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const resolvers = {
   Query: {
+    // retrive information about a single character
+    getOneCharacterInfo: async (_, { searchable_name }) => {
+      try {
+        const character = await Characters.findOne({ searchable_name });
+        if (!character) {
+          throw new Error('Character not found');
+        }
+
+        return {
+          full_name: character.full_name,
+          role: character.role,
+          bio: character.bio,
+        };
+      } catch (error) {
+        console.error(error);
+        throw new Error('Internal server error')
+      }
+    },
+    // retrieve info about a single item -- input variable = searchable_item
+    getOneItem: async (_, { searchable_item }) => {
+      try {
+        const foundItem = await Items.findOne({ searchable_item });
+
+        if (!foundItem) {
+          throw new Error('Item not found');
+        }
+
+        return {
+          item_name: foundItem.item_name,
+          description: foundItem.description,
+        };
+      } catch (error) {
+        console.error(error);
+        throw new Error('Internal server error');
+      }
+    },
+    // references Items model which houses information about all items
+    getItems: async () => {
+      try {
+        const allItems = await Items.find({}, { item_name: 1, description: 1 });
+
+        return allItems.map((item) => ({
+          item_name: item.item_name,
+          description: item.description,
+        }));
+      } catch (error) {
+        console.error(error);
+        throw new Error('Internal server error');
+      }
+    },
+    // User Save File References the db collection which contains the users game progress.
     userSaveFile: async () => {
       const database = client.db('simulationHopperDB');
       const collection = database.collection(userinfo.username);
+      console.log('line 61')
       try {
         const dbData = await collection.findOne(); // Retrieve the data from the collection
         return dbData;
@@ -133,13 +68,23 @@ const resolvers = {
         console.error('Failed to retrieve data from the database:', error);
         return null;
       }
-    }
+    },
+    // references Characters model which houses information about all characters
+    getAllCharacters: async () => {
+      try {
+        // Fetch all characters from the Character collection
+        const characters = await Characters.find();
+        return characters;
+      } catch (error) {
+        throw new Error('Failed to fetch characters');
+      }
+    },
   },
   Userinfo: {
     username: (parent) => parent.username,
     password: (parent) => parent.password,
   },  
-  Character: {
+  CharacterInventories: {
     abe: (parent) => {
       return parent.abe;
     },
@@ -162,29 +107,66 @@ const resolvers = {
       return parent.zara;
     }
   },
-
-
   Mutation: {
-    tradeItems: async (_, { characterName, tradeWith, itemToTrade, itemToAcquire }, { dataSources }) => {
+    tradeItems: async (_, { tradeWith, barfGives, barfGets }, { dataSources }) => {
       const userSaveFile = await dataSources.saveFileAPI.getUserSaveFile();
+
+      if (!userSaveFile) {
+        throw new Error("User save file not found");
+      }
+      const characterName = "barf"
+      const characterInventory = userSaveFile.inventory[characterName];
+      const tradeWithInventory = userSaveFile.inventory[tradeWith];
+
+
+      characterInventory[barfGives] = false;
+      characterInventory[barfGets] = true;
+      tradeWithInventory[barfGives] = true;
+      tradeWithInventory[barfGets] = false;
+
+      await dataSources.saveFileAPI.saveUserSaveFile(userSaveFile);
+
+      return userSaveFile;
+    },
+    markCharacterAsMet: async (_, { characterName }, { dataSources, req }) => {
+      const userSaveFile = await dataSources.saveFileAPI.getUserSaveFile(req);
 
       if (!userSaveFile) {
         throw new Error("User save file not found");
       }
 
       const characterInventory = userSaveFile.inventory[characterName];
-      const tradeWithInventory = userSaveFile.inventory[tradeWith];
 
-
-      characterInventory[itemToTrade] = false;
-      characterInventory[itemToAcquire] = true;
-      tradeWithInventory[itemToTrade] = true;
-      tradeWithInventory[itemToAcquire] = false;
+      // Update the hasMet value for the character
+      characterInventory.hasMet = true;
 
       await dataSources.saveFileAPI.saveUserSaveFile(userSaveFile);
 
-      return userSaveFile;
-    }
-  }
+      // Return the updated hasMet value
+      return characterInventory.hasMet;
+    },
+    createNewUser: async (_, { username, password }, { dataSources, req, res }) => {
+      const saveFileAPI = dataSources.saveFileAPI;
+      const collectionName = username; // Set the collection name to the username
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const userinfo = { username, password: hashedPassword }
+      const shhhhhh = process.env.JWT_SECRET_KEY
+      const token = jwt.sign({ username }, shhhhhh, { expiresIn: '1h' });
+
+      const newUserSaveFile = {
+        userinfo: userinfo,
+        ...newUserData,
+        token
+      };
+      console.log('userinfo____', userinfo)
+      console.log('newUserData_____', newUserData)
+      await saveFileAPI.createNewCollection(collectionName, newUserSaveFile);
+
+      return newUserSaveFile;
+    },
+  },
 };
+
+
 module.exports = resolvers;

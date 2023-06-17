@@ -1,88 +1,18 @@
-// const { gql } = require('apollo-server-express');
-
-// const typeDefs = gql`
-
-//   type Character {
-//     character_id: Int!
-//     searchable_name: String!
-//     full_name: String!
-//     role: String!
-//     bio: String!
-//   }
-
-
-//   type Query {
-//     test: String!
-//     biography(searchableName: String!): Character!
-//   }
-
-//   type Item {
-//     item_id: Int!
-//     searchable_item: String!
-//     item_name: String!
-//     description: String!
-//   }
-
-//   type Query {
-//     test: String!
-//     item(searchableItem: String!): Item!
-//     items: [Item]!
-//   }
-
-//   type Inventory {
-//     full_name: Character!
-//     item_name: Item!
-//   }
-
-//   type Query {
-//     test: String!
-//     inventoryByCharacter(character: String!): [Inventory]!
-//     inventory: [Inventory]!
-//   }
-
-//   type Mutation {
-//     trade(item1: String!, item2: String!): Inventory!
-//   }
-
-//   type User {
-//     id: ID!
-//     username: String!
-//     email: String!
-//     password: String!
-//   }
-
-//   type Mutation {
-//     createUser(username: String!, email: String!, password: String!): User!
-//     loginUser(email: String!, password: String!): User!
-//     logoutUser: Boolean!
-//   }
-
-//   schema {
-//     query: Query
-//     mutation: Mutation
-//   }
-// `;
-
-// module.exports = typeDefs;
-
-
-
-// ==============
-// comment out everything above this line to use J typedefs
-
-
 const { gql } = require('apollo-server-express');
-
 const typeDefs = gql`
 type Query {
-  userSaveFile: Collection
+  userSaveFile: userfile
+  getAllCharacters: [Character]
+  getOneCharacterInfo(searchable_name: String!): Character!
+  getOneItem(searchable_item: String!): Item!
+  getItems: [Item]!
 }
 
-type Collection {
+type userfile {
   _id: ID
   userinfo: Userinfo
   playerLocation: PlayerLocParams
-  inventory: Character
+  inventory: CharacterInventories
 }
 
 type Userinfo {
@@ -95,7 +25,7 @@ type PlayerLocParams {
   y: Int
 }
 
-type Character {
+type CharacterInventories {
   abe: InventoryObject
   barf: InventoryObject
   hydra: InventoryObject
@@ -104,7 +34,6 @@ type Character {
   violet: InventoryObject
   zara: InventoryObject
 }
-
 
 type InventoryObject {
   hasMet: Boolean
@@ -128,15 +57,26 @@ type InventoryObject {
 
 type Mutation {
   tradeItems(
-    characterName: String!
     tradeWith: String!
-    itemToTrade: String!
-    itemToAcquire: String!
-  ): Collection
+    barfGives: String!
+    barfGets: String!
+  ): userfile
+  markCharacterAsMet(characterName: String!): Boolean
+  createNewUser(username: String!, password: String!): userfile!
 }
 
+type Character {
+  searchable_name: String
+  full_name: String
+  role: String
+  bio: String
+}
 
+type Item {
+  searchable_item: String
+  item_name: String
+  description: String
+}
 
 `;
-
 module.exports = typeDefs;

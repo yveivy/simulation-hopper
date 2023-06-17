@@ -1,28 +1,16 @@
-const mongoose = require('mongoose');
-const seedCharacters = require('./characterData');
-const seedItems = require('./itemData');
-const seedInventory = require('/inventoryData');
 require('dotenv').config();
+const mongoose = require('mongoose');
+const characterData = require('./characterData.json');
+const itemData = require('./itemData.json');
+const { Characters, Items } = require('../models');
+const db = require('../config/connection')
 
-mongoose.connect(process.env.MONGODB_URI, {
-  userNewUrlParser: true,
-  useUnifiedTopology: true,
+db.once('open', async () => {
+  await Characters.deleteMany({});
+  await Items.deleteMany({});
+  const characters = await Characters.insertMany(characterData);
+  const items = await Items.insertMany(itemData);
+
+  console.log('Character and Item info seeded');
+  process.exit(0);
 });
-
-const seedDatabase = async () => {
-  try {
-    await seedCharacters();
-
-    await seedItems();
-
-    await seedInventory();
-
-    console.log('Database seeding completed successfully.');
-  } catch (error) {
-    console.error('Error seeding database:', error);
-  } finally {
-    mongoose.disconnect();
-  }
-};
-
-seedDatabase();
