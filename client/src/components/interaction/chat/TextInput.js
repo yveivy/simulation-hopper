@@ -44,6 +44,8 @@ export const TextInput = () => {
         }
     };
 
+
+
     return (
         <div id="text-input-container">
             <form id="chat-input-form" onSubmit={handleSubmit}>

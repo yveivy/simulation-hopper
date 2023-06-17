@@ -3,6 +3,7 @@ import Dialogue from "./Dialogue"
 import TextInput from "./TextInput"
 import "../../../css/overlay1.css"
 import { enableWASD } from "../../../utils/interactionMenu";
+import SeerTextInput from "./SeerChat";
 
 export const DialogueContext = createContext();
 
@@ -24,7 +25,12 @@ const Chat = ({ setShowAnything, setShowChat, setShowSpecialFeatures }) => {
     setShowSpecialFeatures(false);
     setShowAnything(false)
     enableWASD()
-  };
+  }
+  if(window.interactionObject === "shaman") {
+    return (
+      null
+    )
+  }
 
   return (
     <div className="interaction-container" id="chat-container">

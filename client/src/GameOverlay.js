@@ -12,6 +12,7 @@ import Interaction from "./components/interaction/Interaction"
 import { enableWASD, disableWASD } from './utils/interactionMenu';
 import { fetchInventory, fetchOneItemDetails } from './utils/db/fetches';
 import { parseInventoryObjToGetJustItems} from "./utils/inventory"
+import SeerTextInput from './components/interaction/chat/SeerChat';
 
 function GameOverlay() {
   const [showChat, setShowChat] = useState(false);
@@ -99,6 +100,7 @@ function GameOverlay() {
         />
         <VideoComponent />
         <InnerMind />
+        <SeerTextInput />
         {showInventory &&
           <InventoryOverlay setShowAnything={setShowAnything} inventory={inventory} setInventory={setInventory} />
         }
