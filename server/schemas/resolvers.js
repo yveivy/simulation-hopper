@@ -164,8 +164,7 @@ const resolvers = {
       // Return the updated hasMet value
       return characterInventory.hasMet;
     },
-    createNewUser: async (_, { username, password }, { dataSources, req, res }) => {
-      const saveFileAPI = dataSources.saveFileAPI;
+    createNewUser: async (_, { username, password } ) => {
       const collectionName = username; // Set the collection name to the username
 
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -176,11 +175,18 @@ const resolvers = {
       const newUserSaveFile = {
         userinfo: userinfo,
         ...newUserData,
-        token
+        token: token
       };
       console.log('userinfo____', userinfo)
-      console.log('newUserData_____', newUserData)
-      await saveFileAPI.createNewCollection(collectionName, newUserSaveFile);
+      console.log('newUserSaveFile_____', newUserSaveFile)
+      const database = client.db(process.env.DB_NAME);
+      const collection = database.collection(collectionName);
+      try {
+      await collection.insertOne(newUserSaveFile);
+      console.log(`Created account for "${collectionName}" and seeded data`);
+    } catch (error) {
+      console.error(`Failed to create collection: ${collectionName}`, error);
+    }
 
       return newUserSaveFile;
     },

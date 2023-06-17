@@ -43,7 +43,7 @@ export const Login = (props) => {
         setPass('');
         
         //uncomment once gamepage is exported as component. for now use win.loc
-        navigate('/') 
+        navigate('/play') 
         
         // window.location.href = '/'
         } catch (error) {

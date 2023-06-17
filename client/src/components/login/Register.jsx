@@ -46,7 +46,7 @@ export const Register = (props) => {
             setName('');
             setPass('');
             setConfirmPass('')
-            navigate('/game/')
+            navigate('/play')
         }   catch (error) {
             console.error(error);
             setErrorMessage("Oh no! Barf's Spaceship Has Crashed Into Our Response Object! Try Again Later.")
