@@ -1,6 +1,7 @@
 import { questionData } from "./interactionMenu.js";
 import {fetchInventory } from "./db/fetches"
 
+
 export function parseInventoryObjToGetJustItems(inventoryObj) {
     var inventoryItems = Object.keys(inventoryObj).filter(key => inventoryObj[key] === true);
     console.log("parseInventoryObjToGetJustItems() inventoryItems__________", inventoryItems)

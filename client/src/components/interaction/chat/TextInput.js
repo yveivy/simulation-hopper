@@ -1,11 +1,11 @@
 import { useState, useContext } from 'react'
 import { createPromptForNpcResponseToChat, createPromptRobotResponseToChat, fetchOpenAiApi, formatDialogueForPrompt } from '../../../utils/ai';
-import { DialogueContext} from './Chat';
+import { DialogueContext} from '../Interaction';
 import { fetchOneCharacterData } from '../../../utils/db/fetches';
 import "../../../css/overlay1.css"
 import { updateUserObjectives } from '../../../utils/inventory';
 
-export const TextInput = () => {
+export const TextInput = (spec) => {
     // var interactionObject = window.interactionObject
     // var interactionObject = "violet"
 

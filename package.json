@@ -9,8 +9,9 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "node server/seeds/seed.js",
     "build": "cd client && npm run build",
-    "start-production": "NODE_ENV=production && concurrently \"node server/server.js\" \"cd client && npm start\"",
-    "heroku-postbuild": "npm run install && npm run build"
+    "start-production": "NODE_ENV=production && concurrently \"npm run build && node server/server.js --ignore client\" \"cd client && npm start\"",
+    "heroku-postbuild": "npm run install && npm run build",
+    "local-prod": "concurrently \"cd client && npm run build\" \"NODE_ENV=production node server/server.js\""
   },
   "engines": {
     "node": "16.x"

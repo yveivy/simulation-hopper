@@ -30,6 +30,7 @@ const resolvers = {
     },
     // retrieve info about a single item -- input variable = searchable_item
     getOneItem: async (_, { searchable_item }) => {
+      console.log("resolvers.js getOneItem()____________", searchable_item)
       try {
         const foundItem = await Items.findOne({ searchable_item });
 

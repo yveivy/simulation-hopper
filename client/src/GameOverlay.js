@@ -17,6 +17,7 @@ function GameOverlay() {
   const [showChat, setShowChat] = useState(false);
   const [showSpecialFeatures, setShowSpecialFeatures] = useState(false);
   const [inventory, setInventory] = useState([{"getOneItem": {"id": "1", "item_name": "testName", "description": "testDescription"}}]);
+  const [inventoryItems, setInventoryItems] = useState(["testItem", "anotherTestItem"]);
   const [showInventory, setShowInventory] = useState(false);
   const [showAnything, setShowAnything] = useState(false)
 
@@ -75,7 +76,9 @@ function GameOverlay() {
 
     const fetchAndSetInventory = async () => {
       const inventoryObj = await fetchInventory('barf');
+      console.log("GameOverlay.js fetchAndSetInventory() inventoryObj_______", inventoryObj)
       const inventoryItems = parseInventoryObjToGetJustItems(inventoryObj);
+      console.log("GameOverlay.js fetchAndSetInventory() inventoryItems_______", inventoryItems)
       const inventoryItemsWithDetails = []
       //ToDo: Get descriptions of items in someone's inventory:
       for (let itemSearchableName of inventoryItems) {
@@ -85,12 +88,14 @@ function GameOverlay() {
       }
       console.log("inventoryOverlay.js fetchAndSetInventory() inventoryItemsWithDetails_____________", inventoryItemsWithDetails)
       setInventory(inventoryItemsWithDetails);
+      setInventoryItems(inventoryItems)
     }
 
   return (
     <ApolloProvider client={client}>
       <div>
-        <Interaction 
+        <Interaction
+          inventoryItems={inventoryItems}
           showChat={showChat}
           setShowChat={setShowChat}
           showSpecialFeatures={showSpecialFeatures}

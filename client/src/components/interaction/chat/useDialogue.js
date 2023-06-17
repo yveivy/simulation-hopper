@@ -1,14 +1,14 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 
-export const useDialogue = () => {
-  const [dialogueList, setDialogueList] = useState([]);
+// export const useDialogue = () => {
+//   const [dialogueList, setDialogueList] = useState([]);
 
-  const addDialogue = (speaker, text) => {
-    setDialogueList([...dialogueList, { speaker, text }]);
-  };
+//   const addDialogue = (speaker, text) => {
+//     setDialogueList([...dialogueList, { speaker, text }]);
+//   };
 
-  return {
-    dialogueList,
-    addDialogue,
-  };
-};
+//   return {
+//     dialogueList,
+//     addDialogue,
+//   };
+// };

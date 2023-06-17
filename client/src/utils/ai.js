@@ -90,9 +90,14 @@ return prompt
 }
 
 
-export function createPrompt(){
+export function createPremisePromptFor20Questions() {
 
 }
+export function createResponsePromptFor20Questions() {
+    
+}
+
+
 
 export function formatDialogueForPrompt(dialogueList) {
     var formattedAndInListForm = []
