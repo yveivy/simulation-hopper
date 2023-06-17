@@ -12,6 +12,9 @@
     "start-production": "NODE_ENV=production && concurrently \"node server/server.js\" \"cd client && npm start\"",
     "heroku-postbuild": "npm run install && npm run build"
   },
+  "engines": {
+    "node": "14.x"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
