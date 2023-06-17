@@ -9,7 +9,8 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "node server/seeds/seed.js",
     "build": "cd client && npm run build",
-    "start-production": "NODE_ENV=production && concurrently \"node server/server.js\" \"cd client && npm start\""
+    "start-production": "NODE_ENV=production && concurrently \"node server/server.js\" \"cd client && npm start\"",
+    "heroku-postbuild": "npm run install && npm run build"
   },
   "author": "",
   "license": "ISC",
