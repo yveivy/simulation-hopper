@@ -9,7 +9,7 @@ export const TextInput = ({specialFeatures=false}) => {
     var interactionObject = window.interactionObject
     // var interactionObject = 'taylor'
 
-    const { addDialogue, dialogueList } = useContext(DialogueContext);
+    const { addDialogue, dialogueList, handleClose } = useContext(DialogueContext);
     const [inputText, setInputText] = useState("");
 
     const [secretWord, setSecretWord] = useState("")
@@ -36,12 +36,20 @@ export const TextInput = ({specialFeatures=false}) => {
         var chatHistory
         var npcFullName;
         var prompt;
+        var npcResponse
 
         if (specialFeatures === true) { 
             if (interactionObject === "taylor") {
-                await addDialogue('Barf', inputText)
-                prompt = await createResponsePromptFor20Questions(secretWord, inputText)
+                addDialogue('Barf', inputText)
+                prompt = createResponsePromptFor20Questions(secretWord, inputText)
                 npcFullName = "Taylor Tuck"
+                npcResponse = await fetchOpenAiApi(prompt)
+                if (npcResponse === `"Correct"` || npcResponse === `"Correct."` || npcResponse === `Correct` || npcResponse === `Correct.`) {
+                    npcResponse = `You guessed it! I made the leather of these pants out of ${secretWord}! Enjoy! Btw, that pretty redhead violet will probably fall in love with you when she sees in you pants this handsome. *Taylor puts the ${secretWord} leather pants in your inventory*`
+                    //swap pants to barf's inventory
+                    //close window
+                    setTimeout(handleClose, 10000)
+                }
             }
         } else {
             addDialogue('Barf', inputText);
@@ -56,8 +64,9 @@ export const TextInput = ({specialFeatures=false}) => {
                 prompt = createPromptForNpcResponseToChat(npcData.full_name, npcData.bio, npcData.role, chatHistory)
                 npcFullName = npcData.full_name
             }
+            npcResponse = await fetchOpenAiApi(prompt)
         }
-        const npcResponse = await fetchOpenAiApi(prompt); // Some function that generates NPC response
+        ; // Some function that generates NPC response
         addDialogue(npcFullName, npcResponse); // NPC's dialogue
         console.log("TextInput.js dialogueList_______", localCopyOfDialogueList)
         setInputText(''); // Clear the input field
