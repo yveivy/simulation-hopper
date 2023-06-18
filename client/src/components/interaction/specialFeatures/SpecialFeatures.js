@@ -33,7 +33,7 @@ const SpecialFeatures = ({ inventoryItems, setShowAnything, setShowChat, setShow
           <button onClick={handleTab}>Chat</button>
         </nav> 
 
-        <Taylor inventoryItems={inventoryItems} handleClose={handleClose}/>
+        {/* <Taylor inventoryItems={inventoryItems} handleClose={handleClose}/> */}
 
         {window.interactionObject === "violet" &&
           <Violet inventoryItems={inventoryItems} handleClose={handleClose}/>
