@@ -6,7 +6,7 @@ import "../../../css/overlay1.css"
 import { updateUserObjectives } from '../../../utils/inventory';
 import { useMutation, gql } from '@apollo/client';
 
-export const TextInput = ({specialFeatures=false}) => {
+export const TextInput = ({ specialFeatures=false }) => {
     var interactionObject = window.interactionObject
     // var interactionObject = 'taylor'
 
