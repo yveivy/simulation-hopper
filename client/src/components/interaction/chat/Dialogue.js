@@ -17,7 +17,7 @@ const Dialogue = () => {
 
   const { dialogueList } = useContext(DialogueContext)
 
-  const currentCharacter = `game/images/characterHeadshots/${window.interactionObject}.png`;
+  const currentCharacter = `images/characterHeadshots/${window.interactionObject}.png`;
   
   return (
     <div id="dialogue-container">
