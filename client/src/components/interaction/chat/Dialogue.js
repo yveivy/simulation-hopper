@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { DialogueContext } from "./Chat"
+import { DialogueContext} from '../Interaction';
 
 import "../../../css/overlay1.css"
 
@@ -14,6 +14,7 @@ import "../../../css/overlay1.css"
 
 
 const Dialogue = () => {
+
   const { dialogueList } = useContext(DialogueContext)
 
   const currentCharacter = `game/images/characterHeadshots/${window.interactionObject}.png`;

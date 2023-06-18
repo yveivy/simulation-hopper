@@ -30,7 +30,7 @@ async function callOpenAiApi(prompt) {
             },
         });
         const promptResponse = response.data.choices[0].message.content;
-        // console.log("callOpenAiApi()____________", promptResponse)
+        console.log("callOpenAiApi()____________", promptResponse)
         return promptResponse;
     } 
     catch (error) {

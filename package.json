@@ -4,12 +4,17 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "start": "nodemon server/server.js --ignore client",
+    "start": "node server/server.js --ignore client",
     "develop": "concurrently \"node server/server.js\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "node server/seeds/seed.js",
     "build": "cd client && npm run build",
-    "start-production": "NODE_ENV=production && concurrently \"node server/server.js\" \"cd client && npm start\""
+    "start-production": "NODE_ENV=production && concurrently \"npm run build && node server/server.js --ignore client\" \"cd client && npm start\"",
+    "heroku-postbuild": "npm run install && npm run build",
+    "local-prod": "concurrently \"cd client && npm run build\" \"NODE_ENV=production node server/server.js\""
+  },
+  "engines": {
+    "node": "16.x"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +22,7 @@
     "concurrently": "^5.3.0"
   },
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
     "gsap": "^3.12.1"

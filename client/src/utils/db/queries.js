@@ -26,7 +26,7 @@ query Query {
         pocketWatch
         scope
         spade
-        spanner
+        repairTool
         striders
         translator
       },
@@ -44,7 +44,7 @@ query Query {
         pocketWatch
         scope
         spade
-        spanner
+        repairTool
         striders
         translator
       },
@@ -62,7 +62,7 @@ query Query {
         pocketWatch
         scope
         spade
-        spanner
+        repairTool
         striders
         translator
       },
@@ -80,7 +80,7 @@ query Query {
         pocketWatch
         scope
         spade
-        spanner
+        repairTool
         striders
         translator
       },
@@ -98,7 +98,7 @@ query Query {
         pocketWatch
         scope
         spade
-        spanner
+        repairTool
         striders
         translator
       },
@@ -116,7 +116,7 @@ query Query {
         pocketWatch
         scope
         spade
-        spanner
+        repairTool
         striders
         translator
       },
@@ -134,7 +134,7 @@ query Query {
         pocketWatch
         scope
         spade
-        spanner
+        repairTool
         striders
         translator
       }

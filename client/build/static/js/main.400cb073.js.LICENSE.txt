@@ -76,6 +76,4 @@ object-assign
 
 //! possibly use this function depending on new endgame logic fetchResetInventoryData()
 
-//! uncomment once fetchTradeOfferResponse works: window.globalVars.tradeOfferDecision = await fetchTradeOfferResponse()
-
 //! uncomment this function call after moving slideshow functions from gameboard to react: endGame()

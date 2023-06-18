@@ -1,10 +1,11 @@
 import { useState, useContext } from 'react'
 import { createPromptForNpcResponseToChat, createPromptRobotResponseToChat, fetchOpenAiApi, formatDialogueForPrompt } from '../../../utils/ai';
-import { DialogueContext} from './Chat';
+import { DialogueContext} from '../Interaction';
 import { fetchOneCharacterData } from '../../../utils/db/fetches';
 import "../../../css/overlay1.css"
+import { updateUserObjectives } from '../../../utils/inventory';
 
-export const TextInput = () => {
+export const TextInput = (spec) => {
     // var interactionObject = window.interactionObject
     // var interactionObject = "violet"
 
@@ -25,7 +26,8 @@ export const TextInput = () => {
         var prompt;
         if (interactionObject === "") {
             // interactionObject = "robot"
-            prompt = createPromptRobotResponseToChat(chatHistory)
+            updateUserObjectives()
+            prompt = createPromptRobotResponseToChat(chatHistory, window.globalVars.userObjectives)
             npcFullName = "Robot"
         } else {
             var npcData = await fetchOneCharacterData(interactionObject)

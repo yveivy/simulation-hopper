@@ -8,7 +8,7 @@ canvas.height = 576;
 window.interactionObject = []
 window.WASDenabled = true;
 
-const movementSpeedMultiplier = 6
+const movementSpeedMultiplier = 10
 
 
 let colArrMap = []
@@ -240,26 +240,26 @@ function animate() {
                 if (interaction.position.value === 4750) {
 
 
-                    console.log("Interacting with Zara");
-                    window.interactionObject = "zara-sparks"
+                    console.log("Interacting with zara");
+                    window.interactionObject = "zara"
                 } else if (interaction.position.value === 6060) {
-                    console.log("Interacting with Beryl and Basil Hydra");
-                    window.interactionObject = "beryl-and-basil-hydra"
+                    console.log("Interacting with hydra");
+                    window.interactionObject = "hydra"
                 } else if (interaction.position.value === 3030) {
-                    console.log("Interacting with Abe");
-                    window.interactionObject = "abe-harmony"
+                    console.log("Interacting with abe");
+                    window.interactionObject = "abe"
                 } else if (interaction.position.value === 2020) {
-                    console.log("Interacting with Sketchy Schemer");
-                    window.interactionObject = "shady-schemer"
+                    console.log("Interacting with shady");
+                    window.interactionObject = "shady"
                 } else if (interaction.position.value === 1010) {
-                    console.log("Interacting with Taylor");
-                    window.interactionObject = "taylor-tuck"
+                    console.log("Interacting with taylor");
+                    window.interactionObject = "taylor"
                 } else if (interaction.position.value === 5050) {
-                    console.log("Interacting with Violet");
-                    window.interactionObject = "violet-meadows"
+                    console.log("Interacting with violet");
+                    window.interactionObject = "violet"
                 } else if (interaction.position.value === 9090) {
-                    console.log("interacting with the Ship");
-                    window.interactionObject = "Spaceship"
+                    console.log("interacting with spaceship");
+                    window.interactionObject = "spaceship"
                     //if barf has item(s) in inventory and spacebar is pressed then function EndGame()
                 } 
                 
