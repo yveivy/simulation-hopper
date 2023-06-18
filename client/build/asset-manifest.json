@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.6d9fdb4c.css",
-    "main.js": "/static/js/main.b114e373.js",
+    "main.js": "/static/js/main.a71203ad.js",
     "static/media/ShamanForGame.gif": "/static/media/ShamanForGame.075b10dd3a2744c708f4.gif",
     "static/media/AnimationStartGif.gif": "/static/media/AnimationStartGif.42cfbf63db3df05b1adf.gif",
     "static/media/loading.gif": "/static/media/loading.76fcf2be3b4207023ef3.gif",
@@ -11,10 +11,10 @@
     "static/media/gameInfo.png": "/static/media/gameInfo.2e3b657cce77f975e530.png",
     "index.html": "/index.html",
     "main.6d9fdb4c.css.map": "/static/css/main.6d9fdb4c.css.map",
-    "main.b114e373.js.map": "/static/js/main.b114e373.js.map"
+    "main.a71203ad.js.map": "/static/js/main.a71203ad.js.map"
   },
   "entrypoints": [
     "static/css/main.6d9fdb4c.css",
-    "static/js/main.b114e373.js"
+    "static/js/main.a71203ad.js"
   ]
 }
