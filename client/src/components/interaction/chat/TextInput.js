@@ -4,6 +4,7 @@ import { DialogueContext} from '../Interaction';
 import { fetchOneCharacterData } from '../../../utils/db/fetches';
 import "../../../css/overlay1.css"
 import { updateUserObjectives } from '../../../utils/inventory';
+import { useMutation, gql } from '@apollo/client';
 
 export const TextInput = ({specialFeatures=false}) => {
     var interactionObject = window.interactionObject
@@ -13,6 +14,14 @@ export const TextInput = ({specialFeatures=false}) => {
     const [inputText, setInputText] = useState("");
 
     const [secretWord, setSecretWord] = useState("")
+
+    const playerToken = localStorage.getItem('nekotsresueht')
+    const WIN_ITEM = gql`
+    mutation MyMutation($token: String!, $characterName: String!, $item: String!) {
+      winItem(token: $token, characterName: $characterName, item: $item)
+    }
+  `;
+    const [winItem] = useMutation(WIN_ITEM);
 
     useEffect(() => {
         const setup20Questions = async () => {
@@ -47,8 +56,23 @@ export const TextInput = ({specialFeatures=false}) => {
                 npcFullName = "Taylor Tuck"
                 npcResponse = await fetchOpenAiApi(prompt)
                 if (npcResponse === `"Correct"` || npcResponse === `"Correct."` || npcResponse === `Correct` || npcResponse === `Correct.`) {
-                    npcResponse = `You guessed it! I made the leather of these pants out of ${secretWord}! Enjoy! Btw, that pretty redhead violet will probably fall in love with you when she sees in you pants this handsome. *Taylor puts the ${secretWord} leather pants in your inventory*`
+                    npcResponse = `You guessed it! I made the leather of these pants out of ${secretWord}! Enjoy! Btw, that pretty redhead violet will probably fall in love with you when she sees in you pants this handsome. *Taylor puts the ${secretWord} leather pants in your inventory*`;
                     //swap pants to barf's inventory
+                    winItem({
+                    variables: {
+                        token: playerToken,
+                        characterName: 'taylor',
+                        item: 'striders',
+                    },
+                    })
+                    .then((result) => {
+                        // Handle successful mutation result
+                        console.log('barf got the item: true or cap?', result);
+                    })
+                    .catch((error) => {
+                        // Handle error
+                        console.error('the deal went sideways', error);
+                    });
                     //close window
                     setTimeout(handleClose, 10000)
                 }

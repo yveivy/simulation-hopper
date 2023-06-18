@@ -66,6 +66,7 @@ type Mutation {
   markCharacterAsMet(characterName: String!, token: String!): Boolean
   createNewUser(username: String!, password: String!): userfile!
   userLogIn(username: String!, password: String!): userfile!
+  winItem(token: String!, characterName: String!, item: String!): Boolean
 }
 
 type Character {

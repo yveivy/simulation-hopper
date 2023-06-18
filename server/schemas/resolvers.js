@@ -171,7 +171,7 @@ const resolvers = {
       const hashedPassword = await bcrypt.hash(password, 10);
       const userinfo = { username, password: hashedPassword }
       const shhhhhh = process.env.JWT_SECRET_KEY
-      const token = jwt.sign({ username }, shhhhhh, { expiresIn: '1h' });
+      const token = jwt.sign({ username }, shhhhhh);
 
       const newUserSaveFile = {
         userinfo: userinfo,
@@ -212,7 +212,7 @@ const resolvers = {
       if (result) {
         try {
           const shhhhhh = process.env.JWT_SECRET_KEY
-          const newToken = jwt.sign({ username }, shhhhhh, { expiresIn: '1h' });
+          const newToken = jwt.sign({ username }, shhhhhh);
           console.log("newly generated token", newToken)
 
           const insertNewToken = await collection.findOneAndUpdate(
@@ -235,8 +235,31 @@ const resolvers = {
         console.error('Incorrect Credentials', error);
         return null;
       }
-    }
-  },
+    },
+    winItem: async (_, { token, characterName, item } ) => {
+      const database = client.db(process.env.DB_NAME);
+      const collectionName = tokenVerifier(token).username
+      const collection = database.collection(collectionName)
+      const userSaveFile = await collection.findOne()
+
+      if (!userSaveFile) {
+        throw new Error("User save file not found");
+      }
+
+      const barfInventory = userSaveFile.inventory.barf;
+      const giversInventory = userSaveFile.inventory[characterName];
+
+      // Barf truly has the item now.
+      barfInventory[item] = true;
+      // the giver has the item, not.
+      giversInventory[item] = false;
+      
+      await collection.replaceOne({}, userSaveFile, { upsert: true });
+
+      // Does barf have the item? response is boolean
+      return barfInventory[item];
+    },
+  }
 };
 
 
