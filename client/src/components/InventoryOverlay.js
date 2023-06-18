@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from "react";
-import { enableWASD, disableWASD } from "../utils/interactionMenu";
-import { fetchInventory, fetchOneItemDetails } from "../utils/db/fetches";
-import { parseInventoryObjToGetJustItems } from "../utils/inventory";
+// import { enableWASD, disableWASD } from "../utils/interactionMenu";
+// import { fetchInventory, fetchOneItemDetails } from "../utils/db/fetches";
+// import { parseInventoryObjToGetJustItems } from "../utils/inventory";
 import "../css/overlay.css"
 
 const InventoryOverlay = ({ inventory, setInventory }) => {

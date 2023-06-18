@@ -18,7 +18,7 @@ const newUserData = {
       "newt": false,
       "pocketWatch": false,
       "scope": true,
-      "spanner": false,
+      "repairTool": false,
       "spade": false,
       "striders": false,
       "translator": false
@@ -37,7 +37,7 @@ const newUserData = {
       "newt": false,
       "pocketWatch": true,
       "scope": false,
-      "spanner": false,
+      "repairTool": false,
       "spade": false,
       "striders": false,
       "translator": true
@@ -56,7 +56,7 @@ const newUserData = {
       "newt": true,
       "pocketWatch": false,
       "scope": false,
-      "spanner": false,
+      "repairTool": false,
       "spade": false,
       "striders": false,
       "translator": false
@@ -75,7 +75,7 @@ const newUserData = {
       "newt": false,
       "pocketWatch": false,
       "scope": false,
-      "spanner": false,
+      "repairTool": false,
       "spade": false,
       "striders": false,
       "translator": false
@@ -94,7 +94,7 @@ const newUserData = {
       "newt": false,
       "pocketWatch": false,
       "scope": false,
-      "spanner": false,
+      "repairTool": false,
       "spade": false,
       "striders": true,
       "translator": false
@@ -113,7 +113,7 @@ const newUserData = {
       "newt": false,
       "pocketWatch": false,
       "scope": false,
-      "spanner": false,
+      "repairTool": false,
       "spade": false,
       "striders": false,
       "translator": false
@@ -132,7 +132,7 @@ const newUserData = {
       "newt": false,
       "pocketWatch": false,
       "scope": false,
-      "spanner": true,
+      "repairTool": true,
       "spade": true,
       "striders": false,
       "translator": false

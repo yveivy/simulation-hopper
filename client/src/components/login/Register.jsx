@@ -1,6 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import { useMutation, gql, useQuery } from '@apollo/client';
+import loadinggif from '../../images/loading.gif'
+import { TOKEN_CHECK } from "../../utils/db/queries";
+
+
+const CREATE_NEW_USER = gql`
+  mutation Mutation($username: String!, $password: String!) {
+  createNewUser(username: $username, password: $password) {
+    userinfo {
+      username
+      password
+    }
+    token
+  }
+}`;
 
 export const Register = (props) => {
 
@@ -8,35 +23,85 @@ export const Register = (props) => {
     const [pass, setPass] = useState('');
     const [confirmPass, setConfirmPass] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const navigate = useNavigate();
 
+    const [createNewUser] = useMutation(CREATE_NEW_USER);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         if (pass !== confirmPass) {
             setErrorMessage("Passwords do not match");
             return;
         }
-        console.log(name); 
-        setErrorMessage('');
-    }
+
+        try {
+            const { data } = await createNewUser({
+                variables: { username: name, password: pass },
+            });
+
+            const { createNewUser: { token } } = data;
+
+            // save user token to local storage
+            localStorage.setItem('nekotsresueht', token);
+
+            setName('');
+            setPass('');
+            setConfirmPass('')
+            navigate('/play')
+        }   catch (error) {
+            console.error(error);
+            setErrorMessage("response object lost in the sauce")
+        }
+        setIsLoading(false);
+    };
+
+    const currentToken = localStorage.getItem('nekotsresueht')
+    const { data } = useQuery(TOKEN_CHECK, { variables: { token: currentToken }});
+    console.log(data)
+    
+    useEffect(() => {
+        const setLogInStatus = async (e) => {
+            const { userSaveFile } = data;
+            const { token } = userSaveFile;
+            if (token === currentToken) {
+                setIsLoggedIn(true)
+            } else {
+                return;
+            }  
+        };
+        if (data) {
+        setLogInStatus();
+        }
+        if (isLoggedIn) {
+            navigate('/play')
+        }
+    });
+
 
 
     return (
-          <div className="auth-form-container">    
-          <h2>Register</h2>            
+          <div className="auth-form-container">
+            {isLoading && <img src={loadinggif} alt="loading" height="64px"/>}
+            {!isLoading && <h2>Register</h2>}           
         <form className="register-form" onSubmit={handleSubmit}>
             <label htmlFor="name"></label>
-            <input value={name} type="name" placeholder="username" id="name" name="name"/>
+            
+            <input value={name} onChange={(e) => setName(e.target.value)}type="name" placeholder="username" id="name" name="name"/>
             <label htmlFor="password"></label>
-            <input value={pass} type="password" placeholder="*********" id="password" name="password"/>
+            
+            <input value={pass} onChange={(e) => setPass(e.target.value)}type="password" placeholder="password" id="password" name="password"/>
             <label htmlFor="confirm-password"></label>
-            <input value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} type="password" placeholder="*********" id="confirm-password" name="confirm-password"/>
+            
+            <input value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} type="password" placeholder="confirm password" id="confirm-password" name="confirm-password"/>
             <button type="submit">Log In</button>
 
         </form>
         {errorMessage && <div className="error-message">{errorMessage}</div>}
+        {isLoading && <div className="error-message">creating user save file. . .</div>}
         <button className="link-btn" onClick={() => navigate('/login')}> Already have an account? Login here. </button>
         </div>  
     )

@@ -1,4 +1,5 @@
 import {gsap} from 'gsap'
+import { useNavigate } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 // import { useQuery } from '@apollo/client';
 // import { QUERY_MATCHUPS } from '../utils/queries';
@@ -9,7 +10,7 @@ import {gsap} from 'gsap'
 // <title>Simulation Hopper</title>
 
 const Home = () => {
-
+  const navigate = useNavigate()
   const animateTheIntroZoom = () => {
     console.log('animateTheIntroZoom click event_________')
     var tl = gsap.timeline();
@@ -29,7 +30,8 @@ const Home = () => {
       scale: 3,
       opacity: 0,
       onComplete: function () {
-        window.location.href = "/game";
+        // window.location.href = "/game";
+        navigate('/play')
       }
     });
 
@@ -38,7 +40,8 @@ const Home = () => {
       scale: 3,
       opacity: .3,
       onComplete: function () {
-        window.location.href = "/game";
+        // window.location.href = "/game";
+        navigate('/play')
       }
     });
   };

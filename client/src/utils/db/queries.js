@@ -26,7 +26,7 @@ query Query {
         pocketWatch
         scope
         spade
-        spanner
+        repairTool
         striders
         translator
       },
@@ -44,7 +44,7 @@ query Query {
         pocketWatch
         scope
         spade
-        spanner
+        repairTool
         striders
         translator
       },
@@ -62,7 +62,7 @@ query Query {
         pocketWatch
         scope
         spade
-        spanner
+        repairTool
         striders
         translator
       },
@@ -80,7 +80,7 @@ query Query {
         pocketWatch
         scope
         spade
-        spanner
+        repairTool
         striders
         translator
       },
@@ -98,7 +98,7 @@ query Query {
         pocketWatch
         scope
         spade
-        spanner
+        repairTool
         striders
         translator
       },
@@ -116,7 +116,7 @@ query Query {
         pocketWatch
         scope
         spade
-        spanner
+        repairTool
         striders
         translator
       },
@@ -134,7 +134,7 @@ query Query {
         pocketWatch
         scope
         spade
-        spanner
+        repairTool
         striders
         translator
       }
@@ -170,3 +170,12 @@ query Query($searchableName: String!) {
 //     }
 //   }
 // }
+
+
+export const TOKEN_CHECK = gql`
+query Query($token: String) {
+  userSaveFile(token: $token) {
+    token
+  }
+}
+`
