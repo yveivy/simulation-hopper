@@ -91,10 +91,23 @@ return prompt
 
 
 export function createPremisePromptFor20Questions() {
-
+var prompt = 
+`You are a bot in a 20 questions minigame. Come up with something for the user to guess. It must be an animal that leather can be theoretically be made out of. It can be silly, but it must be an animal the average person would have heard of one could theoretically make pants of.
+Just tell me the word in quotes. Don't say anything besides the word in quotes or it will mess up the program`
+return prompt
 }
-export function createResponsePromptFor20Questions() {
-    
+
+export function createResponsePromptFor20Questions(secretWord, question) {
+var prompt = 
+`You are a bot in a 20 questions minigame. It is always set to be an animal that leather can theoretically be made out of. The user will ask you clarifying questions about the animal or straight up guess what it is. You can only respond with "Yes", "No" , "Maybe", "Sometimes" or, in the case that the user approximately guesses the animal correctly, respond with "Correct". Make sure your answer is in quotes and that you say nothing else outside of quotes or it will mess up the program.
+
+The animal the user is trying to guess is: ${secretWord} 
+
+Here is what the user just said:
+User: ${question}`
+
+console.log(`createResponsePromptFor20Questions()________`, prompt)
+return prompt
 }
 
 

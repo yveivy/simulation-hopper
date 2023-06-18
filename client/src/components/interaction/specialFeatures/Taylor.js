@@ -2,14 +2,14 @@ import React, {useState} from "react"
 import "../../../css/overlay1.css"
 import Dialogue from "../chat/Dialogue"
 import TextInput from "../chat/TextInput";
-import TaylorGame from "./TaylorGame"
+import {fetchOpenAiApi, createPremisePromptFor20Questions} from "../../../utils/ai"
 
 
 
 const Taylor = ({inventoryItems, handleClose}) => {
     const [showGame, setShowGame] = useState(false);
 
-    const handleStartGame = () => {
+    const handleStartGame = async () => {
         setShowGame(true);
     }
 
@@ -30,7 +30,7 @@ const Taylor = ({inventoryItems, handleClose}) => {
         <div className="interaction-container" id="chat-container">
 
                 <Dialogue />
-                <TextInput specialFeature={true}/>
+                <TextInput specialFeatures={true}/>
                 {/* <TextInput /> */}
             
             {/* <TaylorGame /> */}

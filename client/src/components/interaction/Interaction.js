@@ -1,4 +1,5 @@
 import React, {useState, createContext, useContext, useEffect} from "react"
+import { enableWASD } from "../../utils/interactionMenu"
 
 import Chat from "./chat/Chat"
 import SpecialFeatures from "./specialFeatures/SpecialFeatures"
@@ -17,9 +18,16 @@ const Interaction = ({inventoryItems, setShowAnything, showChat, setShowChat, sh
       setDialogueList((prevDialogueList) => [...prevDialogueList, { speaker, text }]);
     };
 
+    const handleClose = () => {
+        setShowChat(false);
+        setShowSpecialFeatures(false);
+        setShowAnything(false)
+        enableWASD()
+      };
+
 
     return (
-        <DialogueContext.Provider value={{ dialogueList, addDialogue, setDialogueList }}>
+        <DialogueContext.Provider value={{ dialogueList, addDialogue, setDialogueList, handleClose}}>
             <div>
                 {showChat && 
                     <Chat setShowAnything={setShowAnything} setShowChat={setShowChat} setShowSpecialFeatures={setShowSpecialFeatures} />
