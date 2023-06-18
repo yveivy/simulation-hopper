@@ -6,8 +6,8 @@ import { fetchOneCharacterData } from '../../../utils/db/fetches';
 import { updateUserObjectives } from '../../../utils/inventory';
 
 export const TextInput = ({specialFeatures=false}) => {
-    // var interactionObject = window.interactionObject
-    var interactionObject = 'zara'
+    var interactionObject = window.interactionObject
+    // var interactionObject = 'zara'
 
     const { addDialogue, dialogueList, handleClose } = useContext(DialogueContext);
     const [inputText, setInputText] = useState("");

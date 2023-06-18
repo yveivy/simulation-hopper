@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.0a68c62e.css",
-    "main.js": "/static/js/main.400cb073.js",
+    "main.css": "/static/css/main.6d9fdb4c.css",
+    "main.js": "/static/js/main.b114e373.js",
     "static/media/ShamanForGame.gif": "/static/media/ShamanForGame.075b10dd3a2744c708f4.gif",
     "static/media/AnimationStartGif.gif": "/static/media/AnimationStartGif.42cfbf63db3df05b1adf.gif",
     "static/media/loading.gif": "/static/media/loading.76fcf2be3b4207023ef3.gif",
@@ -10,11 +10,11 @@
     "static/media/InnerMindGif.gif": "/static/media/InnerMindGif.a73dc3b3535280445962.gif",
     "static/media/gameInfo.png": "/static/media/gameInfo.2e3b657cce77f975e530.png",
     "index.html": "/index.html",
-    "main.0a68c62e.css.map": "/static/css/main.0a68c62e.css.map",
-    "main.400cb073.js.map": "/static/js/main.400cb073.js.map"
+    "main.6d9fdb4c.css.map": "/static/css/main.6d9fdb4c.css.map",
+    "main.b114e373.js.map": "/static/js/main.b114e373.js.map"
   },
   "entrypoints": [
-    "static/css/main.0a68c62e.css",
-    "static/js/main.400cb073.js"
+    "static/css/main.6d9fdb4c.css",
+    "static/js/main.b114e373.js"
   ]
 }

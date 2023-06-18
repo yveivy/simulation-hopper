@@ -3,21 +3,15 @@
 <link>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>~*~SIMULATION~*~HOPPER~*~</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/game.css"></link>
+  <meta name="viewport" content="width=1024px">
+  <link rel="stylesheet" href="./css/gameproxy.css"></link>
 </head>
 
 <body>
-  
-  <header>
-    <h1>Simulation Hopper</h1>
-  </header>
+
   <div id="gameBoard">
     <div id="canvasContain">
+      <canvas id="gameCanvas"></canvas>
       <div class="image-container">
         <img src="./images/spaceForEnding.png" alt="Image 1">
       </div>
@@ -31,12 +25,14 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
   integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>"
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="js/interactionsZones2.js"></script>
 <script src="js/classes.js"></script>
 <script src="js/collisions1.js"></script>
 <script src="js/gameboard.js"></script>
-
+<script type="module" src="js/ai.js"></script>
+<script type="module" src="js/interactionMenu.js"></script>
+<script type="module" src="js/inventory.js"></script>
 <script src="/static/js/bundle.js"></script>
 <!-- <script src="%PUBLIC_URL%/static/js/main.js"></script> -->
 </body>

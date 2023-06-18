@@ -27,7 +27,7 @@ const SpecialFeatures = ({ inventoryItems, setShowAnything, setShowChat, setShow
           {/* <button onClick={handleTab}>Chat</button> */}
         </nav> 
 
-        <Zara inventoryItems={inventoryItems} handleClose={handleClose}/>
+        {/* <Zara inventoryItems={inventoryItems} handleClose={handleClose}/> */}
 
         {window.interactionObject === "violet" &&
           <Violet inventoryItems={inventoryItems} handleClose={handleClose}/>
