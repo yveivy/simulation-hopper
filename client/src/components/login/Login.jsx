@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation, gql, useQuery } from '@apollo/client';
 import loadinggif from '../../images/loading.gif'
+import { TOKEN_CHECK } from "../../utils/db/queries";
 
 const USER_LOGIN = gql`
     mutation Mutation($username: String!, $password: String!) {
@@ -21,6 +22,7 @@ export const Login = (props) => {
     const[pass, setPass] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const navigate = useNavigate();
 
@@ -42,20 +44,43 @@ export const Login = (props) => {
         setName('');
         setPass('');
         
-        //uncomment once gamepage is exported as component. for now use win.loc
-        navigate('/') 
+
+        navigate('/play') 
         
-        // window.location.href = '/'
+
         } catch (error) {
         console.error(error);
         setErrorMessage("Wrong Credentials!")
         }
     setIsLoading(false)
-    }
+    };
+
+    const currentToken = localStorage.getItem('nekotsresueht')
+    const { data } = useQuery(TOKEN_CHECK, { variables: { token: currentToken }});
+    console.log(data)
+    
+    useEffect(() => {
+        const setLogInStatus = async (e) => {
+            const { userSaveFile } = data;
+            const { token } = userSaveFile;
+            if (token === currentToken) {
+                setIsLoggedIn(true)
+            } else {
+                return;
+            }  
+        };
+        if (data) {
+        setLogInStatus();
+        }
+        if (isLoggedIn) {
+            navigate('/play')
+            return;
+        }
+    });
 
     return (
         <div className="auth-form-container">   
-            {isLoading && <img src={loadinggif} height="64px"/>}
+            {isLoading && <img src={loadinggif} alt="loading" height="64px"/>}
             {!isLoading && <h2>Login</h2>}
             {/* <h2>Login</h2> */}
             <form className="login-form" onSubmit={handleSubmit}>
@@ -68,6 +93,7 @@ export const Login = (props) => {
 
             </form>
             {errorMessage && <div className="error-message">{errorMessage}</div>}
+            {isLoading && <h2>retrieving user save file</h2>}
             <button className="link-btn" onClick={() => navigate('/register')}>Don't have an account? Register here. </button>
         </div>  
     )

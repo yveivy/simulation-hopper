@@ -1,6 +1,5 @@
 const express = require('express');
 const { ApolloServer }= require('apollo-server-express');
-const SaveFileAPI = require('./utils/saveFileAPI')
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const router = require("./api/routes.js");
@@ -15,9 +14,6 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  dataSources: () => ({
-    saveFileAPI: new SaveFileAPI(),
-  }),
   context: ({ req, res }) => {
     const token = req?.headers?.authorization || req?.query?.token || req?.cookies?.token;
     let user = null;
@@ -47,7 +43,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/public')));
 }
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   if (process.env.NODE_ENV === 'production') {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 } else {

@@ -198,7 +198,125 @@ ul {
   display: none;
 }
 .visible {
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
+  position: fixed;
+    top: 0;
+    left: 0;   
+    width: 100%;
+    height: 100%;
+    z-index: 1000
 }
+.custom-text-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hidden-text-input-container {
+  width: 0;
+  height: 0;
+  position: absolute;
+  overflow: hidden;
+}
+
+.custom-textarea {
+  width: 100%;
+  height: auto;
+  min-height: 20px;
+  background: none;
+  border: none;
+  resize: none;
+  padding: 0;
+  outline: none;
+  color: inherit;
+  font: inherit;
+}
+
+/* .input-section {
+  display: flex;
+  flex-direction: column;
+  z-index: 1002;
+}
+
+.invisible-textarea {
+  border: none;
+  outline: none;
+  resize: none;
+  background: none;
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  padding: 8px;
+  z-index: 1002;
+}
+
+.response-text {
+  margin-top: 10px;
+  font-size: 18px;
+  color: blue;
+  z-index: 1001;
+}
+.inside{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+.input-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+} */
+
+.invisible-textarea {
+  position: fixed;
+  width: 100%;
+  height: 40px; /* Adjust the height as desired */
+  background-color: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow: auto;
+  color: white;
+  text-align: center;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -60%); /* Adjust the vertical position as desired */
+  z-index: 1004;
+}
+
+.response-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  max-height: 80vh; /* Set a maximum height of 80% of the viewport height */
+  overflow: auto; /* Add scrollbars if the content exceeds the height */
+  color: white;
+  background-color: transparent;
+  border: none;
+  text-align: center;
+  z-index: 1003;
+}
+
+/* .response-text p {
+  text-align: center; /* Center the text horizontally */
+
+
+
+  .inside {
+    position: fixed;
+    top: 0;
+    left: 0;   
+    width: 100%;
+    height: 100%;
+    z-index: 1002;
+  }
+  

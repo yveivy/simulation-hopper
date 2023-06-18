@@ -170,3 +170,12 @@ query Query($searchableName: String!) {
 //     }
 //   }
 // }
+
+
+export const TOKEN_CHECK = gql`
+query Query($token: String) {
+  userSaveFile(token: $token) {
+    token
+  }
+}
+`
