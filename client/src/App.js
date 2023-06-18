@@ -6,7 +6,8 @@ import NotFound from './pages/NotFound';
 import Home from "./pages/home/Home"
 import Login from './components/login/Login';
 import Register from './components/login/Register';
-import GameOverlay from './GameOverlay';
+// import GameOverlay from './GameOverlay';
+import GameProxy from './components/gameproxy';
 
 
 function App() {
@@ -25,10 +26,10 @@ function App() {
 
             <Route path="/register" 
             element={<Register />} />
-            {/* <Route 
-              path="/game"
-              element={< />} 
-            /> */}
+            <Route 
+              path="/play"
+              element={<GameProxy />} 
+            />
             <Route 
               path="*"
               element={<NotFound />}
