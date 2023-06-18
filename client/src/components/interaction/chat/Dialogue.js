@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import { DialogueContext} from '../Interaction';
 
-import "../../../css/overlay1.css"
+// import "../../../css/overlay1.css"
 
 // const characterImages = {
 //   "zara": "/game/images/zara-sparks.png",

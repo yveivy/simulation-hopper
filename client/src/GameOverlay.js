@@ -5,7 +5,7 @@ import InventoryOverlay from "./components/InventoryOverlay"
 import client from './utils/db/apolloClient'
 // import 'bootstrap/dist/css/bootstrap.min.css'
 import VideoComponent from './components/StartGame';
-import './css/overlay.css'
+// import './css/overlay.css'
 import EndGame from './components/EndGame';
 import InnerMind from './components/InnerMind';
 import Interaction from "./components/interaction/Interaction"

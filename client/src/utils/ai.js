@@ -110,7 +110,26 @@ console.log(`createResponsePromptFor20Questions()________`, prompt)
 return prompt
 }
 
+export function createPremisePromptForRatingGame() {
+    var prompt = 
+`The user desperately wants the spaceship repair tool to get him back to his home planet. You are only willing to give it to him if he gets a result above a certain threshold on your challenge. (He must receive a score 3/5 or greater to pass). Create a verbal challenge to objectively grade him on such as "Give me your best written impression of Donald Trump" or "Persuade me to buy this pen."
+The verbal challenge should be such that the response doesn't have to be more than 3 sentences.`
 
+console.log(`createPremisePromptForRatingGame()________`, prompt)
+return prompt
+}
+export function createRankingPromptForRatingGame(response) {
+    var prompt = 
+`The user desperately wants the spaceship repair tool to get him back to his home planet. You are only willing to give it to him if he gets a result above a certain threshold on your challenge. (He must receive a score 3/5 or greater to pass).  
+Challenge: "Compose a futuristic haiku that incorporates themes of hope, space travel, and unity. It should adhere to the traditional 5-7-5 syllable count."
+His response: "${response}"
+
+
+Your response must be a very specific number between 1-5. Don't respond with anything other than just the number in quotes or it will mess up the program`
+    
+    console.log(`createRankingPromptForRatingGame()________`, prompt)
+    return prompt
+}
 
 export function formatDialogueForPrompt(dialogueList) {
     var formattedAndInListForm = []
