@@ -1,6 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const GameProxy = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+  function noTokenNoPlay() {
+    const currentToken = localStorage.getItem('nekotsresueht');
+    console.log('currentToken', currentToken);
+    if (currentToken === null) {
+      navigate('/login');
+    }
+  }
+  noTokenNoPlay();
+}, [navigate]);
+
+
+// Rest of your component code
+
+
+
   const iframeStyle = {
     width: '1024px',
     height: '578px',

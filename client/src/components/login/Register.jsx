@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation, gql, useQuery } from '@apollo/client';
+import loadinggif from '../../images/loading.gif'
+import { TOKEN_CHECK } from "../../utils/db/queries";
 
 
 const CREATE_NEW_USER = gql`
@@ -21,6 +23,8 @@ export const Register = (props) => {
     const [pass, setPass] = useState('');
     const [confirmPass, setConfirmPass] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const navigate = useNavigate();
 
@@ -28,6 +32,7 @@ export const Register = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         if (pass !== confirmPass) {
             setErrorMessage("Passwords do not match");
             return;
@@ -49,14 +54,39 @@ export const Register = (props) => {
             navigate('/play')
         }   catch (error) {
             console.error(error);
-            setErrorMessage("Oh no! Barf's Spaceship Has Crashed Into Our Response Object! Try Again Later.")
+            setErrorMessage("response object lost in the sauce")
         }
-    }
+        setIsLoading(false);
+    };
+
+    const currentToken = localStorage.getItem('nekotsresueht')
+    const { data } = useQuery(TOKEN_CHECK, { variables: { token: currentToken }});
+    console.log(data)
+    
+    useEffect(() => {
+        const setLogInStatus = async (e) => {
+            const { userSaveFile } = data;
+            const { token } = userSaveFile;
+            if (token === currentToken) {
+                setIsLoggedIn(true)
+            } else {
+                return;
+            }  
+        };
+        if (data) {
+        setLogInStatus();
+        }
+        if (isLoggedIn) {
+            navigate('/play')
+        }
+    });
+
 
 
     return (
-          <div className="auth-form-container">    
-          <h2>Register</h2>            
+          <div className="auth-form-container">
+            {isLoading && <img src={loadinggif} alt="loading" height="64px"/>}
+            {!isLoading && <h2>Register</h2>}           
         <form className="register-form" onSubmit={handleSubmit}>
             <label htmlFor="name"></label>
             
@@ -71,6 +101,7 @@ export const Register = (props) => {
 
         </form>
         {errorMessage && <div className="error-message">{errorMessage}</div>}
+        {isLoading && <div className="error-message">creating user save file. . .</div>}
         <button className="link-btn" onClick={() => navigate('/login')}> Already have an account? Login here. </button>
         </div>  
     )

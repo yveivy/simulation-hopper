@@ -1,6 +1,5 @@
 const express = require('express');
 const { ApolloServer }= require('apollo-server-express');
-const SaveFileAPI = require('./utils/saveFileAPI')
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const router = require("./api/routes.js");
@@ -15,9 +14,6 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  dataSources: () => ({
-    saveFileAPI: new SaveFileAPI(),
-  }),
   context: ({ req, res }) => {
     const token = req?.headers?.authorization || req?.query?.token || req?.cookies?.token;
     let user = null;
