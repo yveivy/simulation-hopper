@@ -9,7 +9,7 @@ import { DialogueContext } from "../Interaction";
 
 const SpecialFeatures = ({ inventoryItems, setShowAnything, setShowChat, setShowSpecialFeatures }) => {
 
-    const { setDialogueList } = useContext(DialogueContext);
+    const { setDialogueList, handleClose } = useContext(DialogueContext);
 
     useEffect(() => {
       setDialogueList([])
@@ -19,12 +19,6 @@ const SpecialFeatures = ({ inventoryItems, setShowAnything, setShowChat, setShow
         setShowSpecialFeatures(false);
         setShowChat(true);
     };
-    const handleClose = () => {
-        setShowChat(false);
-        setShowSpecialFeatures(false);
-        setShowAnything(false)
-        enableWASD()
-      };
 
   return (
     <div className="interaction-container" id="special-features-container">
@@ -33,7 +27,7 @@ const SpecialFeatures = ({ inventoryItems, setShowAnything, setShowChat, setShow
           <button onClick={handleTab}>Chat</button>
         </nav> 
 
-        <Taylor inventoryItems={inventoryItems} handleClose={handleClose}/>
+        {/* <Taylor inventoryItems={inventoryItems} handleClose={handleClose}/> */}
 
         {window.interactionObject === "violet" &&
           <Violet inventoryItems={inventoryItems} handleClose={handleClose}/>

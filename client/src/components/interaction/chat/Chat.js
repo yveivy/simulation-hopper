@@ -3,13 +3,13 @@ import Dialogue from "./Dialogue"
 import TextInput from "./TextInput"
 import { DialogueContext } from "../Interaction"
 import "../../../css/overlay1.css"
-import { enableWASD } from "../../../utils/interactionMenu";
 import SeerTextInput from "./SeerChat";
+
 
 // export const DialogueContext = createContext();
 
 const Chat = ({ setShowAnything, setShowChat, setShowSpecialFeatures }) => {
-  const { setDialogueList } = useContext(DialogueContext);
+  const { setDialogueList, handleClose } = useContext(DialogueContext);
 
   useEffect(() => {
     setDialogueList([])
@@ -19,12 +19,7 @@ const Chat = ({ setShowAnything, setShowChat, setShowSpecialFeatures }) => {
     setShowChat(false);
     setShowSpecialFeatures(true);
   };
-  const handleClose = () => {
-    setShowChat(false);
-    setShowSpecialFeatures(false);
-    setShowAnything(false)
-    enableWASD()
-  }
+
   if(window.interactionObject === "shaman") {
     return (
       null
