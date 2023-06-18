@@ -5,7 +5,7 @@ import { fetchOneCharacterData } from '../../../utils/db/fetches';
 import "../../../css/overlay1.css"
 import { updateUserObjectives } from '../../../utils/inventory';
 
-export const TextInput = ({specialFeatures=false}) => {
+export const TextInput = ({ specialFeatures=false }) => {
     var interactionObject = window.interactionObject
     // var interactionObject = 'taylor'
 

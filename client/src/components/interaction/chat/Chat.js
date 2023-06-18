@@ -3,7 +3,7 @@ import Dialogue from "./Dialogue"
 import TextInput from "./TextInput"
 import { DialogueContext } from "../Interaction"
 import "../../../css/overlay1.css"
-import SeerTextInput from "./SeerChat";
+
 
 
 // export const DialogueContext = createContext();

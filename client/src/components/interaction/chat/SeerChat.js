@@ -1,8 +1,7 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import InnerMindGif from '../../../images/InnerMindGif.gif';
-// import Chat from './Chat';
-// import Dialogue, { DialogueContext, addDialogue } from './Dialogue.js';
-
+import Dialogue from './Dialogue.js';
+import SeerTextFeatures from '../../interaction/specialFeatures/SeerTextFeatures.js';
 
 const SeerTextInput = () => {
   const [inputText, setInputText] = useState('');
@@ -26,7 +25,7 @@ const SeerTextInput = () => {
     }
   };
 
-  const handleKeyDown = (event) => {
+  const handleEscapeKeyDown = (event) => {
     if (event.key === 'Escape') {
       setShowTextInput(false);
     }
@@ -53,9 +52,9 @@ const SeerTextInput = () => {
   }, []);
 
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keydown', handleEscapeKeyDown);
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keydown', handleEscapeKeyDown);
     };
   }, []);
 
@@ -65,11 +64,8 @@ const SeerTextInput = () => {
 
   return (
     <div className="input-section">
-     {/* <Chat/>
-     <DialogueContext.Provider value={{ dialogueList, addDialogue }}>
-          <Dialogue />
-          <TextInput />
-        </DialogueContext.Provider> */}
+      <Dialogue />
+      <SeerTextFeatures />
       <img src={InnerMindGif} alt="InnerMindGif" className="inside" />
     </div>
   );

@@ -4,7 +4,7 @@ import { enableWASD } from "../../../utils/interactionMenu";
 import Violet from "./Violet"
 import Taylor from "./Taylor"
 import Zara from "./Zara"
-import Seer from "./Seer"
+import Seer from "./SeerTextFeatures"
 import { DialogueContext } from "../Interaction";
 
 const SpecialFeatures = ({ inventoryItems, setShowAnything, setShowChat, setShowSpecialFeatures }) => {
