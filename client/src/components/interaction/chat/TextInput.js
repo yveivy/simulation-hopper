@@ -14,7 +14,7 @@ export const TextInput = ({ specialFeatures=false }) => {
     const [inputText, setInputText] = useState("");
 
     const [secretWord, setSecretWord] = useState("")
-    const [ratingGamePremise, setRatingGamePremise] = useState("")
+    // const [ratingGamePremise, setRatingGamePremise] = useState("")
 
     const playerToken = localStorage.getItem('nekotsresueht')
     const WIN_ITEM = gql`
@@ -32,7 +32,7 @@ export const TextInput = ({ specialFeatures=false }) => {
                 if (interactionObject === "taylor" && dialogueList.length < 1) {
                     var secretWordString = await fetchOpenAiApi(createPremisePromptFor20Questions())
                     setSecretWord(secretWordString)
-                    addDialogue("Taylor Tuck", "Haha I'm so glad you'll humor me. I'm so bored and love to make people play my game. I'm thinking of an animal. Go ahead and ask me questions and I'll respond with yes or no, or if you guess I'll tell you if it's correct.")
+                    addDialogue("Taylor Tuck", "Haha I'm so glad you'll humor me. Go ahead and guess what animal this leather is made out of. I'll respond with yes or no, or if you guess I'll tell you if it's correct.")
                 } 
                 // else if (interactionObject === "zara" && dialogueList.length < 1) {
                     // var ratingGamePremiseString = await fetchOpenAiApi(createPremisePromptForRatingGame())

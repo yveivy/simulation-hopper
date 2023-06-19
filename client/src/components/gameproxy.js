@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import miniMap from '../images/MiniMapWithNames.png';
 
 
 const GameProxy = () => {
@@ -46,7 +47,7 @@ const GameProxy = () => {
     <div style={columnStyle}>
       <h1>Simulation Hopper</h1>
       <iframe src="/game/gameproxy.html" title="SimulationHopper" style={iframeStyle} />
-      <div style={{zIndex: "10000", display:"block", margin: '50px'}}>
+      <div style={{zIndex: "10000", display:"flex", flexDirection:"column", margin: '50px'}}>
         <p style={instructionsStyle}>Press "spacebar" when near an NPC or near your spaceship to interact.</p>
         <br />
         <p style={instructionsStyle}>Press the "r" key at any time ask your robot sidekick for help.</p>
@@ -55,6 +56,7 @@ const GameProxy = () => {
         <p style={instructionsStyle}>Press "e" to view your inventory.</p>
         <br />
         <p style={instructionsStyle}>Use "w" "a" "s" d" keys to move Barf.</p>
+        <img style={{alignSelf: 'center', border: "3px solid white", borderRadius: '10px', margin: '25px'}} src={miniMap} alt="minimap" />
       </div>
     </div>
   );
