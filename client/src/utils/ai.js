@@ -131,6 +131,7 @@ export function createPromptForPoemRating(poem, topic) {
     Just tell me the number in quotes. Don't say anything besides the number in quotes or it will mess up the program.`
 
     console.log('createPromptforPoemRating()_________________________', prompt);
+
     return prompt
 }
 

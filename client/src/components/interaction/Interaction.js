@@ -3,7 +3,7 @@ import { enableWASD } from "../../utils/interactionMenu"
 
 import Chat from "./chat/Chat"
 import SpecialFeatures from "./specialFeatures/SpecialFeatures"
-import "../../css/overlay1.css"
+// import "../../css/overlay1.css"
 
 export const DialogueContext = createContext({
     dialogueList: [],

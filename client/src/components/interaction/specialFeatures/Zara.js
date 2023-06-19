@@ -62,9 +62,8 @@ const Zara = ({inventoryItems, handleClose}) => {
         <div id="zara-container">
             {!inventoryItems.includes("wrench") && !rating && !challengeAccepted  && (
                 <div id="storyline">
-
-                    <p>Zara: Hello interstellar traveler</p> 
-                <p>I'm set for retirement and don't really need anything you're offering to trade, but I do sympathize with your plight and your ship would be easy to repair with the right tool. I really love poetry. If you can recite a short poem on a topic of my choosing, and it pleases me well enough, I'll just give you the spaceship wrench. Would you like to try?</p>
+      
+                <p>Zara: Hello interstellar traveler! I'm set for retirement and don't really need anything you're offering to trade, but I do sympathize with your plight and your ship would be easy to repair with the right tool. I really love poetry. If you can recite a short poem on a topic of my choosing, and it pleases me well enough, I'll just give you the spaceship wrench. Would you like to try?</p>
 
                     <div id="response-options">
 
@@ -107,3 +106,4 @@ const Zara = ({inventoryItems, handleClose}) => {
 
 
 export default Zara; 
+
