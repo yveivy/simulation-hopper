@@ -27,6 +27,12 @@ export const TextInput = ({ specialFeatures=false }) => {
     useEffect(() => {
         const setupSpecialFeature = async () => {
             console.log("specialFeatures_______", specialFeatures)
+
+            if (specialFeatures===true && interactionObject === "taylor" && dialogueList.length < 1) {
+                var secretWordString = await fetchOpenAiApi(createPremisePromptFor20Questions())
+                setSecretWord(secretWordString)
+                addDialogue("Taylor Tuck", "Haha I'm so glad you'll humor me. Go ahead and guess what animal this leather is made out of. I'll respond with yes or no, or if you guess I'll tell you if it's correct.")
+
             if (specialFeatures===true) {
                 if (interactionObject === "taylor" && dialogueList.length < 1) {
                     var secretWordString = await fetchOpenAiApi(createPremisePromptFor20Questions())
@@ -39,6 +45,7 @@ export const TextInput = ({ specialFeatures=false }) => {
                 }
             } else {
                 return
+
             }
         }
         setupSpecialFeature()

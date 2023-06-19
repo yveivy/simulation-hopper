@@ -23,8 +23,13 @@ const SpecialFeatures = ({ inventoryItems, setShowAnything, setShowChat, setShow
   return (
     <div className="interaction-container" id="special-features-container">
         <nav className="interaction-nav">
+
+          <button className="nav-btn" onClick={handleClose}>Close</button>
+          <button className="nav-btn" onClick={handleTab}>Chat</button>
+
           <button onClick={handleClose}>Close</button>
           {/* <button onClick={handleTab}>Chat</button> */}
+
         </nav> 
 
         <Zara inventoryItems={inventoryItems} handleClose={handleClose}/>

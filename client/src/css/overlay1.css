@@ -1,4 +1,8 @@
+
+.interaction-container {
+
 .interaction-container, #special-features-container {
+
     position: absolute; 
     bottom: 10%;
     left: 10%; 
@@ -16,6 +20,30 @@
     
   }
 
+.special-features-container {
+display: flex;
+flex-direction: column;
+  overflow: auto;
+    width: 100%;
+    height: 100%;  
+    font-size: 20px;
+    line-height: 21px;
+    overflow-wrap: break-word;
+    background-color: tan;
+    border: 10px ridge rgb(66, 133, 55);
+
+    /* background: url('../../public/game/images/Dialog-boxVioletBig.png') no-repeat center center / cover; */
+    z-index: 1;
+   position: relative;
+}
+
+#storyline {
+    display: flex;
+    flex-direction: column;
+    margin: 35px;
+    height: 100%;
+    width: 100%;
+}
 
   .interaction-container::before, .special-features-container::before {
     content: "";
@@ -40,7 +68,7 @@
   
 
 
-#dialogue-container, #violet-container {
+#dialogue-container, #violet-container{
     overflow: auto;
     width: 100%;
     height: 100%;  
@@ -48,7 +76,8 @@
     line-height: 21px;
     overflow-wrap: break-word;
     background-color: tan;
-    border: 10px ridge rgb(66, 133, 55);
+
+    border: 0px 0px 10px 0px ridge rgb(66, 133, 55);
 
     /* background: url('../../public/game/images/Dialog-boxVioletBig.png') no-repeat center center / cover; */
     z-index: 1;
@@ -64,6 +93,7 @@
     overflow-y: scroll;
     text-align: justify;
     margin-right: 100px;
+    margin-top: 100px;
     margin-bottom: 100px;
 }
 
@@ -80,7 +110,7 @@
 #text-input-container {
     width: 100%;
     height: 10%; 
-    border-width: 3px 3px 3px 0; 
+    border-width: 3px 0px 0px 0px; 
     border: 10px ridge rgb(66, 133, 55);
 
     justify-content: center;
@@ -95,6 +125,12 @@
 
 }
 
+#game-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 #chat-input-form {
     display: flex;
     width: 100%;
@@ -103,34 +139,51 @@
     padding: 0px;
 }
 
-.close.btn, .trade.btn, .chat.btn {
-    height: 45px;
+.close.btn, .trade.btn,  .nav-btn {
+    width: 60px;
+    height: 30px;
     border-radius: 5px;
     padding: 10px;
-    font-size: 16px;
-    margin: 20 0px;
+    font-size: 14px;
+    margin: 0px 12px 0px 12px;
     background-color: rgb(66, 133, 55);
     color: white;
     border: none;
-    box-shadow: 10px 10px 20px rgba(0,0,0,0.3);
+    /* box-shadow: 10px 10px 20px rgba(0,0,0,0.3); */
     transition: 0.3s ease;
     /* margin-top: 40px;
     margin-right: 20px;
     */
- 
+}
+
+.btn {
+  height: 30px;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+  margin: 0px 12px 0px 12px;
+  background-color: rgb(66, 133, 55);
+  color: white;
+  border: none;
+  /* box-shadow: 10px 10px 20px rgba(0,0,0,0.3); */
+  transition: 0.3s ease;
+}
+
+.response-options {
+  margin-top: auto;
 }
 
 
 .interaction-nav {
-
-    gap: 10px;
-    width: 100%;
-    height: 5%;
-    display: flex;
-
-
-    justify-content: flex-end;
-    position: relative;
-    z-index: 1001;
-   
+  position: absolute;
+  top: 13px;
+  gap: 10px;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-between;
+  /* align-items: space-between; */
+  /* align-content: space-between; */
+  z-index: 1001;
 }
