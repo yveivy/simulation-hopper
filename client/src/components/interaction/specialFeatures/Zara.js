@@ -65,10 +65,10 @@ const Zara = ({inventoryItems, handleClose}) => {
       
                 <p>Zara: Hello interstellar traveler! I'm set for retirement and don't really need anything you're offering to trade, but I do sympathize with your plight and your ship would be easy to repair with the right tool. I really love poetry. If you can recite a short poem on a topic of my choosing, and it pleases me well enough, I'll just give you the spaceship wrench. Would you like to try?</p>
 
-                    <div id="response-options">
+                    <div className="response-options">
 
-                    <button onClick={handleAcceptChallenge}>Accept</button>
-                    <button onClick={handleClose}>Decline</button>
+                        <button className="btn" onClick={handleAcceptChallenge}>Accept</button>
+                        <button className="btn" onClick={handleClose}>Decline</button>
 
                     </div>
                 </div>
