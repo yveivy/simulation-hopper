@@ -24,7 +24,7 @@ const SpecialFeatures = ({ inventoryItems, setShowAnything, setShowChat, setShow
     <div className="interaction-container" id="special-features-container">
         <nav className="interaction-nav">
 
-          <button className="nav-btn" onClick={handleClose}>Close</button>
+          <button id="close-btn"className="nav-btn" onClick={handleClose}>Close</button>
           <button className="nav-btn" onClick={handleTab}>Chat</button>
 
           <button onClick={handleClose}>Close</button>
