@@ -35,10 +35,27 @@ const GameProxy = () => {
     flexDirection: 'column',
     alignItems: 'center'
   }
+
+  const instructionsStyle = {
+    color: "white", 
+    fontSize: "30px",
+    display: "block",
+    margin: "3px"
+  }
   return (
     <div style={columnStyle}>
       <h1>Simulation Hopper</h1>
       <iframe src="/game/gameproxy.html" title="SimulationHopper" style={iframeStyle} />
+      <div style={{zIndex: "10000", display:"block", margin: '50px'}}>
+        <p style={instructionsStyle}>Press "spacebar" when near an NPC or near your spaceship to interact.</p>
+        <br />
+        <p style={instructionsStyle}>Press the "r" key at any time ask your robot sidekick for help.</p>
+        <p style={instructionsStyle}>He knows everything Barf needs to know to leave the planet.</p>
+        <br />
+        <p style={instructionsStyle}>Press "e" to view your inventory.</p>
+        <br />
+        <p style={instructionsStyle}>Use "w" "a" "s" d" keys to move Barf.</p>
+      </div>
     </div>
   );
 };

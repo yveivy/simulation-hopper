@@ -20,7 +20,7 @@ const Taylor = ({inventoryItems, handleClose}) => {
         {!inventoryItems.includes("striders") && !showGame ? (
             <div id="storyline">
                 <p>Taylor Tuck: Hello my pantsless fella. Boy do I have just the thing for you.</p> 
-                <p>I’ll give you a fresh pair of pants if you can guess what I made them out of. I have an artisen’s passion for crafting out of all kinds of materials one may not even think you can make pants out of. Want to play?</p>
+                <p>I’ll give you a fresh pair of pants if you can guess what animal I made the leather for them from. Want to play?</p>
                 <div className="response-options">
                     <button className="btn" onClick={handleClose}>Tell Taylor he can kiss your bare ass</button>
                     <button className="btn" onClick={handleStartGame}>"Let's play"</button>
