@@ -20,7 +20,7 @@ const Dialogue = () => {
   const currentCharacter = `images/characterHeadshots/${window.interactionObject}.png`;
   
   return (
-    <div id="dialogue-container">
+    <div id="dialogue-container" style={{zIndex: "120000000"}}>
       <ul className="dialogue-ul" id="dialogue-text">
         {dialogueList.map((dialogue, index) => (
           <li key={index}>

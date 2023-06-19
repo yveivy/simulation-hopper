@@ -14,7 +14,7 @@ export const TextInput = ({ specialFeatures=false }) => {
     const [inputText, setInputText] = useState("");
 
     const [secretWord, setSecretWord] = useState("")
-    const [ratingGamePremise, setRatingGamePremise] = useState("")
+    // const [ratingGamePremise, setRatingGamePremise] = useState("")
 
     const playerToken = localStorage.getItem('nekotsresueht')
     const WIN_ITEM = gql`
