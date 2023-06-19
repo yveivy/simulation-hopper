@@ -112,7 +112,7 @@ const SeerTextInput = () => {
               zIndex: 1004,
             }}
             id="chat-input"
-            placeholder='Respond to the seer here...'
+            placeholder='Ask of the Seer...'
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={handleTextAreaKeyDown}
