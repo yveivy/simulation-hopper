@@ -50,6 +50,7 @@ const Home = () => {
     <div className='wrapper'>
       <header>
         <h1>Simulation Hopper</h1>
+        <a style={{color:"white", textDecoration: 'white'}}href="/login">Login</a>
       </header>
       <div id="handheldNintendoContainer">
 

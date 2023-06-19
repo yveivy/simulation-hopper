@@ -23,11 +23,11 @@ const SpecialFeatures = ({ inventoryItems, setShowAnything, setShowChat, setShow
   return (
     <div className="interaction-container" id="special-features-container">
         <nav className="interaction-nav">
-          <button onClick={handleClose}>Close</button>
-          <button onClick={handleTab}>Chat</button>
+          <button className="nav-btn" onClick={handleClose}>Close</button>
+          <button className="nav-btn" onClick={handleTab}>Chat</button>
         </nav> 
 
-        {/* <Taylor inventoryItems={inventoryItems} handleClose={handleClose}/> */}
+        <Taylor inventoryItems={inventoryItems} handleClose={handleClose}/>
 
         {window.interactionObject === "violet" &&
           <Violet inventoryItems={inventoryItems} handleClose={handleClose}/>
