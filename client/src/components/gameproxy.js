@@ -50,7 +50,7 @@ const GameProxy = () => {
         <p style={instructionsStyle}>Press "spacebar" when near an NPC or near your spaceship to interact.</p>
         <br />
         <p style={instructionsStyle}>Press the "r" key at any time ask your robot sidekick for help.</p>
-        <p style={instructionsStyle}>He knows everything Barf needs to know to leave the planet.</p>
+        <p style={instructionsStyle}>Robot knows everything Barf needs to know to leave the planet.</p>
         <br />
         <p style={instructionsStyle}>Press "e" to view your inventory.</p>
         <br />
