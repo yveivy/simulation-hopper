@@ -76,10 +76,10 @@
     line-height: 21px;
     overflow-wrap: break-word;
     background-color: tan;
-
+    padding-bottom: 1px;
     border: 10px ridge rgb(66, 133, 55);
 
-
+   
     /* border: 0px 0px 10px 0px ridge rgb(66, 133, 55); */
 
     /* background: url('../../public/game/images/Dialog-boxVioletBig.png') no-repeat center center / cover; */
@@ -87,18 +87,42 @@
     position: relative;
 
 }
-
-
-
-#dialogue-text, #violet-container{
-    width: 100%;
-    height: 100%;
-    overflow-y: scroll;
-    text-align: justify;
-    margin-right: 100px;
-    margin-top: 100px;
-    margin-bottom: 100px;
+#dialogue-container::-webkit-scrollbar, #violet-container::-webkit-scrollbar {
+  width: 0.5em;
+  background-color: transparent;
 }
+
+
+
+
+#dialogue-text, #violet-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  text-align: justify;
+  margin-right: 100px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+#dialogue-text::-webkit-scrollbar, #violet-container::-webkit-scrollbar {
+  width: 0.5em;
+  background-color: transparent;
+}
+
+
+#dialogue-text, #violet-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  text-align: justify;
+  margin-right: 100px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  position: relative; /* Add this line */
+}
+
+
 
 #dialogue-img {
     position: absolute;
@@ -122,11 +146,20 @@
   
 }
 
+#text-input-container::-webkit-scrollbar {
+  width: 0.5em;
+  background-color: transparent;
+}
 
-#chat-input {
+#text-input-container::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+
+/* #chat-input {
     overflow: scroll;
 
-}
+} */
 
 #game-container {
   height: 100%;
