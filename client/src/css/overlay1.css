@@ -34,12 +34,17 @@ flex-direction: column;
    position: relative;
 }
 
+#zara-container {
+  height: 100%;
+}
+
 #storyline {
     display: flex;
     flex-direction: column;
     margin: 35px;
-    height: 100%;
+    height: 80%;
     width: 100%;
+    margin: 50px;
 }
 
   .interaction-container::before, .special-features-container::before {
