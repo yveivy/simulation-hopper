@@ -135,6 +135,36 @@ export function createPromptForPoemRating(poem, topic) {
     return prompt
 }
 
+export function createNextPromptForTextEnvironmentGame(environmentAndContainer, history) {
+    var prompt = 
+`The user is navigating a text based environment and searching for a container of some sort. The user should find it in 3 directions or less ideally. If they find it, return "found".
+
+${environmentAndContainer}
+
+
+This is the log of the user's directions and previous descriptions of the environment:
+${history}
+
+
+Your response should be one of two things:
+Unless the user mentions whatever the container is, describe the current scene in response to the User's most recent navigation command while dropping hints about where the container is. (Put your description in quotes with nothing outside of quotes or it will mess up the program.)
+
+If the user HAS mentioned whatever the container is, simply return in quotes: “found”. (Don't say any extra words or it will mess up the program.)`
+    console.log("createNextPromptForTextEnvironmentGame______", prompt)    
+    return prompt
+}
+
+export function createPremisePromptForTextEnvironmentGame() {
+    var prompt =
+`You are creating a concept for a text based environment for the user to navigate. The user's goal while navigating the environment is find "the key to the user's success" stored in a container. (what the container is will depend on what the concept of the environment is. ie if I'm navigating old man's childhood home, the container might be a sock drawer. The container shouldn't have a lock on it or anything. It should be something that is easy to open when you find it.) The environment should be relatively small area and should be described in 3 sentences or less, and ideally the container would be fairly obvious to find.
+Let me know an overview description for the text based environment and what the target container in the environment will be. Put your response in the following format:
+{"environmentOverview": "example concept", "container": "example container"}`
+    console.log("createPremisePromptForTextEnvironmentGame____________", prompt)
+    return prompt
+}
+
+
+
 export function formatDialogueForPrompt(dialogueList) {
     var formattedAndInListForm = []
     dialogueList.forEach((dialogue, index) => (
