@@ -105,7 +105,7 @@ const SeerTextInput = () => {
         // setDialogueList([{speaker:"Barf",text:"****"}])
         addDialogue("Barf", `*Blinks as if waking up from a deep sleep and looks around...*`)
         addDialogue("Description", environmentOverview)
-        addDialogue("Seer", "You can find the secret to your success within a container in this environment. Type to navigate.")
+        addDialogue("Seer", "You can find the secret to your success within a container in this environment. (Type to navigate.)")
 
         return () => {
           clearTimeout(timer);
@@ -134,7 +134,7 @@ const SeerTextInput = () => {
     <div className="input-section">
       <div id="seer-dialogue">
           <div id="seer-dialogue-container" style={{zIndex: "120000000"}}>
-          <ul id="seer-text" style={{color: "white"}}>
+          <ul id="seer-text" style={{color: "white", width: '90%', textAlign:"left"}}>
             {dialogueList.map((dialogue, index) => (
               <li key={index}>
                 {dialogue.speaker}: {dialogue.text}
