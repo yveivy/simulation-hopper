@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react'
-import { createPremisePromptForRatingGame, createRankingPromptForRatingGame, createPremisePromptFor20Questions, createPromptForNpcResponseToChat, createPromptRobotResponseToChat, createResponsePromptFor20Questions, fetchOpenAiApi, formatDialogueForPrompt } from '../../../utils/ai';
+import {  createPremisePromptFor20Questions, createPromptForNpcResponseToChat, createPromptRobotResponseToChat, createResponsePromptFor20Questions, fetchOpenAiApi, formatDialogueForPrompt } from '../../../utils/ai';
 import { DialogueContext} from '../Interaction';
 import { fetchOneCharacterData } from '../../../utils/db/fetches';
 // import "../../../css/overlay1.css"
@@ -27,30 +27,25 @@ export const TextInput = ({ specialFeatures=false }) => {
     useEffect(() => {
         const setupSpecialFeature = async () => {
             console.log("specialFeatures_______", specialFeatures)
-
-            if (specialFeatures===true && interactionObject === "taylor" && dialogueList.length < 1) {
-                var secretWordString = await fetchOpenAiApi(createPremisePromptFor20Questions())
-                setSecretWord(secretWordString)
-                addDialogue("Taylor Tuck", "Haha I'm so glad you'll humor me. Go ahead and guess what animal this leather is made out of. I'll respond with yes or no, or if you guess I'll tell you if it's correct.")
-
+    
             if (specialFeatures===true) {
                 if (interactionObject === "taylor" && dialogueList.length < 1) {
                     var secretWordString = await fetchOpenAiApi(createPremisePromptFor20Questions())
                     setSecretWord(secretWordString)
                     addDialogue("Taylor Tuck", "Haha I'm so glad you'll humor me. I'm so bored and love to make people play my game. I'm thinking of an animal. Go ahead and ask me questions and I'll respond with yes or no, or if you guess I'll tell you if it's correct.")
-                } else if (interactionObject === "zara" && dialogueList.length < 1) {
-                    var ratingGamePremiseString = await fetchOpenAiApi(createPremisePromptForRatingGame())
-                    setRatingGamePremise(ratingGamePremiseString)
-                    addDialogue("Zara Sparks", `If you pass my challenge I'll help you. ${ratingGamePremiseString}`)
-                }
+                } 
+                // else if (interactionObject === "zara" && dialogueList.length < 1) {
+                    // var ratingGamePremiseString = await fetchOpenAiApi(createPremisePromptForRatingGame())
+                    // setRatingGamePremise(ratingGamePremiseString)
+                    // addDialogue("Zara Sparks", `If you pass my challenge I'll help you. ${ratingGamePremiseString}`)
+                // }
             } else {
                 return
-
             }
         }
         setupSpecialFeature()
-    }, [addDialogue, setSecretWord, dialogueList.length, interactionObject, specialFeatures])
-  
+    }, [addDialogue, setSecretWord, dialogueList, interactionObject, specialFeatures])
+    
 
     const handleSubmit = async (event) => {
         
@@ -92,27 +87,28 @@ export const TextInput = ({ specialFeatures=false }) => {
                     //close window
                     setTimeout(handleClose, 10000)
                 }
-            } else if (interactionObject === "zara") {
-                npcFullName = "Zara Sparks"
-                addDialogue("Barf", inputText)
-                prompt = createRankingPromptForRatingGame(inputText)
-                var ranking = await fetchOpenAiApi(prompt)
-                try {
-                    ranking = parseInt(ranking);
-                    if (isNaN(ranking)) throw new Error('createRankingPromptForRatingGame() did not return an integer');
-                } catch (error) {
-                    console.error(error);
-                    ranking = createRankingPromptForRatingGame(secretWord, inputText);
-                }
-                if (ranking >= 3) {
-                    npcResponse = `I'm quite impressed. I'd rate that as a ${ranking}. Thank you for making my day. I'll try to help you get home now Barf. *Zara puts the Spaceship Repair Tool in Barf's inventory*`
-                    //swap pants to barf's inventory
-                    //close window
-                    setTimeout(handleClose, 10000)
-                } else {
-                    npcResponse = `I rate that as a ${ranking}. You're gonna have to work harder than that to impress me. You're welcome to try again.`
-                }
             }
+            //  else if (interactionObject === "zara") {
+            //     npcFullName = "Zara Sparks"
+            //     addDialogue("Barf", inputText)
+            //     // prompt = createRankingPromptForRatingGame(inputText)
+            //     var ranking = await fetchOpenAiApi(prompt)
+            //     try {
+            //         ranking = parseInt(ranking);
+            //         if (isNaN(ranking)) throw new Error('createRankingPromptForRatingGame() did not return an integer');
+            //     } catch (error) {
+            //         console.error(error);
+            //         // ranking = createRankingPromptForRatingGame(secretWord, inputText);
+            //     }
+            //     if (ranking >= 3) {
+            //         npcResponse = `I'm quite impressed. I'd rate that as a ${ranking}. Thank you for making my day. I'll try to help you get home now Barf. *Zara puts the Spaceship Repair Tool in Barf's inventory*`
+            //         //swap pants to barf's inventory
+            //         //close window
+            //         setTimeout(handleClose, 10000)
+            //     } else {
+            //         npcResponse = `I rate that as a ${ranking}. You're gonna have to work harder than that to impress me. You're welcome to try again.`
+            //     }
+            // }
         } else {
             addDialogue('Barf', inputText);
             chatHistory = formatDialogueForPrompt(localCopyOfDialogueList)
