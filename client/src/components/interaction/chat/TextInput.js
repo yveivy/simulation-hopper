@@ -7,8 +7,8 @@ import { updateUserObjectives } from '../../../utils/inventory';
 import { useMutation, gql } from '@apollo/client';
 
 export const TextInput = ({ specialFeatures=false }) => {
-    // var interactionObject = window.interactionObject
-    var interactionObject = 'taylor'
+    var interactionObject = window.interactionObject
+    // var interactionObject = 'taylor'
 
     const { addDialogue, dialogueList, handleClose } = useContext(DialogueContext);
     const [inputText, setInputText] = useState("");

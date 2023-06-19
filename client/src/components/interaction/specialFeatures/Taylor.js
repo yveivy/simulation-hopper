@@ -27,7 +27,7 @@ const Taylor = ({inventoryItems, handleClose}) => {
                 </div>
             </div>
         ) : (
-        <div className="interaction-container" id="chat-container">
+        <div id="game-container">
 
                 <Dialogue />
                 <TextInput specialFeatures={true}/>
