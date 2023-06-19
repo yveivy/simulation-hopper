@@ -110,7 +110,30 @@ console.log(`createResponsePromptFor20Questions()________`, prompt)
 return prompt
 }
 
+//Zara Poetry Game
 
+export function createPromptForPoemChallenge() {
+    var prompt = 
+    `You are an AI npc in a sci-fi themed RPG called simulation hopper. The user has landed on a planet, and he is trying to interact with a few of the NPCs to get the items he needs to leave. What he needs from you is a tool to repair his spaceship that was damaged when it crash landed. You really aren't interested in anything he has to trade but you are willing to let him earn the tool. You like poetry and if he is willing to recite a poem that you like, you will happily give him the tool he is looking for. To generate the challenge you will generate a topic for the user to write a poem about. The topic can be anything ranging from nature, emotions, to abstract concepts. Just tell me the word in quotes. Don't say anything besides the word in quotes or it will mess up the program. `
+    return prompt
+}
+
+export function createPromptForPoemRating(poem, topic) {
+    var prompt =
+    `You are an AI asked to rate a user-submitted poem based on the given topic. The poem the user submitted is:
+    
+    "${poem}"
+    
+    The topic they were asked to write about is "${topic}".
+    
+    Please rate the poem on a scale from 1 to 5, with 5 being the highest. The rating should be based on how well the poem adheres to the topic and its overall quality.
+    
+    Just tell me the number in quotes. Don't say anything besides the number in quotes or it will mess up the program.`
+
+    console.log('createPromptforPoemRating()_________________________', prompt);
+
+    return prompt
+}
 
 export function formatDialogueForPrompt(dialogueList) {
     var formattedAndInListForm = []

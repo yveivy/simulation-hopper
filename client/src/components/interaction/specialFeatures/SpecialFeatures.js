@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from "react"
-import "../../../css/overlay1.css"
+// import "../../../css/overlay1.css"
 import { enableWASD } from "../../../utils/interactionMenu";
 import Violet from "./Violet"
 import Taylor from "./Taylor"
@@ -23,11 +23,16 @@ const SpecialFeatures = ({ inventoryItems, setShowAnything, setShowChat, setShow
   return (
     <div className="interaction-container" id="special-features-container">
         <nav className="interaction-nav">
+
           <button className="nav-btn" onClick={handleClose}>Close</button>
           <button className="nav-btn" onClick={handleTab}>Chat</button>
+
+          <button onClick={handleClose}>Close</button>
+          {/* <button onClick={handleTab}>Chat</button> */}
+
         </nav> 
 
-        {/* <Taylor inventoryItems={inventoryItems} handleClose={handleClose}/> */}
+        <Zara inventoryItems={inventoryItems} handleClose={handleClose}/>
 
         {window.interactionObject === "violet" &&
           <Violet inventoryItems={inventoryItems} handleClose={handleClose}/>
