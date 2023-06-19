@@ -1,60 +1,109 @@
-import React, {useState} from "react"
-// import "../../../css/overlay1.css"
-import Dialogue from "../chat/Dialogue"
-import TextInput from "../chat/TextInput";
-import {fetchOpenAiApi, createPremisePromptFor20Questions} from "../../../utils/ai"
+import React, { useState } from "react";
+import "../../../css/overlay1.css"
+import {fetchOpenAiApi, createPromptForPoemChallenge, createPromptForPoemRating} from "../../../utils/ai"
 
 
-// Setup special feature for zara:
-// -ai.js createPremisePromptForRatingGame
-// -ai.js createRankingPromptForRatingGame
-// Ensure prompt response is a ranking:
-// -ai.js ensureRanking function
-// Recursive try catch (/if else) (try checks for number between 1-5), (catch calls itself). 
-// -specialFeatures.js  
-// Switch conditional on interactionObject check for zara-> Zara.js
-// -Zara.js fetchInventory(barf)
-// If !repairTool:
-// Text (b:*sees the tool to repair a ship in Zara’s inventory* Z: I get so bored out here. I’ll give you the tool and help you fix your ship if you humor me and beat my challlenge)
-// Button (accept challenge):
-
-// Button (tell her to F off) (same as escape button (pass as prop to Zara component)
-// Else (already has repair tool):
-// <Dialogue (ZaraDialogue.js?) />
-// <InputText  />  ( createDialogueListForZaraGame() )
-// 1. Premise
-// 2. Ranking
-// 3. End challenge conditional message (fail, success, ( repairTool ? Victory scene and inventory swap) play again button hides than reloads the Zara component 
 
 
-const Taylor = ({inventoryItems, handleClose}) => {
-    const [showGame, setShowGame] = useState(false);
+const Zara = ({inventoryItems, handleClose}) => {
+    const [rating, setRating] = useState(false);
+    const [challengeAccepted, setChallengeAccepted] = useState(false);
+    const [repairToolAcquired, setRepairToolAcquired] = useState(false);
+    const[challengeFailed, setChallengeFailed] = useState(false);
+    const [Retry, setRetry] = useState(true);
+    const[poemTopic, setPoemTopic] = useState(" ");
+    const [userPoem, setUserPoem] = useState(" ");
 
-    const handleStartGame = async () => {
-        setShowGame(true);
-    }
+    console.log('challengeAccepted:', challengeAccepted);
+    console.log('repairToolAcquired:', repairToolAcquired);
 
-    inventoryItems = ["none"]
+    const handleAcceptChallenge = async () => {
+        const prompt = createPromptForPoemChallenge();
+        const response = await fetchOpenAiApi(prompt);
+        console.log('response from fetchOpenAiApi', response);
+        const topic = response.trim();
+        setPoemTopic(topic);
+        setChallengeAccepted(true);
+        console.log('handleAcceptChallenge completed successfully.')
+    };
 
-  return (
-        <div id="taylor-container">
-        {!inventoryItems.includes("repairTool") && !showGame ? (
-            <div id="storyline">
-                <p>*Barf sees the tool to repair a ship in Zara’s inventory*</p>
-                <p> Zara Sparks: I get so bored out here. I’ll give you the tool and help you fix your ship if you humor me and beat my challenge</p>
-                <div id="response-options">
-                    <button onClick={handleClose}>"Yeah right"</button>
-                    <button onClick={handleStartGame}>Accept Challenge</button>
+    const handleFinishChallenge = async (userPoem) => {
+        console.log(userPoem);
+        const poemText = userPoem;
+        const prompt = createPromptForPoemRating(poemText, poemTopic);
+        const response = await fetchOpenAiApi(prompt);
+        const rating = parseInt(response.replace(/"/g, ''));
+
+
+        setRating(rating);
+
+        if (rating >= 4 ){
+            setRepairToolAcquired(true);
+        } else {
+            setChallengeFailed(true);
+            setRetry(true);
+        }
+    };
+
+    const handlePoemInputChange = (e) => {
+        setUserPoem(e.target.value);
+    };
+
+    const handleRetryChallenge = () => {
+       setChallengeAccepted(false);
+       setRepairToolAcquired(false);
+       setChallengeFailed(false);
+       setRetry(true);
+    };
+
+
+
+    return (
+        <div id="zara-container">
+            {!inventoryItems.includes("wrench") && !rating && !challengeAccepted  && (
+                <div id="storyline">
+      
+                <p>Zara: Hello interstellar traveler! I'm set for retirement and don't really need anything you're offering to trade, but I do sympathize with your plight and your ship would be easy to repair with the right tool. I really love poetry. If you can recite a short poem on a topic of my choosing, and it pleases me well enough, I'll just give you the spaceship wrench. Would you like to try?</p>
+
+                    <div id="response-options">
+
+                    <button onClick={handleAcceptChallenge}>Accept</button>
+                    <button onClick={handleClose}>Decline</button>
+
+                    </div>
                 </div>
-            </div>
-        ) : (
-        <div className="interaction-container" id="chat-container">
-            <Dialogue />
-            <TextInput specialFeatures={true}/>
-        </div>
-        )}
-        </div>
-  )
-}
+            )}
 
-export default Taylor;
+            {challengeAccepted && !repairToolAcquired && (
+                <div>
+                <p>Zara: I'm so happy to find a fellow poet. String some words together about "{poemTopic}". Just to warn you, I'll be brutally honest, as I can't stand poetry hack jobs. I'd rather listen to the clang of metal than a botched poem.</p>
+                <textarea value={userPoem} 
+                onChange={handlePoemInputChange} 
+                placeholder="Enter your poem here" />
+                <button onClick={() => handleFinishChallenge(userPoem)}>Submit</button>
+                </div>
+            )}
+
+            {repairToolAcquired && (
+                <div>
+                    <p>Zara: Congratulations! You've earned the tool to repair your ship. Good luck!</p>
+                    </div>
+            )} 
+            
+            {/* Zara should pass the wrench item to Barf after this runs, if repairToolAcquired is true */}
+
+            {challengeFailed && (
+                <div>
+                    <p>Zara: Sorry, but your poem wasn't good enough. I'd rather listen to the clang of metal. Try again if you think you can improve.</p>
+                    {Retry && <button onClick={handleRetryChallenge}>Try Again</button>}
+                    </div>
+            )}
+
+        </div>
+    );
+};
+
+
+
+export default Zara; 
+

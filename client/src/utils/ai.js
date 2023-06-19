@@ -110,24 +110,28 @@ console.log(`createResponsePromptFor20Questions()________`, prompt)
 return prompt
 }
 
-export function createPremisePromptForRatingGame() {
-    var prompt = 
-`The user desperately wants the spaceship repair tool to get him back to his home planet. You are only willing to give it to him if he gets a result above a certain threshold on your challenge. (He must receive a score 3/5 or greater to pass). Create a verbal challenge to objectively grade him on such as "Give me your best written impression of Donald Trump" or "Persuade me to buy this pen."
-The verbal challenge should be such that the response doesn't have to be more than 3 sentences.`
+//Zara Poetry Game
 
-console.log(`createPremisePromptForRatingGame()________`, prompt)
-return prompt
+export function createPromptForPoemChallenge() {
+    var prompt = 
+    `You are an AI npc in a sci-fi themed RPG called simulation hopper. The user has landed on a planet, and he is trying to interact with a few of the NPCs to get the items he needs to leave. What he needs from you is a tool to repair his spaceship that was damaged when it crash landed. You really aren't interested in anything he has to trade but you are willing to let him earn the tool. You like poetry and if he is willing to recite a poem that you like, you will happily give him the tool he is looking for. To generate the challenge you will generate a topic for the user to write a poem about. The topic can be anything ranging from nature, emotions, to abstract concepts. Just tell me the word in quotes. Don't say anything besides the word in quotes or it will mess up the program. `
+    return prompt
 }
-export function createRankingPromptForRatingGame(response) {
-    var prompt = 
-`The user desperately wants the spaceship repair tool to get him back to his home planet. You are only willing to give it to him if he gets a result above a certain threshold on your challenge. (He must receive a score 3/5 or greater to pass).  
-Challenge: "Compose a futuristic haiku that incorporates themes of hope, space travel, and unity. It should adhere to the traditional 5-7-5 syllable count."
-His response: "${response}"
 
-
-Your response must be a very specific number between 1-5. Don't respond with anything other than just the number in quotes or it will mess up the program`
+export function createPromptForPoemRating(poem, topic) {
+    var prompt =
+    `You are an AI asked to rate a user-submitted poem based on the given topic. The poem the user submitted is:
     
-    console.log(`createRankingPromptForRatingGame()________`, prompt)
+    "${poem}"
+    
+    The topic they were asked to write about is "${topic}".
+    
+    Please rate the poem on a scale from 1 to 5, with 5 being the highest. The rating should be based on how well the poem adheres to the topic and its overall quality.
+    
+    Just tell me the number in quotes. Don't say anything besides the number in quotes or it will mess up the program.`
+
+    console.log('createPromptforPoemRating()_________________________', prompt);
+
     return prompt
 }
 

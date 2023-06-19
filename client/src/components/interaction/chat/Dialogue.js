@@ -16,8 +16,8 @@ import { DialogueContext} from '../Interaction';
 const Dialogue = () => {
 
   const { dialogueList } = useContext(DialogueContext)
-
-  const currentCharacter = `game/images/characterHeadshots/${window.interactionObject}.png`;
+//added game to url so deleted to fix repeat
+  const currentCharacter = `images/characterHeadshots/${window.interactionObject}.png`;
   
   return (
     <div id="dialogue-container">
