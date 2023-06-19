@@ -27,12 +27,12 @@ const SpecialFeatures = ({ inventoryItems, setShowAnything, setShowChat, setShow
           <button id="close-btn"className="nav-btn" onClick={handleClose}>Close</button>
           <button className="nav-btn" onClick={handleTab}>Chat</button>
 
-          <button onClick={handleClose}>Close</button>
+          {/* <button onClick={handleClose}>Close</button> */}
           {/* <button onClick={handleTab}>Chat</button> */}
 
         </nav> 
 
-        <Zara inventoryItems={inventoryItems} handleClose={handleClose}/>
+        {/* <Zara inventoryItems={inventoryItems} handleClose={handleClose}/> */}
 
         {window.interactionObject === "violet" &&
           <Violet inventoryItems={inventoryItems} handleClose={handleClose}/>
