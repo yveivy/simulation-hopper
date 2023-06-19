@@ -16,7 +16,7 @@ import "../../../css/overlay1.css"
 const Dialogue = () => {
 
   const { dialogueList } = useContext(DialogueContext)
-
+//added game to url so deleted to fix repeat
   const currentCharacter = `images/characterHeadshots/${window.interactionObject}.png`;
   
   return (
