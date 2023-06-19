@@ -101,7 +101,7 @@ const Violet = ({inventoryItems, handleClose}) => {
             <div id="sees-and-requests-elixer">
               <p>*Barf sees the botanical elixir in Violet’s inventory*<br/><br/> 
               Barf: I have traveled the galaxy to find that. My planet is in desperate need. Plant life has nearly completely died off and needs to be restored.</p>
-              <button onClick={requestElixerHandler}>Request Botanical Elixir</button>
+              <button id="violet-btn" onClick={requestElixerHandler}>Request Botanical Elixir</button>
             </div>
           ) : (
             <div>
