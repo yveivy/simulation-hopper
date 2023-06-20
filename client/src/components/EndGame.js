@@ -14,7 +14,7 @@ const EndGame = () => {
                 } catch {
                     console.log("interactionOverlay.js retrieveInventoryData() failed")
                     return
-                }
+                } 
                 const endGameItems = ['Botanical Elixir ', 'Aetheric Spanner']
                 const hasEndGameItems = endGameItems.every(item => window.globalVars.userInventoryItems.includes(item))
                 if (hasEndGameItems) {
