@@ -87,7 +87,7 @@ const Violet = ({inventoryItems, handleClose}) => {
   }
   const hasMetViolet = localStorage.getItem('hasMetViolet')
   return (
-    <div id="violet-container" className="flex-column">
+    <div id="violet-container" className="flex-column" style={{height:"100%", margin: "0px"}}>
       {awaitingInventoryCheck && !hasMetViolet ? (
         <div>
           <p>Violet: Hey you! You don't look like you are from around here! Did you hear that loud boom earlier?</p>
@@ -95,17 +95,17 @@ const Violet = ({inventoryItems, handleClose}) => {
       ) : (
         <>
           {!violetHasElixir && hasMetViolet ? (
-            <div>
+            <div style={{margin: "60px"}}>
               <p>Godspeed Barf, my short king! Use the elixir to save your home planet!</p>
             </div>
           ) : showSeesAndRequestsElixir && violetHasElixir && !barfHasPants ? (
-            <div id="sees-and-requests-elixer">
+            <div style={{margin: "60px"}} id="sees-and-requests-elixer">
               <p>*Barf sees the botanical elixir in Violet’s inventory*<br/><br/> 
               Barf: I have traveled the galaxy to find that. My planet is in desperate need. Plant life has nearly completely died off and needs to be restored.</p>
               <button id="violet-btn" onClick={requestElixerHandler}>Request Botanical Elixir</button>
             </div>
           ) : (
-            <div>
+            <div style={{margin: "60px"}}>
               {barfHasPants && showSeesAndRequestsElixir && (
                 <>
                   <p>*Barf and Violet slowly falling in love*</p>
@@ -116,7 +116,7 @@ const Violet = ({inventoryItems, handleClose}) => {
           )}
 
           {showElixirRequestResponse && (
-            <div id="elixer-request-response">
+            <div style={{margin: "60px"}} id="elixer-request-response">
               {!barfHasPants ? (
                 <p>Violet Meadows: EW! How about you put on some pants before approaching a lady like me!?</p>
               ) : barfHasPants && awaitingTransfer ? (
