@@ -84,10 +84,10 @@ const Zara = ({inventoryItems, handleClose}) => {
             {challengeAccepted && !repairToolAcquired && (
                 <div>
                 <p>Zara: I'm so happy to find a fellow poet. String some words together about "{poemTopic}". Just to warn you, I'll be brutally honest, as I can't stand poetry hack jobs. I'd rather listen to the clang of metal than a botched poem.</p>
-                <textarea value={userPoem} 
+                <textarea className="zara-input"  value={userPoem} 
                 onChange={handlePoemInputChange} 
                 placeholder="Enter your poem here" />
-                <button onClick={() => handleFinishChallenge(userPoem)}>Submit</button>
+                <button className="zara-button" onClick={() => handleFinishChallenge(userPoem)}>Submit</button>
                 </div>
             )}
 
@@ -102,7 +102,7 @@ const Zara = ({inventoryItems, handleClose}) => {
             {challengeFailed && (
                 <div style={{margin:"60px", display: "flex", flexDirection:"column"}}>
                     <p>Zara: Sorry, but i'd rate your poem as {rating}/5, and that's not good enough. I'd rather listen to the clang of metal. Try again if you think you can improve.</p>
-                    {Retry && <button onClick={handleRetryChallenge}>Try Again</button>}
+                    {Retry && <button className="zara-button" onClick={handleRetryChallenge}>Try Again</button>}
                     </div>
             )}
 
