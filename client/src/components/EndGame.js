@@ -1,46 +1,44 @@
-import React, { useEffect } from "react"
-import { retrieveInventoryData} from "../utils/inventory";
-import EndGameGif from "../images/EndGameGif.gif"
+import React, { useEffect, useState } from 'react';
+import EndGameGif from '../images/EndGameGif.gif';
+
 const EndGame = () => {
+  const [renderComponent, setRenderComponent] = useState(false);
 
-    useEffect(() => {
-        const handleKeyDown = async (e) => {
-            if (e.key === 'w' || e.key === 'a' || e.key === 's' || e.key === 'd' || e.key === 'e') {
-                return
-            }
-            if (e.key === ' ' && window.interactionObject === 'Spaceship') {
-                try {
-                    retrieveInventoryData()
-                } catch {
-                    console.log("interactionOverlay.js retrieveInventoryData() failed")
-                    return
-                }
-                const endGameItems = ['Botanical Elixir ', 'Aetheric Spanner']
-                const hasEndGameItems = endGameItems.every(item => window.globalVars.userInventoryItems.includes(item))
-                if (hasEndGameItems) {
-                    console.log("endGame.js gameWin!")
-                    //! uncomment this function call after moving slideshow functions from gameboard to react: endGame()
-                    //! possibly use this function depending on new endgame logic fetchResetInventoryData()
-                } else {
-                    console.log("interactionMenu.js eventListener: You can't leave in your spaceship yet. You need to get something to restore the plantlife on your home planet and something to repair your ship.")
-                    //ToDo: render message on the screen to the effect of "You can't leave in your spaceship yet. You need to get something to restore plantlife on your planet and something to repair your ship."
-                    return
-                }  
-            }
-        }
+  useEffect(() => {
+    const handleKeyDown = async (e) => {
+      if (
+        e.key === 'w' ||
+        e.key === 'a' ||
+        e.key === 's' ||
+        e.key === 'd' ||
+        e.key === 'e'
+      ) {
+        return;
+      }
+      if (
+        e.key === ' ' &&
+        window.interactionObject === 'Spaceship' &&
+        localStorage.getItem('repairTool') === 'true'
+      ) {
+        setRenderComponent(true);
+        setTimeout(() => {
+          setRenderComponent(false);
+        }, 32000); // 32 seconds
+      }
+    };
 
-        window.addEventListener("keydown", handleKeyDown)
+    window.addEventListener('keydown', handleKeyDown);
 
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    }, []);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
+  return renderComponent ? (
+    <div>
+      <EndGameGif />
+    </div>
+  ) : null;
+};
 
-    return (
-        <div>
-<EndGameGif />
-        </div>
-        )
-}
-export default EndGame
+export default EndGame;
