@@ -2,32 +2,75 @@ import React, { useState, useEffect, useContext } from 'react';
 import InnerMindGif from '../../../images/InnerMindGif.gif';
 import Dialogue from './Dialogue.js';
 import SeerTextFeatures from '../../interaction/specialFeatures/SeerTextFeatures.js';
-import { fetchOpenAiApi } from '../../../utils/ai';
+import { formatDialogueForPrompt, fetchOpenAiApi, createNextPromptForTextEnvironmentGame, createPremisePromptForTextEnvironmentGame, createPremisePromptFor20Questions} from '../../../utils/ai';
 import { DialogueContext } from '../Interaction';
 
 const SeerTextInput = () => {
   const [inputText, setInputText] = useState('');
   const [showTextInput, setShowTextInput] = useState(false);
-  const [dialogueList, setDialogueList] = useState([{"speaker": "testSpeaker", "text": "testText"}]);
+  const [dialogueList, setDialogueList] = useState([]);
+  const [environmentAndContainer, setEnvironmentAndContainer] = useState("")
 
   const addDialogue = (speaker, text) => {
     setDialogueList((prevDialogueList) => [...prevDialogueList, { speaker, text }]);
   };
 
+  const parseJsonString = (jsonData, property) =>{
+    let parsedData = JSON.parse(jsonData);
+    return parsedData[property];
+}
+
+// setDialogueList([])
+
+// useEffect(() => {
+//   const setupSpecialFeature = async () => {
+//       //   setTimeout(function() {
+//       //     console.log("This message is displayed after a 10 second delay.");
+//       // }, 10000);
+//       if (dialogueList.length < 1 && environmentAndContainer === "" && window.interactionObject === 'shaman') {
+//           // addDialogue("****", `******`) //placeholder
+//           var environmentAndContainerString = await fetchOpenAiApi(createPremisePromptForTextEnvironmentGame())
+//           // var environmentAndContainerString= `{"environmentOverview": "example concept", "container": "example container"}`
+//           setEnvironmentAndContainer(environmentAndContainerString)
+//           let environmentOverview = parseJsonString(environmentAndContainerString, 'environmentOverview');
+//           // setDialogueList([{speaker:"Barf",text:"****"}])
+//           addDialogue("Barf", `*Blinks as if waking up from a deep sleep and looks around...*`)
+//           addDialogue("Description", environmentOverview)
+//           addDialogue("Seer", "You can find the secret to your success within a container in this environment. Type to navigate.")
+//         }
+//   }
+//   setupSpecialFeature()
+// }, [])
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Placeholder logic for handling submission
+    const localCopyOfDialogueList = [...dialogueList, {speaker: 'Barf', text: inputText}]; //local copy
+    // // Placeholder logic for handling submission
+    var chatHistory = formatDialogueForPrompt(localCopyOfDialogueList.slice(3))
+    console.log('chatHistory___', chatHistory)
     addDialogue('Barf', inputText)
-    // prompt = createResponsePromptFor20Questions(secretWord, inputText)
-    var npcResponse = await fetchOpenAiApi(inputText)
-    addDialogue("Seer", npcResponse)
-
+    var prompt = createNextPromptForTextEnvironmentGame(environmentAndContainer, chatHistory)
+    var npcResponse = await fetchOpenAiApi(prompt)
+    if (npcResponse.includes(`found`)) {
+      var container = parseJsonString(environmentAndContainer, 'container');
+      addDialogue("Seer", `You have found the secret to your success inside ${container}!`)
+      addDialogue("Seer", `The secret to yourself is these talented engineers:`)
+      addDialogue("engineer", `https://www.linkedin.com/in/j-seybold-0a737627a/`)
+      addDialogue("engineer", `https://www.linkedin.com/in/edward-wells87/`)
+      addDialogue("engineer", `https://www.linkedin.com/in/yevette-hunt/`)
+      addDialogue("engineer", `https://www.linkedin.com/in/willrcline/`)
+    }
+     else {
+       console.log('else')
+      addDialogue("Description", npcResponse)
+    }
     console.log('Submitted:', inputText);
     setInputText('');
   };
 
   const handleInputChange = (event) => {
+    event.preventDefault()
     setInputText(event.target.value);
   };
 
@@ -41,17 +84,29 @@ const SeerTextInput = () => {
   const handleEscapeKeyDown = (event) => {
     if (event.key === 'Escape') {
       setShowTextInput(false);
+      setDialogueList([])
+      setEnvironmentAndContainer("")
     }
   };
 
   const response = "hey whatsup doggg ";
 
   useEffect(() => {
-    const spacebarListener = (event) => {
-      if (event.code === 'Space' && window.interactionObject === 'shaman') {
+    const spacebarListener = async (event) => {
+      if (event.code === 'Space' && window.interactionObject === 'shaman' && dialogueList.length < 1) {
         const timer = setTimeout(() => {
           setShowTextInput(true);
         }, 30000);
+
+        var environmentAndContainerString = await fetchOpenAiApi(createPremisePromptForTextEnvironmentGame())
+        // var environmentAndContainerString= `{"environmentOverview": "example concept", "container": "example container"}`
+        setEnvironmentAndContainer(environmentAndContainerString)
+        let environmentOverview = parseJsonString(environmentAndContainerString, 'environmentOverview');
+        // setDialogueList([{speaker:"Barf",text:"****"}])
+        addDialogue("Barf", `*Blinks as if waking up from a deep sleep and looks around...*`)
+        addDialogue("Description", environmentOverview)
+        addDialogue("Seer", "You can find the secret to your success within a container in this environment. (Type to navigate.)")
+
         return () => {
           clearTimeout(timer);
         };
@@ -62,7 +117,7 @@ const SeerTextInput = () => {
     return () => {
       document.removeEventListener('keydown', spacebarListener);
     };
-  }, []);
+  }, [dialogueList.length]);
 
   useEffect(() => {
     document.addEventListener('keydown', handleEscapeKeyDown);
@@ -79,7 +134,7 @@ const SeerTextInput = () => {
     <div className="input-section">
       <div id="seer-dialogue">
           <div id="seer-dialogue-container" style={{zIndex: "120000000"}}>
-          <ul id="seer-text" style={{color: "white"}}>
+          <ul id="seer-text" style={{color: "white", width: '90%', textAlign:"left"}}>
             {dialogueList.map((dialogue, index) => (
               <li key={index}>
                 {dialogue.speaker}: {dialogue.text}

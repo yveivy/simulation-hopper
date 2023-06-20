@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import { useMutation, gql, useQuery } from '@apollo/client';
 import loadinggif from '../../images/loading.gif'
-import { TOKEN_CHECK } from "../../utils/db/queries";
 
 
 const CREATE_NEW_USER = gql`
@@ -60,21 +59,10 @@ export const Register = (props) => {
     };
 
     const currentToken = localStorage.getItem('nekotsresueht')
-    const { data } = useQuery(TOKEN_CHECK, { variables: { token: currentToken }});
-    console.log(data)
     
     useEffect(() => {
-        const setLogInStatus = async (e) => {
-            const { userSaveFile } = data;
-            const { token } = userSaveFile;
-            if (token === currentToken) {
-                setIsLoggedIn(true)
-            } else {
-                return;
-            }  
-        };
-        if (data) {
-        setLogInStatus();
+        if (currentToken) {
+        setIsLoggedIn(true);
         }
         if (isLoggedIn) {
             navigate('/play')

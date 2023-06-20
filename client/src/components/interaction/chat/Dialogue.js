@@ -17,7 +17,11 @@ const Dialogue = () => {
 
   const { dialogueList } = useContext(DialogueContext)
 //added game to url so deleted to fix repeat
-  const currentCharacter = `images/characterHeadshots/${window.interactionObject}.png`;
+  var interactionObject = window.interactionObject
+  if (interactionObject === "") {
+    interactionObject = "robot"
+  } 
+  const currentCharacter = `images/characterHeadshots/${interactionObject}.png`;
   
   return (
     <div id="dialogue-container" >
@@ -29,7 +33,7 @@ const Dialogue = () => {
         ))}
       </ul>
           {/* {currentCharacter && <img src={characterImages[currentCharacter]} alt="Character Image" id="dialogue-img"/>} */}
-            <img src={currentCharacter} alt="Character Image" id="dialogue-img"/>
+            <img src={currentCharacter} alt="Character" id="dialogue-img"/>
     </div>
   );
 }
