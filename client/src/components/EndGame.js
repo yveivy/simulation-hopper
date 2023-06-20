@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { retrieveInventoryData} from "../utils/inventory";
-import EndGameGif from "../images/EndGameGif.gif"
+// import EndGameGif from "../images/EndGameGif.gif"
 const EndGame = () => {
 
     useEffect(() => {
@@ -39,7 +39,7 @@ const EndGame = () => {
 
     return (
         <div>
-<EndGameGif />
+{/* <EndGameGif /> */}
         </div>
         )
 }

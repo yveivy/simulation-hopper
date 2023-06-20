@@ -35,7 +35,8 @@ const Chat = ({ setShowAnything, setShowChat, setShowSpecialFeatures }) => {
     <div className="interaction-container" id="chat-container">
         <nav className="interaction-nav">
           <button className="close btn" onClick={handleClose}>Close</button>
-          {(interactionObject === "zara")|| (interactionObject === "violet") || (interactionObject === "taylor") &&
+
+          {(["zara", "violet", "taylor"].includes(interactionObject)) &&
           <button className="trade btn" onClick={handleTab}>Special</button>
           }
         </nav>
