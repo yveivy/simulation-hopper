@@ -43,6 +43,9 @@ const SeerTextInput = () => {
 // }, [])
 
 
+
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const localCopyOfDialogueList = [...dialogueList, {speaker: 'Barf', text: inputText}]; //local copy
