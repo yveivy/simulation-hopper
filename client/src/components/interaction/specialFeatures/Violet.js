@@ -82,6 +82,7 @@ const Violet = ({inventoryItems, handleClose}) => {
     localStorage.setItem('hasMetViolet', true)
     if (barfHasPants && violetHasElixir) {
       winElixirMutation()
+      localStorage.setItem('elixir', true)
     }
   }
   const hasMetViolet = localStorage.getItem('hasMetViolet')
