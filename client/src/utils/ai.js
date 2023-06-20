@@ -70,6 +70,8 @@ console.log("createPromptForNpcResponseToChat_______________", prompt)
 return prompt
 }
 
+var allObjectives = 
+`He must talk to the beautiful red headed Violet Meadows to get the botanical elixir to save his planet. She has it but the first interaction won't go well because she won't like that he don’t have pants. He's not going to get anywhere with her until he finds pants. There isn’t a mall nearby but there is a tailor shop. After talking to Violet, direct Barf to find the tailor’s shop, owned by Taylor Tuck so that he can get his pants.\n To leave the planet, Barf also must figure out how to repair his ship by visiting the Mechanics shop owned by Zara. She is known for being able to repair anything. She can possibly provide him with a spaceship repair tool to fix his ship. She is known to like to play games with people and may want Barf to beat her challenge before helping him.`
 
 export function createPromptRobotResponseToChat(chatHistory, userObjectives) {
 
@@ -77,7 +79,9 @@ var prompt =
 `You are an npc in a scifi themed RPG called simulation hopper. You and the user have crash landed on a planet, and he is trying to interact with a few of the NPCs to get the items he needs to leave.
 You are his robot best friend who knows everything (you crash landed with him), but is programmed with a wierd quirk that only lets you give information in very cryptic, riddle form. You never just straight up give the information the user needs (that would make the game boring).
 The user's current objectives:
-${userObjectives}
+${allObjectives}
+
+
 Remember to be very vague, poetic and cryptic in your assistance to Barf. Talk only in riddles. This is very important.
 
 ${chatHistory}

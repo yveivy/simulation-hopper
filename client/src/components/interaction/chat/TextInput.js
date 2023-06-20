@@ -114,6 +114,7 @@ export const TextInput = ({ specialFeatures=false }) => {
             chatHistory = formatDialogueForPrompt(localCopyOfDialogueList)
             if (interactionObject === "") {
                 updateUserObjectives()
+                console.log("textInput userObjectives________", window.globalVars.userObjectives)
                 prompt = createPromptRobotResponseToChat(chatHistory, window.globalVars.userObjectives)
                 npcFullName = "Robot"
             } else {
