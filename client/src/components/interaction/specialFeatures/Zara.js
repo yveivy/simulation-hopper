@@ -16,6 +16,7 @@ const Zara = ({inventoryItems, handleClose}) => {
 
     console.log('challengeAccepted:', challengeAccepted);
     console.log('repairToolAcquired:', repairToolAcquired);
+    const [showDoChallenge, setShowDoChallenge] = useState(true)
 
     const handleAcceptChallenge = async () => {
         const prompt = createPromptForPoemChallenge();
@@ -24,6 +25,7 @@ const Zara = ({inventoryItems, handleClose}) => {
         const topic = response.trim();
         setPoemTopic(topic);
         setChallengeAccepted(true);
+        setShowDoChallenge(true)
         console.log('handleAcceptChallenge completed successfully.')
     };
 
@@ -34,11 +36,11 @@ const Zara = ({inventoryItems, handleClose}) => {
         const prompt = createPromptForPoemRating(poemText, poemTopic);
         const response = await fetchOpenAiApi(prompt);
         const rating = parseInt(response.replace(/"/g, ''));
-
+        setShowDoChallenge(false)
 
         setRating(rating);
 
-        if (rating >= 4 ){
+        if (rating >= 3 ){
             setRepairToolAcquired(true);
             localStorage.setItem('aetheric', true)
         } else {
@@ -56,6 +58,7 @@ const Zara = ({inventoryItems, handleClose}) => {
        setRepairToolAcquired(false);
        setChallengeFailed(false);
        setRetry(true);
+       setShowDoChallenge(true)
     };
 
 
@@ -89,16 +92,16 @@ const Zara = ({inventoryItems, handleClose}) => {
             )}
 
             {repairToolAcquired && (
-                <div>
-                    <p>Zara: Congratulations! You've earned the tool to repair your ship. Good luck!</p>
+                <div style={{margin:"60px", display: "flex", flexDirection:"column"}}>
+                    <p>Zara: I rate your poem as {rating}/5. Congratulations! You've earned the tool to repair your ship. Good luck!</p>
                     </div>
             )} 
             
             {/* Zara should pass the wrench item to Barf after this runs, if repairToolAcquired is true */}
 
             {challengeFailed && (
-                <div>
-                    <p>Zara: Sorry, but your poem wasn't good enough. I'd rather listen to the clang of metal. Try again if you think you can improve.</p>
+                <div style={{margin:"60px", display: "flex", flexDirection:"column"}}>
+                    <p>Zara: Sorry, but i'd rate your poem as {rating}/5, and that's not good enough. I'd rather listen to the clang of metal. Try again if you think you can improve.</p>
                     {Retry && <button onClick={handleRetryChallenge}>Try Again</button>}
                     </div>
             )}
