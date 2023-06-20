@@ -3,7 +3,11 @@ import React, { useEffect, useState } from 'react';
 import EndGameGif from '../images/EndGameGif.gif';
 
 import { retrieveInventoryData} from "../utils/inventory";
-
+const zIndex = {
+  zIndex: 10
+}
+const elixir = localStorage.getItem('elixir')
+const repairTool = localStorage.getItem('repairTool')
 const EndGame = () => {
   const [renderComponent, setRenderComponent] = useState(false);
   useEffect(() => {
@@ -19,9 +23,11 @@ const EndGame = () => {
       }
       if (
         e.key === ' ' &&
-        window.interactionObject === 'Spaceship' &&
-        localStorage.getItem('repairTool') === 'true'
+        window.interactionObject === 'spaceship' &&
+        elixir &&
+        repairTool
       ) {
+        console.log('endgame')
         setRenderComponent(true);
         setTimeout(() => {
           setRenderComponent(false);
@@ -38,8 +44,8 @@ const EndGame = () => {
   }, []);
 
   return renderComponent ? (
-    <div>
-      <EndGameGif />
+    <div style={zIndex}>
+      <img src = {EndGameGif} stle={zIndex} alt="EndgameGif"/>
     </div>
   ) : null;
 };
