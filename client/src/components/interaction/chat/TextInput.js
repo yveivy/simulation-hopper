@@ -27,6 +27,9 @@ export const TextInput = ({ specialFeatures=false }) => {
     useEffect(() => {
         const setupSpecialFeature = async () => {
             console.log("specialFeatures_______", specialFeatures)
+            if (window.interactionObject==="" && dialogueList.length < 1) {
+                addDialogue("Robot", "Let me know what info you need to get off this rock homie. I, as an artificial general super intelligence, know everything. (But remember, you programmed me to only talk in riddles.)")
+            }
     
             if (specialFeatures===true) {
                 if (interactionObject === "taylor" && dialogueList.length < 1) {
