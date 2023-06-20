@@ -45,7 +45,7 @@ const EndGame = () => {
 
   return renderComponent ? (
     <div style={zIndex}>
-      <EndGameGif />
+      <img src = {EndGameGif} stle={zIndex} alt="EndgameGif"/>
     </div>
   ) : null;
 };
