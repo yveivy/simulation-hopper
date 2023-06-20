@@ -99,21 +99,21 @@ const Violet = ({inventoryItems, handleClose}) => {
               <p>Godspeed Barf, my short king! Use the elixir to save your home planet!</p>
             </div>
           ) : showSeesAndRequestsElixir && violetHasElixir && !barfHasPants ? (
-            <div style={{margin: "60px"}} id="sees-and-requests-elixer">
+            <div style={{margin: "60px", display: 'flex', flexDirection: 'column', height: "100%"}} id="sees-and-requests-elixer">
               <p>*Barf sees the botanical elixir in Violet’s inventory*<br/><br/> 
               Barf: I have traveled the galaxy to find that. My planet is in desperate need. Plant life has nearly completely died off and needs to be restored.</p>
-              <button id="violet-btn" onClick={requestElixerHandler}>Request Botanical Elixir</button>
+              <button style={{alignSelf: "center", marginTop: "auto"}} className="btn" onClick={requestElixerHandler}>Request Botanical Elixir</button>
             </div>
           ) : (
-            <div style={{margin: "60px"}}>
+            <div style={{margin: "60px", display: 'flex', flexDirection: 'column'}}>
               {barfHasPants && showSeesAndRequestsElixir && (
                 <>
                   <p>*Barf and Violet slowly falling in love*</p>
-                  <button onClick={requestElixerHandler}>Request Botanical Elixir</button>
+                  <button style={{alignSelf: "center", marginTop: "auto"}} onClick={requestElixerHandler}>Request Botanical Elixir</button>
                 </>
               )}
             </div>
-          )}
+          )}      
 
           {showElixirRequestResponse && (
             <div style={{margin: "60px"}} id="elixer-request-response">
