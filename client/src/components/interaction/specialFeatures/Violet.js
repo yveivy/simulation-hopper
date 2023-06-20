@@ -105,12 +105,12 @@ const Violet = ({inventoryItems, handleClose}) => {
               <button style={{alignSelf: "center", marginTop: "auto"}} className="btn" onClick={requestElixerHandler}>Request Botanical Elixir</button>
             </div>
           ) : (
-            <div style={{margin: "60px", display: 'flex', flexDirection: 'column'}}>
+            <div style={{margin: "60px", display: 'flex', flexDirection: 'column', height: "100%"}}>
               {barfHasPants && showSeesAndRequestsElixir && (
-                <>
-                  <p>*Barf and Violet slowly falling in love*</p>
-                  <button style={{alignSelf: "center", marginTop: "auto"}} onClick={requestElixerHandler}>Request Botanical Elixir</button>
-                </>
+                <div style={{margin: "60px", display: 'flex', flexDirection: 'column', height: "100%"}}>
+                  {/* <p>*Barf and Violet slowly falling in love*</p> */}
+                  <button className="btn" style={{alignSelf: "center", marginTop: "auto"}} onClick={requestElixerHandler}>Request Botanical Elixir</button>
+                </div>
               )}
             </div>
           )}      
