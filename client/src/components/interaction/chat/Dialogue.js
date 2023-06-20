@@ -25,7 +25,7 @@ const Dialogue = () => {
   
   return (
     <div id="dialogue-container" >
-      <ul className="dialogue-ul" id="dialogue-text">
+      <ul style={{margin: "45px"}}className="dialogue-ul" id="dialogue-text">
         {dialogueList.map((dialogue, index) => (
           <li key={index}>
             {dialogue.speaker}: {dialogue.text}
