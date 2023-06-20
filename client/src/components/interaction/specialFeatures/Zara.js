@@ -83,7 +83,7 @@ const Zara = ({inventoryItems, handleClose}) => {
             )}
             {challengeAccepted && !repairToolAcquired && (
                 <div>
-                <p style={{fontSize: "24px"}}>Zara: I'm so happy to find a fellow poet. String some words together about "{poemTopic}". Just to warn you, I'll be brutally honest, as I can't stand poetry hack jobs. I'd rather listen to the clang of metal than a botched poem.</p>
+                <p style={{fontSize: "24px"}}>Zara: I would love to find a fellow poet. String some words together about "{poemTopic}". Just to warn you, I'll be brutally honest, as I can't stand poetry hack jobs. I'd rather listen to the clang of metal than a botched poem.</p>
                 <textarea className="zara-input"  value={userPoem} 
                 onChange={handlePoemInputChange} 
                 placeholder="Enter your poem here" />
