@@ -42,7 +42,7 @@ const Zara = ({inventoryItems, handleClose}) => {
 
         if (rating >= 3 ){
             setRepairToolAcquired(true);
-            localStorage.setItem('aetheric', true)
+            localStorage.setItem('repairTool', true)
         } else {
             setChallengeFailed(true);
             setRetry(true);
