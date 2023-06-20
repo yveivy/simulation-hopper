@@ -27,6 +27,7 @@ const Zara = ({inventoryItems, handleClose}) => {
         console.log('handleAcceptChallenge completed successfully.')
     };
 
+    const hasRepairTool = localStorage.getItem('repairTool')
     const handleFinishChallenge = async (userPoem) => {
         console.log(userPoem);
         const poemText = userPoem;
@@ -39,6 +40,7 @@ const Zara = ({inventoryItems, handleClose}) => {
 
         if (rating >= 4 ){
             setRepairToolAcquired(true);
+            localStorage.setItem('aetheric', true)
         } else {
             setChallengeFailed(true);
             setRetry(true);
@@ -60,7 +62,7 @@ const Zara = ({inventoryItems, handleClose}) => {
 
     return (
         <div id="zara-container">
-            {!inventoryItems.includes("wrench") && !rating && !challengeAccepted  && (
+            {!hasRepairTool && !rating && !challengeAccepted  && (
                 <div id="storyline">
       
                 <p>Zara: Hello interstellar traveler! I'm set for retirement and don't really need anything you're offering to trade, but I do sympathize with your plight and your ship would be easy to repair with the right tool. I really love poetry. If you can recite a short poem on a topic of my choosing, and it pleases me well enough, I'll just give you the spaceship wrench. Would you like to try?</p>
@@ -73,7 +75,9 @@ const Zara = ({inventoryItems, handleClose}) => {
                     </div>
                 </div>
             )}
-
+            {hasRepairTool && (
+                <p>Use the tool to go fix your ship!!</p>
+            )}
             {challengeAccepted && !repairToolAcquired && (
                 <div>
                 <p>Zara: I'm so happy to find a fellow poet. String some words together about "{poemTopic}". Just to warn you, I'll be brutally honest, as I can't stand poetry hack jobs. I'd rather listen to the clang of metal than a botched poem.</p>
