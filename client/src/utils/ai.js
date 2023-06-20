@@ -146,16 +146,14 @@ ${history}
 
 
 Your response should be one of two things:
-Unless the user mentions whatever the container is, describe the current scene in response to the User's most recent navigation command while dropping hints about where the container is. (Put your description in quotes with nothing outside of quotes or it will mess up the program.)
-
-If the user HAS mentioned whatever the container is, simply return in quotes: “found”. (Don't say any extra words or it will mess up the program.)`
+If the user mentions the item by name, respond with "found" and no extra words or it will mess up the program. Otherwise continue to describe the current scene in response to the User's most recent navigation command while dropping hints about where the container is. (Put your description in quotes with nothing outside of quotes or it will mess up the program.) If the user follows your hints well and thoroughly searches through the text environment in response to your suggestions they will eventually be led to the item. At this point, respond in quotes: "found". (Don't say any extra words or it will mess up the program.)`
     console.log("createNextPromptForTextEnvironmentGame______", prompt)    
     return prompt
 }
 
 export function createPremisePromptForTextEnvironmentGame() {
     var prompt =
-`You are creating a concept for a text based environment for the user to navigate. The user's goal while navigating the environment is find "the key to the user's success" stored in a container. (what the container is will depend on what the concept of the environment is. ie if I'm navigating old man's childhood home, the container might be a sock drawer. The container shouldn't have a lock on it or anything. It should be something that is easy to open when you find it.) The environment should be relatively small area and should be described in 3 sentences or less, and ideally the container would be fairly obvious to find.
+`You are creating a concept for a text based environment for the user to navigate. The user's goal while navigating the environment is find "the key to the user's success" stored in a container. (what the container is will depend on what the concept of the environment is. ie if I'm navigating old man's childhood home, the container might be a sock drawer. The container shouldn't have a lock on it or anything. It should be something that is easy to open when you find it.) The environment should be relatively small area and should be described in 3 sentences or less, and ideally the container would be fairly obvious to find. If the user echoes your prompts follows what you are directing by saying  something like, I am opening the sock drawer, progress the scene of the text environment by describing what he sees in the sock drawer. Never give the same prompt word for word but keep it varied. 
 Let me know an overview description for the text based environment and what the target container in the environment will be. Put your response in the following format:
 {"environmentOverview": "example concept", "container": "example container"}`
     console.log("createPremisePromptForTextEnvironmentGame____________", prompt)
