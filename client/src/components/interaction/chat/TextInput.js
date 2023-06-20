@@ -72,6 +72,7 @@ export const TextInput = ({ specialFeatures=false }) => {
                 if ((npcResponse.includes(`"Correct"`)) || (npcResponse.includes(`"correct"`)) ){
                     npcResponse = `You guessed it! I made the leather of these pants out of ${secretWord}! Enjoy! Btw, that pretty redhead violet will probably fall in love with you when she sees in you pants this handsome. *Taylor puts the ${secretWord} leather pants in your inventory*`;
                     //swap pants to barf's inventory
+                    localStorage.setItem('striders', true)
                     winItem({
                     variables: {
                         token: playerToken,

@@ -5,7 +5,7 @@ import TextInput from "../chat/TextInput";
 import {fetchOpenAiApi, createPremisePromptFor20Questions} from "../../../utils/ai"
 
 
-
+const striders = localStorage.getItem('striders')
 const Taylor = ({inventoryItems, handleClose}) => {
     const [showGame, setShowGame] = useState(false);
 
@@ -17,7 +17,7 @@ const Taylor = ({inventoryItems, handleClose}) => {
 
   return (
         <div className='special-features-container' id="taylor-container">
-        {!inventoryItems.includes("striders") && !showGame ? (
+        {!striders && !showGame ? (
             <div id="storyline">
                 <p>Taylor Tuck: Hello my pantsless fella. Boy do I have just the thing for you.</p> 
                 <p>I’ll give you a fresh pair of pants if you can guess what animal I made the leather for them from. Want to play?</p>
