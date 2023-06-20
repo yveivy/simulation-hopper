@@ -1,5 +1,5 @@
 import {parseInventoryObjToGetJustItems} from "./inventory"
-import { fetchInventory } from "./db/fetches";
+// import { fetchInventory } from "./db/fetches";
 
 export async function fetchOpenAiApi(prompt) {
     var promptResponseNotJson = await fetch('/api/openai/', {
@@ -92,8 +92,7 @@ return prompt
 
 export function createPremisePromptFor20Questions() {
 var prompt = 
-`You are a bot in a 20 questions minigame. Come up with something for the user to guess. It must be an animal that leather can be theoretically be made out of. It can be silly, but it must be an animal the average person would have heard of one could theoretically make pants of.
-Just tell me the word in quotes. Don't say anything besides the word in quotes or it will mess up the program`
+`You are a bot in a 20 questions minigame. Come up with something for the user to guess. It must be an animal that leather can be theoretically be made out of. It can be silly, but it must be an animal the average person would have heard of one could theoretically make pants of. Don't return the same word every time. Just tell me the word in quotes. Don't say anything besides the word in quotes or it will mess up the program`
 return prompt
 }
 
@@ -114,7 +113,7 @@ return prompt
 
 export function createPromptForPoemChallenge() {
     var prompt = 
-    `You are an AI npc in a sci-fi themed RPG called simulation hopper. The user has landed on a planet, and he is trying to interact with a few of the NPCs to get the items he needs to leave. What he needs from you is a tool to repair his spaceship that was damaged when it crash landed. You really aren't interested in anything he has to trade but you are willing to let him earn the tool. You like poetry and if he is willing to recite a poem that you like, you will happily give him the tool he is looking for. To generate the challenge you will generate a topic for the user to write a poem about. The topic can be anything ranging from nature, emotions, to abstract concepts. Just tell me the word in quotes. Don't say anything besides the word in quotes or it will mess up the program. `
+    `You are an AI npc in a sci-fi themed RPG called simulation hopper. The user has landed on a planet, and he is trying to interact with a few of the NPCs to get the items he needs to leave. What he needs from you is a tool to repair his spaceship that was damaged when it crash landed. You really aren't interested in anything he has to trade but you are willing to let him earn the tool. You like poetry and if he is willing to recite a poem that you like, you will happily give him the tool he is looking for. To generate the challenge you will generate a topic for the user to write a poem about. The topic can be anything ranging from nature, emotions, to abstract concepts but please provide a variety of words and don't return the same word every time. Just tell me the word in quotes. Don't say anything besides the word in quotes or it will mess up the program. `
     return prompt
 }
 
@@ -175,15 +174,15 @@ export function formatDialogueForPrompt(dialogueList) {
 }
 
 
-export async function updateCurrentObjective() {
-    var currentObjective = ""
-    var userInventory = fetchInventory("barf")
-    var inventoryItems = parseInventoryObjToGetJustItems(userInventory)
-    if ( inventoryItems.includes("") && !inventoryItems.includes("") ) {
-        currentObjective = ""
-    }
-    return currentObjective
-}
+// export async function updateCurrentObjective() {
+//     var currentObjective = ""
+//     // var userInventory = fetchInventory("barf")
+//     // var inventoryItems = parseInventoryObjToGetJustItems(userInventory)
+//     // if ( inventoryItems.includes("") && !inventoryItems.includes("") ) {
+//         currentObjective = ""
+//     }
+//     return currentObjective
+// }
 
 
 //increment checkpoint to user save file
