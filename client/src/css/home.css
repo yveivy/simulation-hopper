@@ -32,17 +32,19 @@ h1 {
 
 }
 
-#infoGraphic {
-    /* border: solid 3px blue; */
-    background-image: url(../images/gameInfo.png);
-    background-size: contain;
-    background-repeat: no-repeat;
+#infoGraphix {
+    background-color: #000000d0;
     position: absolute;
     border-radius: 10px;
     width: 56.5%;
     height: 40.5%;
     top: 13.5%;
     left: 21%;
+    
+}
+a {
+    text-decoration: none;
+    color: aliceblue;
 }
 #info {
     /* border: solid 3px blue; */

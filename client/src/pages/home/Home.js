@@ -1,5 +1,6 @@
 import {gsap} from 'gsap'
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 // import { Link } from 'react-router-dom';
 // import { useQuery } from '@apollo/client';
 // import { QUERY_MATCHUPS } from '../utils/queries';
@@ -9,8 +10,13 @@ import { useNavigate } from 'react-router-dom';
 <script src="./js/infographic.js"></script> */}
 // <title>Simulation Hopper</title>
 
+
 const Home = () => {
+  const [showCredits, setShowCredits] = useState(false)
   const navigate = useNavigate()
+  function toggleCredits() {
+    setShowCredits(!showCredits)
+  }
   const animateTheIntroZoom = () => {
     console.log('animateTheIntroZoom click event_________')
     var tl = gsap.timeline();
@@ -54,10 +60,18 @@ const Home = () => {
       </header>
       <div id="handheldNintendoContainer">
 
-          {/* <div id="infoGraphic" style="display: none"></div> */}
+          <div id="infoGraphix" style={{ display: showCredits ? "block" : "none" }}>
+            <center>
+              <h2>Meet the Creators:</h2>
+              <p><a href="https://www.linkedin.com/in/j-seybold-0a737627a/" target="_blank" rel="noopener noreferrer">J Seybold</a></p>
+              <p><a href="https://www.linkedin.com/in/edward-wells87/" target="_blank" rel="noopener noreferrer">Edward Wells</a></p>
+              <p><a href="https://www.linkedin.com/in/yevette-hunt/" target="_blank" rel="noopener noreferrer">Yevette Hunt</a></p>
+              <p><a href="https://www.linkedin.com/in/willrcline/" target="_blank" rel="noopener noreferrer">Will R Cline</a></p>
+            </center>
+          </div>
           <div id="startGame" onClick={animateTheIntroZoom}></div>
 
-          <div id="info"></div>
+          <div id="info" onClick={toggleCredits}></div>
 
       </div>
 
