@@ -20,6 +20,8 @@ const Chat = ({ setShowAnything, setShowChat, setShowSpecialFeatures }) => {
     setShowSpecialFeatures(true);
   };
 
+  var interactionObject = window.interactionObject
+
   if(window.interactionObject === "shaman") {
     return (
       null
@@ -27,11 +29,15 @@ const Chat = ({ setShowAnything, setShowChat, setShowSpecialFeatures }) => {
   }
 
 
+ 
+
   return (
     <div className="interaction-container" id="chat-container">
         <nav className="interaction-nav">
           <button className="close btn" onClick={handleClose}>Close</button>
+          {(interactionObject === "zara")|| (interactionObject === "violet") || (interactionObject === "taylor") &&
           <button className="trade btn" onClick={handleTab}>Special</button>
+          }
         </nav>
         <Dialogue />
         <TextInput />
