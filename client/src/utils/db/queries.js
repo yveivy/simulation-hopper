@@ -178,4 +178,5 @@ query Query($token: String) {
     token
   }
 }
-`
+`;
+
