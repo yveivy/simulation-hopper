@@ -206,6 +206,61 @@
   transition: 0.3s ease;
 }
 
+#zara-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0 20px;
+  box-sizing: border-box;
+  overflow: auto;
+  border: 10px ridge rgb(66, 133, 55);
+
+
+}
+
+#zara-container p {
+  text-align: center;
+  margin: 20px 0;
+
+}
+
+.zara-input {
+  width: 85%;
+  display: block;
+  height: 10%; 
+  border-width: 3px 0px 0px 0px; 
+  border: 10px ridge rgb(66, 133, 55);
+  border-style: ridge;
+  padding: 10px;
+  resize: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  background-color: rgb(66, 133, 55);
+  
+  }
+
+  .zara-button {
+    width: 10%;
+    height: 85px;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    background-color: rgb(66, 133, 55);
+    color: white;
+    border: none;
+    transition: 0.3s ease;
+    margin-top: auto; /* Add this line */
+    margin-left: auto; /* Add this line */
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+
+  }
+
 .response-options {
   margin-top: auto;
 }
