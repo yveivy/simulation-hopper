@@ -3,6 +3,8 @@
 
 Get ready for an immersive journey through a universe that perfectly juxtaposes the cutting-edge power of AI with the timeless retro style of Zelda and Pokemon. As the player, you'll navigate through captivating and complex narratives, engage in intriguing mini-games, and interact with the world around you using natural language processing. All the while, you're accompanied by a clever, riddle-speaking robot sidekick.
 
+
+![alt text](./client/src/images/sim-hop-gameboy-opening-screencapture.png)
 ![alt text](./client/src/images/sim-hop-crash-screencapture.png)
 ![alt text](./client/src/images/sim-hop-minimap-screencapture.png)
 ![alt text](./client/src/images/sim-hop-violet-interaction-screencapture.png)
