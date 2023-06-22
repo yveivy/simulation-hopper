@@ -10,10 +10,10 @@ if (rootElement) {
   ReactDOM.render(<App />, rootElement);
 }
 
-// const overlayElement = document.getElementById('game-overlay-react-root');
-// if (overlayElement) {
-//   ReactDOM.render(<GameOverlay />, overlayElement);
-// }
+const overlayElement = document.getElementById('game-overlay-react-root');
+if (overlayElement) {
+  ReactDOM.render(<GameOverlay />, overlayElement);
+}
 
 // const app = document.getElementById('root');
 // if (app) {

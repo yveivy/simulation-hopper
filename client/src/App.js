@@ -23,7 +23,7 @@ function App() {
               element={
                 <div>
                   <Home />
-                  <GameOverlay />
+                  {/* <GameOverlay /> */}
                 </div>
               }/>
             <Route path="/login" 
