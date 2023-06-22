@@ -13,11 +13,16 @@ import { useState } from 'react';
 
 const Home = () => {
   const [showCredits, setShowCredits] = useState(false)
+  const [showGame, setShowGame] = useState(false)
+
+
   const navigate = useNavigate()
   function toggleCredits() {
     setShowCredits(!showCredits)
   }
   const animateTheIntroZoom = () => {
+    const rootDiv = document.getElementById('root');
+    const gameBoardDiv = document.getElementById('gameBoard');
     console.log('animateTheIntroZoom click event_________')
     var tl = gsap.timeline();
 
@@ -37,7 +42,10 @@ const Home = () => {
       opacity: 0,
       onComplete: function () {
         // window.location.href = "/game";
-        navigate('/play')
+        // navigate('/play')
+        // rootDiv.style.display = 'none';
+        gameBoardDiv.style.display = 'flex';
+        setShowGame(true)
       }
     });
 
@@ -47,7 +55,10 @@ const Home = () => {
       opacity: .3,
       onComplete: function () {
         // window.location.href = "/game";
-        navigate('/play')
+        // navigate('/play')
+        // rootDiv.style.display = 'none';
+        gameBoardDiv.style.display = 'flex';
+        setShowGame(true)
       }
     });
   };
@@ -58,6 +69,7 @@ const Home = () => {
         <h1>Simulation Hopper</h1>
         <a style={{color:"white", textDecoration: 'white'}}href="/login">Login</a>
       </header>
+      {!showGame &&
       <div id="handheldNintendoContainer">
 
           <div id="infoGraphix" style={{ display: showCredits ? "block" : "none" }}>
@@ -74,7 +86,7 @@ const Home = () => {
           <div id="info" onClick={toggleCredits}></div>
 
       </div>
-
+      } 
   
     </div>
   );

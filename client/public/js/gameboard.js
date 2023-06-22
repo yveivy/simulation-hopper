@@ -450,17 +450,17 @@ window.addEventListener('keyup', (e) => {
 
 
 
-function animateTheIntroZoom1() {
-    var tl = gsap.to("#handheldNintendoContainer", {
-        duration: 3,
-        scale: 3,
-        opacity: .3,
-        onComplete: function () {
-            window.location.href = "/game";
-        }
-    });
+// function animateTheIntroZoom1() {
+//     var tl = gsap.to("#handheldNintendoContainer", {
+//         duration: 3,
+//         scale: 3,
+//         opacity: .3,
+//         onComplete: function () {
+//             window.location.href = "/game";
+//         }
+//     });
 
-}
+// }
 //i know this looks like a mess but i spent at least an hour trying to get this to run every other way.  
 
 
