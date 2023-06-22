@@ -46,7 +46,7 @@ const GameProxy = () => {
   }
   return (
     <div style={columnStyle}>
-      <h1><Link to="/your-desired-link" style={{ color: 'inherit', textDecoration: 'inherit'}}>Simulation Hopper</Link></h1>
+      <h1><Link to="/" style={{ color: 'inherit', textDecoration: 'inherit'}}>Simulation Hopper</Link></h1>
       {/* <iframe src="/game/gameproxy.html" title="SimulationHopper" style={iframeStyle} /> */}
       <div style={{zIndex: "10000", display:"flex", flexDirection:"column", margin: '50px'}}>
         <p style={instructionsStyle}>Press "spacebar" when near an NPC or near your spaceship to interact.</p>

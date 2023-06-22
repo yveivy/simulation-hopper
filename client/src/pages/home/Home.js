@@ -13,7 +13,7 @@ import { useState } from 'react';
 
 const Home = () => {
   const [showCredits, setShowCredits] = useState(false)
-  const [showGame, setShowGame] = useState(false)
+  const [showNintendo, setShowNintendo] = useState(true)
 
 
   const navigate = useNavigate()
@@ -44,8 +44,7 @@ const Home = () => {
         // window.location.href = "/game";
         // navigate('/play')
         // rootDiv.style.display = 'none';
-        gameBoardDiv.style.display = 'flex';
-        setShowGame(true)
+        showGameHideNintendo()
       }
     });
 
@@ -57,19 +56,30 @@ const Home = () => {
         // window.location.href = "/game";
         // navigate('/play')
         // rootDiv.style.display = 'none';
-        gameBoardDiv.style.display = 'flex';
-        setShowGame(true)
+        showGameHideNintendo()
       }
     });
   };
 
+  const showNintendoHideGame = () => {
+    const gameBoardDiv = document.getElementById('gameBoard');
+    gameBoardDiv.style.display = 'none';
+    setShowNintendo(true)
+  }
+
+  const showGameHideNintendo = () => {
+    const gameBoardDiv = document.getElementById('gameBoard');
+    gameBoardDiv.style.display = 'flex';
+    setShowNintendo(false)
+  }
+
   return (
     <div className='wrapper'>
       <header>
-        <h1>Simulation Hopper</h1>
+        <h1 onClick ={showNintendoHideGame} >Simulation Hopper</h1>
         <a style={{color:"white", textDecoration: 'white'}}href="/login">Login</a>
       </header>
-      {!showGame &&
+      {showNintendo &&
       <div id="handheldNintendoContainer">
 
           <div id="infoGraphix" style={{ display: showCredits ? "block" : "none" }}>
