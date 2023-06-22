@@ -27,6 +27,7 @@ function GameOverlay() {
     const handleKeyDown = async (event) => {
         switch(event.code) {
             case 'Space':
+              event.preventDefault();
               if (window.interactionObject !== "" && window.interactionObject !== "spaceship" && !showAnything) {
                 setShowChat(true);
                 setShowAnything(true)

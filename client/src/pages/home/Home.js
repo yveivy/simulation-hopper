@@ -33,7 +33,6 @@ const Home = () => {
     setShowCredits(!showCredits)
   }
   const animateTheIntroZoom = () => {
-    const rootDiv = document.getElementById('root');
     const gameBoardDiv = document.getElementById('gameBoard');
     console.log('animateTheIntroZoom click event_________')
     var tl = gsap.timeline();
@@ -43,19 +42,11 @@ const Home = () => {
       duration: 1
     });
 
-    // tl.to(startGame.current, {
-    //   opacity: 0,
-    //   duration: 1
-    // });
-
     tl.to("#handheldNintendo", {
       duration: 3,
       scale: 3,
       opacity: 0,
       onComplete: function () {
-        // window.location.href = "/game";
-        // navigate('/play')
-        // rootDiv.style.display = 'none';
         showGameHideNintendo()
       }
     });
@@ -65,9 +56,6 @@ const Home = () => {
       scale: 3,
       opacity: .3,
       onComplete: function () {
-        // window.location.href = "/game";
-        // navigate('/play')
-        // rootDiv.style.display = 'none';
         showGameHideNintendo()
       }
     });
