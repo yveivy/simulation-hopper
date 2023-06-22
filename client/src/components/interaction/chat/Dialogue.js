@@ -21,6 +21,7 @@ const Dialogue = () => {
   if (interactionObject === "") {
     interactionObject = "robot"
   } 
+  // console.log("Dialogue.js interactionObject___________", interactionObject)
   const currentCharacter = `images/characterHeadshots/${interactionObject}.png`;
   
   return (
