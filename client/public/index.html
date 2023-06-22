@@ -9,6 +9,7 @@
       name="description"
       content=""
     />
+    <link rel="stylesheet" href="./css/gameproxy.css"></link>
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -26,6 +27,33 @@
     -->
   </head>
   <body>
-      <div id="root"></div>
+    <!-- put both functioning on this page, then conditionally make one display none -->
+    <div id="root"></div>
+
+    <div id="gameBoard">
+
+      <div id="canvasContain">
+        <canvas id="gameCanvas"></canvas>
+        <div class="image-container">
+          <img src="./images/spaceForEnding.png" alt="Image 1">
+        </div>
+      
+        <div class="image-container">
+          <img src="./images/BarfForEnding.png" alt="Image 2">
+        </div>
+        <div id="game-overlay-react-root"></div>
+      </div>
+      
+    </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+    integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="./js/interactionsZones2.js"></script>
+  <script src="./js/classes.js"></script>
+  <script src="./js/collisions1.js"></script>
+  <script src="./js/gameboard.js"></script> -->
+
+
   </body>
 </html>

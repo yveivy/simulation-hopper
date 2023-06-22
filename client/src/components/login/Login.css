@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     color: white; 
-    background-image: url('../../../public/game/images/spaceBackground.png');
+    background-image: url('../../../public/images/spaceBackground.png')
 }
 
 h2 {

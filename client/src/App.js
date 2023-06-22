@@ -20,8 +20,12 @@ function App() {
           <Routes>
             <Route 
               path="/" 
-              element={<Home />}
-            />
+              element={
+                <div>
+                  <Home />
+                  <GameOverlay />
+                </div>
+              }/>
             <Route path="/login" 
             element={<Login />} />
 
