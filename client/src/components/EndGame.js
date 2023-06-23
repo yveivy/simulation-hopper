@@ -6,8 +6,7 @@ import { retrieveInventoryData} from "../utils/inventory";
 const zIndex = {
   zIndex: 10
 }
-const elixir = localStorage.getItem('elixir')
-const repairTool = localStorage.getItem('repairTool')
+
 const EndGame = () => {
   const [renderComponent, setRenderComponent] = useState(false);
   useEffect(() => {
@@ -21,6 +20,9 @@ const EndGame = () => {
       ) {
         return;
       }
+
+      const elixir = localStorage.getItem('elixir')
+      const repairTool = localStorage.getItem('repairTool')
       if (
         e.key === ' ' &&
         window.interactionObject === 'spaceship' &&
