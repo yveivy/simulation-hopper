@@ -5,12 +5,18 @@ import React, { useEffect, useState } from "react";
 // import { parseInventoryObjToGetJustItems } from "../utils/inventory";
 import "../css/overlay.css"
 
-const elixir = localStorage.getItem('elixir')
-const striders = localStorage.getItem('striders')
-const repairTool = localStorage.getItem('repairTool')
-
-const InventoryOverlay = () => {
-
+const InventoryOverlay = (showInventory) => {
+  const [elixir, setElixir] = useState(localStorage.getItem('elixir'));
+  const [striders, setStriders] = useState(localStorage.getItem('striders'));
+  const [repairTool, setRepairTool] = useState(localStorage.getItem('repairTool'));
+  
+  useEffect(() => {
+    if (showInventory) {
+      setElixir(localStorage.getItem('elixir'));
+      setStriders(localStorage.getItem('striders'));
+      setRepairTool(localStorage.getItem('repairTool'));
+    }
+  }, [showInventory]);
   
   return (
     <div id="inventory-container">

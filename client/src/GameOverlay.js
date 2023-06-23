@@ -111,7 +111,7 @@ function GameOverlay() {
         <InnerMind />
         <SeerTextInput />
         {showInventory &&
-          <InventoryOverlay setShowAnything={setShowAnything} inventory={inventory} setInventory={setInventory} />
+          <InventoryOverlay showInventory={showInventory} />
         }
         <EndGame />
       </div>
