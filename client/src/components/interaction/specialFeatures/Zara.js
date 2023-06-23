@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../../css/overlay1.css"
-import {fetchOpenAiApi, createPromptForPoemChallenge, createPromptForPoemRating} from "../../../utils/ai"
+import {fetchOpenAiApi, pickPoetryTopic, createPromptForPoemChallenge, createPromptForPoemRating} from "../../../utils/ai"
 
 
 
@@ -19,10 +19,7 @@ const Zara = ({inventoryItems, handleClose}) => {
     const [showDoChallenge, setShowDoChallenge] = useState(true)
 
     const handleAcceptChallenge = async () => {
-        const prompt = createPromptForPoemChallenge();
-        const response = await fetchOpenAiApi(prompt);
-        console.log('response from fetchOpenAiApi', response);
-        const topic = response.trim();
+        const topic = pickPoetryTopic()
         setPoemTopic(topic);
         setChallengeAccepted(true);
         setShowDoChallenge(true)

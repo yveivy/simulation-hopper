@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react'
-import {  createPremisePromptFor20Questions, createPromptForNpcResponseToChat, createPromptRobotResponseToChat, createResponsePromptFor20Questions, fetchOpenAiApi, formatDialogueForPrompt } from '../../../utils/ai';
+import {  createPremisePromptFor20Questions, createPromptForNpcResponseToChat, createPromptRobotResponseToChat, createResponsePromptFor20Questions, fetchOpenAiApi, formatDialogueForPrompt, pickAnimalToMakeLeatherFrom } from '../../../utils/ai';
 import { DialogueContext} from '../Interaction';
 import { fetchOneCharacterData } from '../../../utils/db/fetches';
 // import "../../../css/overlay1.css"
@@ -33,8 +33,9 @@ export const TextInput = ({ specialFeatures=false }) => {
     
             if (specialFeatures===true) {
                 if (interactionObject === "taylor" && dialogueList.length < 1) {
-                    var secretWordString = await fetchOpenAiApi(createPremisePromptFor20Questions())
-                    setSecretWord(secretWordString)
+                    var animal = pickAnimalToMakeLeatherFrom()
+                    console.log("TextInput.js animal to make leather from_________", animal)
+                    setSecretWord(animal)
                     addDialogue("Taylor Tuck", "Haha I'm so glad you'll humor me. Go ahead and guess what animal this leather is made out of. I'll respond with yes or no, or if you guess I'll tell you if it's correct.")
                 } 
                 // else if (interactionObject === "zara" && dialogueList.length < 1) {

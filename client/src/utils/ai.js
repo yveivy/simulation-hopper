@@ -1,7 +1,7 @@
 import {parseInventoryObjToGetJustItems} from "./inventory"
 // import { fetchInventory } from "./db/fetches";
 
-export async function fetchOpenAiApi(prompt) {
+export async function fetchOpenAiApi(prompt, temperature=0.4) {
     var promptResponseNotJson = await fetch('/api/openai/', {
         method: 'POST',
         headers: {
@@ -9,6 +9,7 @@ export async function fetchOpenAiApi(prompt) {
         },
         body: JSON.stringify({
             prompt: prompt,
+            temperature: temperature
         }),
     })
 
@@ -16,6 +17,7 @@ export async function fetchOpenAiApi(prompt) {
     console.log("fetchOpenAiApi() promptResponse___________", promptResponse)
     return promptResponse
 }
+
 
 
 export function createPromptForNpcResponseToTradeRequest(reqObj) {
@@ -100,8 +102,82 @@ return prompt
 
 export function createPremisePromptFor20Questions() {
 var prompt = 
-`You are a bot in a 20 questions minigame. Come up with something for the user to guess. It must be an animal that leather can be theoretically be made out of. It can be silly, but it must be an animal the average person would have heard of one could theoretically make pants of. Don't return the same word every time. Just tell me the word in quotes. Don't say anything besides the word in quotes or it will mess up the program`
+`You are a bot in a 20 questions minigame. Come up with something for the user to guess. It must be an animal that leather can be theoretically be made out of. It can be silly, but it must be an animal the average person would have heard of one could theoretically make pants of. Don't choose "Kangaroo". I wan't lots of random variation. Just tell me the word in quotes. Don't say anything besides the word in quotes or it will mess up the program`
+console.log("createPremisePromptFor20Questions()_________", prompt)
 return prompt
+}
+
+export function pickAnimalToMakeLeatherFrom() {
+    const leatherAnimals = [
+        "Cow",
+        "Pig",
+        "Sheep",
+        "Goat",
+        "Buffalo",
+        "Deer",
+        "Moose",
+        "Elk",
+        "Rabbit",
+        "Kangaroo",
+        "Alligator",
+        "Crocodile",
+        "Ostrich",
+        "Snake",
+        "Eel",
+        "Stingray",
+        "Shark",
+        "Horse",
+        "Camel",
+        "Bison",
+        "Yak",
+        "Fish",
+        "Frog",
+        "Llama",
+        "Elephant",
+        "Seal",
+        "Walrus",
+        "Beaver",
+        "Otter",
+        "Calf"
+    ];    
+    var animal = pickRandomlyFromList(leatherAnimals)
+    return animal
+}
+
+export function pickPoetryTopic() {
+    const poetryTopics = [
+        "Transistors",
+        "Nanotechnology",
+        "Cryptography",
+        "Blockchain",
+        "Cybersecurity",
+        "Holography",
+        "Drones",
+        "Bionics",
+        "Artificial Intelligence",
+        "Deep Learning",
+        "Big Data",
+        "Cloud Computing",
+        "Virtual Reality",
+        "Augmented Reality",
+        "Internet Of Things",
+        "Machine Learning",
+        "Neural Networks",
+        "Genomics",
+        "Automation",
+        "Robotics",
+        "Bioengineering",
+        "Engines",
+        "Electrons",
+        "Innovation"
+    ];
+    
+    var topic = pickRandomlyFromList(poetryTopics)
+    return topic
+}
+
+export function pickRandomlyFromList(list) {
+    return list[Math.floor(Math.random() * list.length)];
 }
 
 export function createResponsePromptFor20Questions(secretWord, question) {

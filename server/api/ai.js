@@ -11,12 +11,12 @@ function getOpenAiApiKey() {
     }
 }
 
-async function callOpenAiApi(prompt) {
+async function callOpenAiApi(prompt, temperature=0.4) {
     const url = 'https://api.openai.com/v1/chat/completions';
     const data = {
         model: 'gpt-3.5-turbo',
         messages: [{ role: 'user', content: prompt }],
-        temperature: 0.4,
+        temperature: temperature,
         max_tokens: 2000,
     };
 
