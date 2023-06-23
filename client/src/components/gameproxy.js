@@ -5,7 +5,18 @@ import { Link } from 'react-router-dom';
 
 
 const GameProxy = () => {
-  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+  function noTokenNoPlay() {
+    const currentToken = localStorage.getItem('nekotsresueht');
+    console.log('currentToken', currentToken);
+    if (currentToken === null) {
+      navigate('/login');
+    }
+  }
+  noTokenNoPlay();
+}, [navigate]);
 
 
 // Rest of your component code
@@ -26,18 +37,17 @@ const GameProxy = () => {
     flexDirection: 'column',
     alignItems: 'center'
   }
-  
+
   const instructionsStyle = {
     color: "white", 
     fontSize: "30px",
     display: "block",
     margin: "3px"
   }
-  
   return (
     <div style={columnStyle}>
-      <h1><Link to="/" style={{ color: 'inherit', textDecoration: 'inherit'}}>Simulation Hopper</Link></h1>
-      {/* <iframe src="/game/gameproxy.html" title="SimulationHopper" style={iframeStyle} /> */}
+      <h1><Link to="/your-desired-link" style={{ color: 'inherit', textDecoration: 'inherit'}}>Simulation Hopper</Link></h1>
+      <iframe src="/game/gameproxy.html" title="SimulationHopper" style={iframeStyle} />
       <div style={{zIndex: "10000", display:"flex", flexDirection:"column", margin: '50px'}}>
         <p style={instructionsStyle}>Press "spacebar" when near an NPC or near your spaceship to interact.</p>
         <br />

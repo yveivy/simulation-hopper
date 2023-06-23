@@ -16,24 +16,32 @@ const Home = () => {
   const [showCredits, setShowCredits] = useState(false)
   const [showNintendo, setShowNintendo] = useState(true)
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-  function noTokenNoPlay() {
-    const currentToken = localStorage.getItem('nekotsresueht');
-    console.log('currentToken', currentToken);
-    if (currentToken === null) {
-      navigate('/login');
-    }
+  const logout = () =>{
+    localStorage.removeItem('nekotsresueht');
+    setIsLoggedIn(false)
   }
-  noTokenNoPlay();
-}, [navigate]);
-
+    useEffect(() => {
+        const currentToken = localStorage.getItem('nekotsresueht');
+        if (currentToken === null) {
+          setIsLoggedIn(false);
+        } else {
+          setIsLoggedIn(true)
+        }
+        console.log("Home.js currentToken, isLoggedIn___________", currentToken, isLoggedIn)
+    }, []);
 
   function toggleCredits() {
     setShowCredits(!showCredits)
   }
   const animateTheIntroZoom = () => {
-    const gameBoardDiv = document.getElementById('gameBoard');
+    const currentToken = localStorage.getItem('nekotsresueht');
+    console.log('currentToken', currentToken);
+    if (currentToken === null) {
+      navigate('/login');
+      return
+    }
     console.log('animateTheIntroZoom click event_________')
     var tl = gsap.timeline();
 
@@ -63,12 +71,16 @@ const Home = () => {
 
   const showNintendoHideGame = () => {
     const gameBoardDiv = document.getElementById('gameBoard');
+    const gameInstructionsDiv = document.getElementById('game-instructions-react-root');
+    gameInstructionsDiv.style.display = 'none';
     gameBoardDiv.style.display = 'none';
     setShowNintendo(true)
   }
 
   const showGameHideNintendo = () => {
     const gameBoardDiv = document.getElementById('gameBoard');
+    const gameInstructionsDiv = document.getElementById('game-instructions-react-root');
+    gameInstructionsDiv.style.display = 'flex';
     gameBoardDiv.style.display = 'flex';
     setShowNintendo(false)
   }
@@ -84,7 +96,12 @@ const Home = () => {
     <div className='wrapper'>
       <header>
         <h1 onClick ={showNintendoHideGame} >Simulation Hopper</h1>
-        <a style={{color:"white", textDecoration: 'white'}}href="/login">Login</a>
+        { (isLoggedIn===true) &&
+          <a style={{color:"white", textDecoration: 'white'}} onClick={logout} href="/">logout</a>
+        }
+        { (isLoggedIn===false) &&
+          <a style={{color:"white", textDecoration: 'white'}} href="/login">Login</a>
+        }
       </header>
       {showNintendo &&
       <div id="handheldNintendoContainer">

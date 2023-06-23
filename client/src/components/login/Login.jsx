@@ -16,6 +16,10 @@ const USER_LOGIN = gql`
 }
 `;
 
+const logout = () =>{
+    localStorage.setItem('nekotsresueht', null)
+}
+
 
 export const Login = (props) => {
     const[name, setName] = useState('');
@@ -45,7 +49,7 @@ export const Login = (props) => {
         setPass('');
         
 
-        navigate('/play') 
+        navigate('/') 
         
 
         } catch (error) {
@@ -73,7 +77,7 @@ export const Login = (props) => {
         setLogInStatus();
         }
         if (isLoggedIn) {
-            navigate('/play')
+            navigate('/')
             return;
         }
     });

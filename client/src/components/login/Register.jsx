@@ -50,7 +50,7 @@ export const Register = (props) => {
             setName('');
             setPass('');
             setConfirmPass('')
-            navigate('/play')
+            navigate('/')
         }   catch (error) {
             console.error(error);
             setErrorMessage("response object lost in the sauce")
@@ -65,7 +65,7 @@ export const Register = (props) => {
         setIsLoggedIn(true);
         }
         if (isLoggedIn) {
-            navigate('/play')
+            navigate('/')
         }
     });
 
